@@ -29,7 +29,6 @@ class WebViewActivity : AppCompatActivity() {
 
         webView.getSettings().setDomStorageEnabled(true);  // 로컬 스토리지 (localStorage) 사용여부
 
-
         val url = intent.getStringExtra("url")
         if (url != null) {
             webView.loadUrl(url)
