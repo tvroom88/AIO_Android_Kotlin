@@ -2,11 +2,9 @@ package my.android_study
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import my.android_study.adapters.StudyListAdapter
-import my.android_study.models.AndroidStudyItem
+import my.android_study.fragments.CodeExampleListFragment
+import my.android_study.fragments.StudyListFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
                 else -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, StudyListFragment())
+                        .replace(R.id.main_frm, CodeExampleListFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }

@@ -1,4 +1,4 @@
-package my.android_study
+package my.android_study.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import my.android_study.R
 import my.android_study.adapters.StudyListAdapter
 
 class StudyListFragment : Fragment() {
