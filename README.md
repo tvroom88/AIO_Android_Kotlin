@@ -4,3 +4,7 @@
 1. 메인뷰 추가 3/6
 2. webview 추가 3/7
 3. 두번째 페이지 추가 & ViewBinding 프로젝트에 추가 
+
+
+### 메인뷰는 웹뷰로 tistory와 연결
+### 예제뷰는 example code와 결과 
