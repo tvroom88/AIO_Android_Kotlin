@@ -3,25 +3,28 @@ package my.android_study
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import my.android_study.databinding.ActivityMainBinding
 import my.android_study.fragments.CodeExampleListFragment
 import my.android_study.fragments.StudyListFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val mainBnv = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        initBottomNavigation(mainBnv)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initBottomNavigation()
     }
 
     //Bottom Navigation 하는 부분
-    private fun initBottomNavigation(mainBnv:BottomNavigationView) {
+    private fun initBottomNavigation() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, StudyListFragment())
             .commitAllowingStateLoss()
 
-        mainBnv.setOnItemSelectedListener { item ->
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.first -> {
                     supportFragmentManager.beginTransaction()
