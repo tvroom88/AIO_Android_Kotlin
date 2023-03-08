@@ -7,19 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import my.android_study.R
 import my.android_study.adapters.StudyListAdapter
+import my.android_study.databinding.FragmentStudyListBinding
 
 class StudyListFragment : Fragment() {
+
+    private var binding: FragmentStudyListBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val view: View = inflater.inflate(R.layout.fragment_study_list, container, false)
+        binding = FragmentStudyListBinding.inflate(inflater, container, false)
 
-        val mRecyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val mRecyclerView = binding!!.recyclerView
         val mAdapter = StudyListAdapter()
         mRecyclerView.adapter = mAdapter
         mRecyclerView.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
@@ -27,7 +29,13 @@ class StudyListFragment : Fragment() {
         val lm = LinearLayoutManager(activity)
         mRecyclerView.layoutManager = lm
         mRecyclerView.setHasFixedSize(true)
+
+        val view = binding!!.root
         return view
     }
 
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
+    }
 }

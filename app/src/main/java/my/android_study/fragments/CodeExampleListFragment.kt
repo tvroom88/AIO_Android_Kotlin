@@ -7,21 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import my.android_study.R
 import my.android_study.adapters.CodeExampleListAdapter
-import my.android_study.adapters.StudyListAdapter
+import my.android_study.databinding.FragmentCodeExampleListBinding
 
 class CodeExampleListFragment : Fragment() {
+
+    private var binding: FragmentCodeExampleListBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_code_example_list, container, false)
 
-        val mRecyclerView = view.findViewById<RecyclerView>(R.id.exampleRecyclerView)
+        binding = FragmentCodeExampleListBinding.inflate(inflater, container, false)
+
+        val mRecyclerView = binding!!.exampleRecyclerView
         val mAdapter = CodeExampleListAdapter()
         mRecyclerView.adapter = mAdapter
         mRecyclerView.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.VERTICAL))
@@ -29,7 +29,8 @@ class CodeExampleListFragment : Fragment() {
         val lm = LinearLayoutManager(activity)
         mRecyclerView.layoutManager = lm
         mRecyclerView.setHasFixedSize(true)
-        return view
 
+        val view = binding!!.root
+        return view
     }
 }
