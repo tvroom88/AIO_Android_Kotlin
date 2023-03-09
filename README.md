@@ -6,5 +6,5 @@
 3. 두번째 페이지 추가 & ViewBinding 프로젝트에 추가 
 
 
-### 메인뷰는 웹뷰로 tistory와 연결
-### 예제뷰는 example code와 결과 
+#### 메인뷰는 웹뷰로 개인 블로그와 연결
+### 예제뷰는 example code와 결과 화면으로 연결
