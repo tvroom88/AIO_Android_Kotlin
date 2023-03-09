@@ -1,7 +1,10 @@
 package my.android_study.adapters
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,22 +14,47 @@ import my.android_study.data.AndroidStudyList
 import my.android_study.databinding.FragmentStudyListItemBinding
 import my.android_study.models.AndroidStudyItem
 
+
 class StudyListAdapter() : RecyclerView.Adapter<StudyListAdapter.ViewHolder>() {
 
     val dataSet = AndroidStudyList.androidStudyList
 
+    @SuppressLint("ClickableViewAccessibility")
     class ViewHolder(view: View, dataSet: List<AndroidStudyItem>) : RecyclerView.ViewHolder(view) {
 
         val itemBinding: FragmentStudyListItemBinding;
+
         init {
             itemBinding = FragmentStudyListItemBinding.bind(itemView);
 
-            //item 클릭시 웹뷰로 넘어감.
-            view.setOnClickListener {
-                val pos = absoluteAdapterPosition
-                val nextIntent = Intent(view.context, WebViewActivity::class.java)
-                nextIntent.putExtra("url", dataSet[pos].url);
-                view.context.startActivity(nextIntent)
+            //item 터치시 웹뷰로 넘어감.
+            view.setOnTouchListener { v, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> { //눌렀을때
+                        view.setBackgroundColor(Color.parseColor("#ADD8E6"))
+                        true
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        true
+                    }
+
+                    MotionEvent.ACTION_UP -> { //손을 땟을때
+                        view.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                        val pos = absoluteAdapterPosition
+                        val nextIntent = Intent(view.context, WebViewActivity::class.java)
+                        nextIntent.putExtra("url", dataSet[pos].url);
+                        view.context.startActivity(nextIntent)
+                        true
+                    }
+                    else -> {
+                        view.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                        val pos = absoluteAdapterPosition
+                        val nextIntent = Intent(view.context, WebViewActivity::class.java)
+                        nextIntent.putExtra("url", dataSet[pos].url);
+                        view.context.startActivity(nextIntent)
+                        false
+                    }
+                }
             }
         }
     }
@@ -34,7 +62,6 @@ class StudyListAdapter() : RecyclerView.Adapter<StudyListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.fragment_study_list_item, viewGroup, false)
-
         return ViewHolder(view, dataSet)
     }
 
@@ -43,4 +70,7 @@ class StudyListAdapter() : RecyclerView.Adapter<StudyListAdapter.ViewHolder>() {
     }
 
     override fun getItemCount() = dataSet.size
+
+
+    
 }
