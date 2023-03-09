@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item android:id="@+id/first"
-          android:title="firstPage"/>
+          android:icon="@drawable/coding"
+          android:title="code"/>
 
     <item android:id="@+id/second"
-          android:title="secondPage"/>
+          android:icon="@drawable/result"
+          android:title="result"/>
 </menu>

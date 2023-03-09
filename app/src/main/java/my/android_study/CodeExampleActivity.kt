@@ -1,20 +1,21 @@
 package my.android_study
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import my.android_study.databinding.ActivityMainBinding
+import android.os.Bundle
+import my.android_study.databinding.ActivityCodeExampleBinding
 import my.android_study.fragments_main_activity.CodeExampleListFragment
 import my.android_study.fragments_main_activity.StudyListFragment
 
-class MainActivity : AppCompatActivity() {
+class CodeExampleActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityCodeExampleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityCodeExampleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNavigation()
+
     }
 
     //Bottom Navigation 하는 부분
@@ -41,4 +42,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }

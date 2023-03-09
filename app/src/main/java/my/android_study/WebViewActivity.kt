@@ -1,10 +1,10 @@
 package my.android_study
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import my.android_study.databinding.ActivityWebViewBinding
 
 class WebViewActivity : AppCompatActivity() {
@@ -36,6 +36,14 @@ class WebViewActivity : AppCompatActivity() {
         val url = intent.getStringExtra("url")
         if (url != null) {
             binding.webView.loadUrl(url)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (binding.webView.canGoBack()) {
+            binding.webView.goBack()
+        } else {
+            super.onBackPressed()
         }
     }
 }

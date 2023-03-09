@@ -1,4 +1,4 @@
-package my.android_study.fragments
+package my.android_study.fragments_main_activity
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
