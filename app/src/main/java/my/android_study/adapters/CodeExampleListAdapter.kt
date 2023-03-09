@@ -38,14 +38,18 @@ class CodeExampleListAdapter() : RecyclerView.Adapter<CodeExampleListAdapter.Vie
 
                     MotionEvent.ACTION_UP -> { //손을 땟을때
                         view.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                        val pos = absoluteAdapterPosition
                         val nextIntent = Intent(view.context, CodeExampleActivity::class.java)
+                        nextIntent.putExtra("url", dataSet[pos].url);
                         view.context.startActivity(nextIntent)
                         true
                     }
 
                     else -> {
                         view.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                        val pos = absoluteAdapterPosition
                         val nextIntent = Intent(view.context, CodeExampleActivity::class.java)
+                        nextIntent.putExtra("url", dataSet[pos].url);
                         view.context.startActivity(nextIntent)
                         false
                     }

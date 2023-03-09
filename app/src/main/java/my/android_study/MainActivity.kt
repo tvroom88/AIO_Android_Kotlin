@@ -9,11 +9,16 @@ import my.android_study.fragments_main_activity.StudyListFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var url: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        url = intent.getStringExtra("url").toString()
+        print(url)
         initBottomNavigation()
     }
 
