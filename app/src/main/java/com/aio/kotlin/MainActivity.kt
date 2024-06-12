@@ -1,11 +1,10 @@
 package com.aio.kotlin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.aio.kotlin.base.BaseActivity
+import com.aio.kotlin.base.ViewBindingBaseActivity
 import com.aio.kotlin.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
     // ViewBinding 연결
     override fun getViewBinding(): ActivityMainBinding {

@@ -6,26 +6,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.aio.kotlin.R
+import com.aio.kotlin.base.DataBindingBaseActivity
 import com.aio.kotlin.databinding.ActivityDataBindingBinding
 
-class DataBindingActivity : AppCompatActivity() {
+class DataBindingActivity : DataBindingBaseActivity<ActivityDataBindingBinding>(R.layout.activity_data_binding) {
 
-    private lateinit var binding: ActivityDataBindingBinding
     private lateinit var dbViewModel: DataBindingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // DataBinding 설정
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_data_binding)
-
-        // Bind lifecycle owner for LiveData observation
-        binding.lifecycleOwner = this
-
         // ViewModel 초기화
         dbViewModel = ViewModelProvider(this)[DataBindingViewModel::class.java]
 
-        binding.viewModel = dbViewModel
+        mBinding.viewModel = dbViewModel
 
     }
 }
