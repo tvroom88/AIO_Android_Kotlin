@@ -1,4 +1,4 @@
-package com.aio.kotlin.base
+package com.aio.kotlin.base.fragment
 
 import android.app.Activity
 import android.content.Context

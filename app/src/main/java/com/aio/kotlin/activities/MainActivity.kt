@@ -1,7 +1,7 @@
 package com.aio.kotlin.activities
 
 import android.os.Bundle
-import com.aio.kotlin.base.ViewBindingBaseActivity
+import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.databinding.ActivityMainBinding
 
 class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {

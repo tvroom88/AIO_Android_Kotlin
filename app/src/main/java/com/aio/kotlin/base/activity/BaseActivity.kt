@@ -1,4 +1,4 @@
-package com.aio.kotlin.base
+package com.aio.kotlin.base.activity
 
 import android.app.Activity
 import android.content.Intent
