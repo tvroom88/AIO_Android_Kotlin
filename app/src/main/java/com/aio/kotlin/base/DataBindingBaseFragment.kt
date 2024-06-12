@@ -25,6 +25,8 @@ abstract class DataBindingBaseFragment<VB : ViewDataBinding>(@LayoutRes private 
         // Bind lifecycle owner for LiveData observation
         mBinding.lifecycleOwner = this
 
+        initContentInOnCreateView()
+
         return mBinding.root
     }
 

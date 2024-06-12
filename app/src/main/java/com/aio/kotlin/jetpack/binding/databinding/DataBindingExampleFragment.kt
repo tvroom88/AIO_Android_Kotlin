@@ -5,7 +5,7 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentDataBindingBinding
 
-class DataBindingFragment : DataBindingBaseFragment<FragmentDataBindingBinding>(R.layout.fragment_data_binding) {
+class DataBindingExampleFragment : DataBindingBaseFragment<FragmentDataBindingBinding>(R.layout.fragment_data_binding) {
 
     private lateinit var dbViewModel: DataBindingViewModel
     override fun initContentInOnCreateView() {

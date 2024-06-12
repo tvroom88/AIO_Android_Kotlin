@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.aio.kotlin.R
 import com.aio.kotlin.base.ViewBindingBaseActivity
 import com.aio.kotlin.databinding.ActivityDetailBinding
-import com.aio.kotlin.jetpack.binding.databinding.DataBindingFragment
+import com.aio.kotlin.jetpack.binding.databinding.DataBindingExampleFragment
 
 class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
     override fun getViewBinding(): ActivityDetailBinding {
@@ -17,7 +17,7 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
         // Fragment 추가
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_detail, DataBindingFragment())
+                .add(R.id.fcv_detail, DataBindingExampleFragment())
                 .commit()
         }
     }
