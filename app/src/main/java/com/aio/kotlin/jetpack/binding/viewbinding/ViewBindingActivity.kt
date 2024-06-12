@@ -1,4 +1,4 @@
-package com.aio.kotlin.jetpack.binding
+package com.aio.kotlin.jetpack.binding.viewbinding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
