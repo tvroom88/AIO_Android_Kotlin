@@ -1,11 +1,17 @@
 package com.aio.kotlin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aio.kotlin.base.ViewBindingBaseActivity
+import com.aio.kotlin.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
+
+    // ViewBinding 연결
+    override fun getViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
 }
