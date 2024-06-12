@@ -1,4 +1,4 @@
-package com.aio.kotlin
+package com.aio.kotlin.activities
 
 import android.os.Bundle
 import com.aio.kotlin.base.ViewBindingBaseActivity
@@ -15,6 +15,6 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        moveActivityWithOnClick(mBinding.button, DataBindingActivity())
+        moveActivityWithOnClick(mBinding.button, DetailActivity())
     }
 }

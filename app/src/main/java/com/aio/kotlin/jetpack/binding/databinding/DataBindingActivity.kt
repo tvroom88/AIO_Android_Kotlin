@@ -20,6 +20,5 @@ class DataBindingActivity : DataBindingBaseActivity<ActivityDataBindingBinding>(
         dbViewModel = ViewModelProvider(this)[DataBindingViewModel::class.java]
 
         mBinding.viewModel = dbViewModel
-
     }
 }
