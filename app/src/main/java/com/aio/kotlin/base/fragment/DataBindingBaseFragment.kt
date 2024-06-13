@@ -20,7 +20,7 @@ abstract class DataBindingBaseFragment<T : ViewDataBinding>(@LayoutRes private v
 
     // --- context, activity ---
     private var _context: Context? = null
-    protected val context get() = _context!!
+    protected val activityContext get() = _context!!
 
     private var _activity: Activity? = null
     protected val activity get() = _activity!!

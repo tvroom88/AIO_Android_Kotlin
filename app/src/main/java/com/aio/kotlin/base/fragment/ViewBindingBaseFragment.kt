@@ -16,7 +16,7 @@ abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
 
     // --- context, activity ---
     private var _context: Context? = null
-    protected val context get() = _context!!
+    protected val activityContext get() = _context!!
 
     private var _activity: Activity? = null
     protected val activity get() = _activity!!
@@ -34,6 +34,8 @@ abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         _mBinding = getViewBinding()
         return mBinding.root
     }

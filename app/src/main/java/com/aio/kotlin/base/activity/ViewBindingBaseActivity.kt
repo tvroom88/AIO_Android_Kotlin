@@ -13,9 +13,8 @@ abstract class ViewBindingBaseActivity<T : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
         _binding = getViewBinding()
+        setContentView(binding.root)
     }
 
     override fun onDestroy() {
