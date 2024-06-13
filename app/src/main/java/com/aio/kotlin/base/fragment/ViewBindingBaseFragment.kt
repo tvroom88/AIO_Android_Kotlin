@@ -11,8 +11,8 @@ import androidx.viewbinding.ViewBinding
 
 abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
 
-    private var _mBinding: T? = null
-    protected val mBinding get() = _mBinding!!
+    private var _binding: T? = null
+    protected val binding get() = _binding!!
 
     // --- context, activity ---
     private var _context: Context? = null
@@ -34,10 +34,8 @@ abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-        _mBinding = getViewBinding()
-        return mBinding.root
+        _binding = getViewBinding()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,6 +45,6 @@ abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _mBinding = null
+        _binding = null
     }
 }
