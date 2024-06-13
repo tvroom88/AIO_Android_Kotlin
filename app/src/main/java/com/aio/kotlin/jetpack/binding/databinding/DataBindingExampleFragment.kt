@@ -8,8 +8,8 @@ import com.aio.kotlin.databinding.FragmentDataBindingBinding
 class DataBindingExampleFragment : DataBindingBaseFragment<FragmentDataBindingBinding>(R.layout.fragment_data_binding) {
 
     private lateinit var dbViewModel: DataBindingViewModel
-    override fun initContentInOnCreateView() {
+    override fun initContentInOnViewCreated() {
         dbViewModel = ViewModelProvider(this)[DataBindingViewModel::class.java]
-        mBinding.viewModel = dbViewModel
+        binding.viewModel = dbViewModel
     }
 }

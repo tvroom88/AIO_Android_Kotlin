@@ -16,6 +16,6 @@ class DataBindingExampleActivity : DataBindingBaseActivity<ActivityDataBindingBi
         // ViewModel 초기화
         dbViewModel = ViewModelProvider(this)[DataBindingViewModel::class.java]
 
-        mBinding.viewModel = dbViewModel
+        binding.viewModel = dbViewModel
     }
 }
