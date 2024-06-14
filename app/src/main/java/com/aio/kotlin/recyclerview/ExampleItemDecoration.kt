@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-internal class BasicItemDecoration(
+internal class ExampleItemDecoration(
     private val itemSpacing: Int = 0,
     private val firstItemTopSpacing: Int = 0,
     private val lastItemBottomSpacing: Int = 0

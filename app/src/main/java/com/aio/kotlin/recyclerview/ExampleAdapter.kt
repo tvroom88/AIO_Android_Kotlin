@@ -20,7 +20,7 @@ class ExampleAdapter : BaseRecyclerViewAdapter<ExampleAdapter.TestViewHolder, St
     inner class TestViewHolder(parent: ViewGroup) :
         BaseViewHolder<ItemRecyclerviewExampleBinding, String>(parent, R.layout.item_recyclerview_example) {
         override fun bind(data: String) {
-            binding.tvRecyclerExample.text = data
+            binding.title = data
         }
         override fun recycled() {}
     }
