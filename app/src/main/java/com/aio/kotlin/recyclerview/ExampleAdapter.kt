@@ -7,7 +7,7 @@ import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.base.recyclerview.BaseViewHolder
 import com.aio.kotlin.databinding.ItemRecyclerviewExampleBinding
 
-class TestAdapter : BaseRecyclerViewAdapter<TestAdapter.TestViewHolder, String>() {
+class ExampleAdapter : BaseRecyclerViewAdapter<ExampleAdapter.TestViewHolder, String>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItemList(mutableList: MutableList<String>){

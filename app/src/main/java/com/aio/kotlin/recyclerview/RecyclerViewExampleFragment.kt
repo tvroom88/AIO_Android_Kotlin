@@ -6,7 +6,7 @@ import com.aio.kotlin.databinding.FragmentRecyclerViewExampleBinding
 
 class RecyclerViewExampleFragment : ViewBindingBaseFragment<FragmentRecyclerViewExampleBinding>() {
 
-    private val testAdapter by lazy { TestAdapter() }
+    private val testAdapter by lazy { ExampleAdapter() }
     override fun getViewBinding(): FragmentRecyclerViewExampleBinding {
         return FragmentRecyclerViewExampleBinding.inflate(layoutInflater)
     }
@@ -20,6 +20,7 @@ class RecyclerViewExampleFragment : ViewBindingBaseFragment<FragmentRecyclerView
                 false
             )
             adapter = testAdapter
+            addItemDecoration(BasicItemDecoration(30, 60, 60))
         }
     }
 

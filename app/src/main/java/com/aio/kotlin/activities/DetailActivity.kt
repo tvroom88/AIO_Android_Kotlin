@@ -15,7 +15,6 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Fragment 추가
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.fcv_detail, RecyclerViewExampleFragment())
