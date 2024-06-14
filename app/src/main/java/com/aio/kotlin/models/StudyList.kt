@@ -1,3 +1,7 @@
 package com.aio.kotlin.models
 
-data class StudyList(val title: String)
+import androidx.fragment.app.Fragment
+import java.io.Serializable
+
+
+data class StudyList(val title: String, val fragment: Fragment) : Serializable

@@ -1,5 +1,6 @@
 package com.aio.kotlin.adapters
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import com.aio.kotlin.R
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
@@ -8,6 +9,12 @@ import com.aio.kotlin.databinding.ItemStudyListBinding
 import com.aio.kotlin.models.StudyList
 
 class StudyListAdapter :  BaseRecyclerViewAdapter<StudyListAdapter.StudyListViewHolder, StudyList>() {
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItemList(mutableList: MutableList<StudyList>){
+        items = mutableList
+    }
+
     override fun getViewHolder(parent: ViewGroup) = StudyListViewHolder(parent)
 
     inner class StudyListViewHolder(parent: ViewGroup) :

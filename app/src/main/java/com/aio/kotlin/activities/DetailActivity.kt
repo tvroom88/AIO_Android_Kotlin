@@ -5,6 +5,7 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.databinding.ActivityDetailBinding
 import com.aio.kotlin.jetpack.binding.databinding.DataBindingExampleFragment
+import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.recyclerview.RecyclerViewExampleFragment
 
 class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
@@ -14,6 +15,8 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val receivedData = intent.getSerializableExtra("myObject") as StudyList
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

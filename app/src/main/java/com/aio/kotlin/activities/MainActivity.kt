@@ -1,6 +1,8 @@
 package com.aio.kotlin.activities
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.adapters.StudyListAdapter
 import com.aio.kotlin.base.activity.ViewBindingBaseActivity
@@ -8,6 +10,7 @@ import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.ActivityMainBinding
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.recyclerview.ExampleItemDecoration
+import com.aio.kotlin.recyclerview.RecyclerViewExampleFragment
 
 class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
@@ -21,8 +24,6 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setStudyList()
-
         binding.rvMain.run {
             layoutManager = LinearLayoutManager(
                 context,
@@ -34,19 +35,25 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
                     object : BaseRecyclerViewAdapter.OnItemClickListener<StudyList> {
                         override fun onItemClick(data: StudyList, itemPosition: Int) {
                             // 클린 이벤트에 필요한 내용
+                            val intent = Intent(context, DetailActivity::class.java)
+                            intent.putExtra("key", data)
 
                         }
                     }
+
+
+                setItemList(setStudyList()) // RecyclerView에 데이터 추가
             }
+
             addItemDecoration(ExampleItemDecoration(30, 60, 60))
         }
     }
 
-    private fun setStudyList(): List<StudyList> {
-        return listOf(
-            StudyList("a"),
-            StudyList("a"),
-            StudyList("a")
+    private fun setStudyList(): MutableList<StudyList> {
+        return mutableListOf(
+            StudyList("aa", RecyclerViewExampleFragment()),
+            StudyList("bb", RecyclerViewExampleFragment()),
+            StudyList("cc", RecyclerViewExampleFragment())
         )
     }
 }
