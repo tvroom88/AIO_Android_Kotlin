@@ -7,7 +7,7 @@ import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.base.recyclerview.BaseViewHolder
 import com.aio.kotlin.databinding.ItemRecyclerviewExampleBinding
 
-class TestAdapter : BaseRecyclerViewAdapter<TestAdapter.TestViewHolder, String>() {
+class ExampleAdapter : BaseRecyclerViewAdapter<ExampleAdapter.TestViewHolder, String>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItemList(mutableList: MutableList<String>){
@@ -20,7 +20,7 @@ class TestAdapter : BaseRecyclerViewAdapter<TestAdapter.TestViewHolder, String>(
     inner class TestViewHolder(parent: ViewGroup) :
         BaseViewHolder<ItemRecyclerviewExampleBinding, String>(parent, R.layout.item_recyclerview_example) {
         override fun bind(data: String) {
-            binding.tvRecyclerExample.text = data
+            binding.title = data
         }
         override fun recycled() {}
     }
