@@ -6,7 +6,11 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.databinding.ActivityDetailBinding
 import com.aio.kotlin.jetpack.binding.databinding.DataBindingExampleFragment
+<<<<<<< HEAD
 import com.aio.kotlin.models.StudyList
+=======
+import com.aio.kotlin.recyclerview.RecyclerViewExampleFragment
+>>>>>>> parent of c563f95 (1. 메인에 RecyclerView 진행중..)
 
 class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
     override fun getViewBinding(): ActivityDetailBinding {
@@ -16,6 +20,7 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+<<<<<<< HEAD
         val fragmentName = intent.getSerializableExtra("data") as StudyList
 
         try {
@@ -35,6 +40,12 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
             e.printStackTrace()
         } catch (e: InstantiationException) {
             e.printStackTrace()
+=======
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fcv_detail, RecyclerViewExampleFragment())
+                .commit()
+>>>>>>> parent of c563f95 (1. 메인에 RecyclerView 진행중..)
         }
 
 
