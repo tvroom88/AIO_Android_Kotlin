@@ -2,6 +2,7 @@ package com.aio.kotlin.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.adapters.StudyListAdapter
@@ -35,12 +36,11 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
                     object : BaseRecyclerViewAdapter.OnItemClickListener<StudyList> {
                         override fun onItemClick(data: StudyList, itemPosition: Int) {
                             // 클린 이벤트에 필요한 내용
-                            val intent = Intent(context, DetailActivity::class.java)
-                            intent.putExtra("key", data)
-
+                            val intent = Intent(applicationContext, DetailActivity::class.java)
+                            intent.putExtra("data", data)
+                            startActivity(intent)
                         }
                     }
-
 
                 setItemList(setStudyList()) // RecyclerView에 데이터 추가
             }
@@ -51,9 +51,9 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
     private fun setStudyList(): MutableList<StudyList> {
         return mutableListOf(
-            StudyList("aa", RecyclerViewExampleFragment()),
-            StudyList("bb", RecyclerViewExampleFragment()),
-            StudyList("cc", RecyclerViewExampleFragment())
+            StudyList("aa", "com.aio.kotlin.jetpack.binding.databinding.DataBindingExampleFragment"),
+            StudyList("bb", ""),
+            StudyList("cc", "")
         )
     }
 }
