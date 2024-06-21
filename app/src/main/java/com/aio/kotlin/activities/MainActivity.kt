@@ -9,10 +9,14 @@ import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.ActivityMainBinding
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.recyclerview.ExampleItemDecoration
+import com.aio.kotlin.utils.PermissionUtils
+import com.google.firebase.messaging.FirebaseMessaging
+
 
 class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
     private val studyListAdapter by lazy { StudyListAdapter() }
+    private val permissionUtils by lazy { PermissionUtils(this, this) }
 
     // ViewBinding 연결
     override fun getViewBinding(): ActivityMainBinding {
@@ -22,7 +26,9 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setStudyList()
+        setStudyList() // 임시로 목록을 세팅한다.
+
+        permissionUtils.askNotificationPermission() // 권한 요청
 
         binding.rvMain.run {
             layoutManager = LinearLayoutManager(
@@ -46,6 +52,8 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
                 addItemDecoration(ExampleItemDecoration(30, 60, 60))
             }
         }
+
+
     }
 
     private fun setStudyList(): MutableList<StudyList> {
