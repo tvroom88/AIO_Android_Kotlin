@@ -24,12 +24,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private val CHANNEL_NAME = "bbb"
 
     // 토큰
-    // d4b5Ce6pR7uDO4dxlRBNpO:APA91bGwvAZRvTWN2GiOPwlxDvkhA_Hon9k4eAh3nj0Rz027qOJ7kVUFN8cl7aEvkKbJAyQnGxzxfxzrRJZ32Oci0LZNBmqJiCJQw8U_zHtDsuxL9ZAsKttKpEnC6jaL_ITgZgHTUCZf
     override fun onNewToken(@NonNull token: String) {
         super.onNewToken(token)
-        //token을 서버로 전송
         Log.d("MyFcmService", "New token :: $token")
-
     }
 
     override fun onMessageReceived(@NonNull remoteMessage: RemoteMessage) {
@@ -37,8 +34,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         //수신한 메시지를 처리
 
         val notificationManager = NotificationManagerCompat.from(applicationContext)
-        var builder: NotificationCompat.Builder? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val builder: NotificationCompat.Builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (notificationManager.getNotificationChannel(CHANNEL_ID) == null) {
                 val channel = NotificationChannel(
                     CHANNEL_ID,
@@ -47,9 +43,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 )
                 notificationManager.createNotificationChannel(channel)
             }
-            builder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
+            NotificationCompat.Builder(applicationContext, CHANNEL_ID)
         } else {
-            builder = NotificationCompat.Builder(applicationContext)
+            NotificationCompat.Builder(applicationContext)
         }
 
         val title = remoteMessage.notification!!.title
