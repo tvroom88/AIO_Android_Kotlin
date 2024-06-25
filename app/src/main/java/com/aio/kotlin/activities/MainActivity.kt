@@ -16,7 +16,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
     private val studyListAdapter by lazy { StudyListAdapter() }
-    private val permissionUtils by lazy { PermissionUtils(this, this) }
+    private val permissionUtils by lazy { PermissionUtils() }
 
     // ViewBinding 연결
     override fun getViewBinding(): ActivityMainBinding {
@@ -28,7 +28,7 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
         setStudyList() // 임시로 목록을 세팅한다.
 
-        permissionUtils.askNotificationPermission() // 권한 요청
+        permissionUtils.askNotificationPermission(this, this) // 권한 요청
 
         binding.rvMain.run {
             layoutManager = LinearLayoutManager(
@@ -59,11 +59,14 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
     private fun setStudyList(): MutableList<StudyList> {
         return mutableListOf(
             StudyList(
-                "aa",
+                "DataBinding",
                 "com.aio.kotlin.jetpack.binding.databinding.DataBindingExampleFragment"
             ),
-            StudyList("bb", ""),
-            StudyList("cc", "")
+            StudyList(
+                "ViewBinding",
+                "com.aio.kotlin.jetpack.binding.databinding.ViewBindingExampleFragment"
+            ),
+            StudyList("Not Adding Yet", "")
         )
     }
 }
