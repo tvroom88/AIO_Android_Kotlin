@@ -1,4 +1,4 @@
-package com.aio.kotlin.recyclerview
+package com.aio.kotlin.studylist.recyclerview
 
 import android.graphics.Rect
 import android.view.View

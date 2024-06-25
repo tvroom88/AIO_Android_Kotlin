@@ -1,4 +1,4 @@
-package com.aio.kotlin.recyclerview
+package com.aio.kotlin.studylist.recyclerview
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup

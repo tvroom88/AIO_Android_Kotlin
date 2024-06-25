@@ -1,4 +1,4 @@
-package com.aio.kotlin.recyclerview
+package com.aio.kotlin.studylist.recyclerview
 
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager

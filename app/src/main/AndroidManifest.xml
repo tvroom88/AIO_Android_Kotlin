@@ -22,11 +22,11 @@
             android:exported="false"/>
 
         <activity
-            android:name=".jetpack.binding.databinding.DataBindingExampleActivity"
+            android:name=".studylist.jetpack.binding.databinding.DataBindingExampleActivity"
             android:exported="false"/>
 
         <activity
-            android:name=".jetpack.binding.viewbinding.ViewBindingExampleActivity"
+            android:name=".studylist.jetpack.binding.viewbinding.ViewBindingExampleActivity"
             android:exported="false" />
 
         <activity

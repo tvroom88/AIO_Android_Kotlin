@@ -1,4 +1,4 @@
-package com.aio.kotlin.jetpack.binding.viewbinding
+package com.aio.kotlin.studylist.jetpack.binding.viewbinding
 
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentViewBindingBinding

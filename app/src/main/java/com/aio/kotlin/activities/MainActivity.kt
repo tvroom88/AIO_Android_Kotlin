@@ -8,7 +8,7 @@ import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.ActivityMainBinding
 import com.aio.kotlin.models.StudyList
-import com.aio.kotlin.recyclerview.ExampleItemDecoration
+import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import com.aio.kotlin.utils.PermissionUtils
 import com.google.firebase.messaging.FirebaseMessaging
 

@@ -1,4 +1,4 @@
-package com.aio.kotlin.jetpack.binding.databinding
+package com.aio.kotlin.studylist.jetpack.binding.databinding
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
