@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -29,29 +30,42 @@ class ComposeExample : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp()
+            NewText()
         }
+
+//        setContent {
+//            MyApp()
+//        }
+    }
+}
+
+@Composable
+fun NewText() {
+
+    Surface(color = Color.Green) {
+        Text(
+            text = "hi"
+        )
     }
 
+}
 
+@Preview(showBackground = true, name = "Text preview")
+@Composable
+fun GreetingPreview() {
+    NewText()
 }
 
 @Composable
 fun MyApp() {
-    var displayText by remember { mutableStateOf("Hello, Compose!") }
+    var firstText by remember { mutableStateOf("Hello, first Text!") }
+    var secondText by remember { mutableStateOf("Hello, second Text!") }
 
     MaterialTheme {
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.TopCenter
         ) {
-
-            Text(
-                text = displayText,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Blue
-            )
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -59,7 +73,14 @@ fun MyApp() {
             ) {
                 // Text to display
                 Text(
-                    text = displayText,
+                    text = firstText,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Green
+                )
+
+                Text(
+                    text = secondText,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Blue
@@ -70,7 +91,7 @@ fun MyApp() {
                 // Button to change the text
                 Button(
                     onClick = {
-                        displayText = "You clicked the button!"
+                        secondText = "You clicked the button!"
                     }
                 ) {
                     Text("Click me!")
