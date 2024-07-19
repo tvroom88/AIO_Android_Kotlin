@@ -3,12 +3,6 @@ package com.aio.kotlin.models
 import java.io.Serializable
 import kotlin.reflect.KClass
 
-
-//data class StudyList(
-//    val title: String,
-//    val fragmentName: String
-//) : Serializable
-
 sealed class StudyList : Serializable {
 
     abstract var title: String

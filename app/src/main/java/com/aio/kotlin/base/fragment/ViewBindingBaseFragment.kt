@@ -47,4 +47,15 @@ abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    fun getFullFragmentName(): String {
+        // 현재 프래그먼트의 클래스 객체를 가져옵니다
+        val fragmentClass = this::class.java
+
+        // 패키지 이름과 클래스 이름을 가져와서 결합합니다
+        val packageName = fragmentClass.`package`?.name ?: ""
+        val className = fragmentClass.simpleName
+
+        return "$packageName.$className"
+    }
 }

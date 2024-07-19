@@ -8,10 +8,12 @@ import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.ActivityMainBinding
 import com.aio.kotlin.models.StudyList
-import com.aio.kotlin.studylist.jetpack.compose.ComposeExample
+import com.aio.kotlin.studylist.backgroundWork.multiThread.MultiThreadFragment
+import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
+import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
+import com.aio.kotlin.studylist.recyclerview.RecyclerViewExampleFragment
 import com.aio.kotlin.utils.PermissionUtils
-
 
 class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
@@ -61,20 +63,24 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
     }
 
     private fun setStudyList(): MutableList<StudyList> {
+
         return mutableListOf(
             StudyList.StudyFragmentList(
                 "DataBinding",
-                "com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment"
+                DataBindingExampleFragment().getFullFragmentName()
             ),
             StudyList.StudyFragmentList(
                 "ViewBinding",
-                "com.aio.kotlin.studylist.jetpack.binding.databinding.ViewBindingExampleFragment"
+                ViewBindingExampleFragment().getFullFragmentName()
             ),
             StudyList.StudyFragmentList(
                 "RecyclerView",
-                "com.aio.kotlin.studylist.recyclerview.RecyclerViewExampleFragment"
+                RecyclerViewExampleFragment().getFullFragmentName()
             ),
-            StudyList.StudyActivityList("aaaaaa", ComposeExample::class)
+            StudyList.StudyFragmentList(
+                "Thread",
+                MultiThreadFragment().getFullFragmentName()
+            ),
         )
     }
 }

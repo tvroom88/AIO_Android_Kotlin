@@ -38,7 +38,7 @@ abstract class DataBindingBaseFragment<T : ViewDataBinding>(@LayoutRes private v
         savedInstanceState: Bundle?
     ): View? {
         _binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_data_binding, container, false)
+            DataBindingUtil.inflate(inflater, layoutResId, container, false)
         return binding.root
     }
 
@@ -51,5 +51,16 @@ abstract class DataBindingBaseFragment<T : ViewDataBinding>(@LayoutRes private v
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun getFullFragmentName(): String {
+        // 현재 프래그먼트의 클래스 객체를 가져옵니다
+        val fragmentClass = this::class.java
+
+        // 패키지 이름과 클래스 이름을 가져와서 결합합니다
+        val packageName = fragmentClass.`package`?.name ?: ""
+        val className = fragmentClass.simpleName
+
+        return "$packageName.$className"
     }
 }
