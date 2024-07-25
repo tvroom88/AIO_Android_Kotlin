@@ -17,17 +17,6 @@
         android:theme="@style/Theme.AIO_Android_Kotlin"
         tools:targetApi="31">
 
-        <activity
-            android:name=".activities.DetailActivity"
-            android:exported="false"/>
-
-        <activity
-            android:name=".jetpack.binding.databinding.DataBindingExampleActivity"
-            android:exported="false"/>
-
-        <activity
-            android:name=".jetpack.binding.viewbinding.ViewBindingExampleActivity"
-            android:exported="false" />
 
         <activity
             android:name=".activities.MainActivity"
@@ -39,7 +28,25 @@
             </intent-filter>
         </activity>
 
-        <!--        -->
+        <!--   Detail 화면     -->
+        <activity
+            android:name=".activities.DetailActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".studylist.jetpack.binding.databinding.DataBindingExampleActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".studylist.jetpack.binding.viewbinding.ViewBindingExampleActivity"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".studylist.jetpack.compose.ComposeExample"
+            android:exported="false" />
+
+        <!--    FCM    -->
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:exported="false">

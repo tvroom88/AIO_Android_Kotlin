@@ -8,10 +8,12 @@ import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.ActivityMainBinding
 import com.aio.kotlin.models.StudyList
-import com.aio.kotlin.recyclerview.ExampleItemDecoration
+import com.aio.kotlin.studylist.backgroundWork.multiThread.MultiThreadFragment
+import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
+import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
+import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
+import com.aio.kotlin.studylist.recyclerview.RecyclerViewExampleFragment
 import com.aio.kotlin.utils.PermissionUtils
-import com.google.firebase.messaging.FirebaseMessaging
-
 
 class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
 
@@ -41,10 +43,14 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
                     object : BaseRecyclerViewAdapter.OnItemClickListener<StudyList> {
                         override fun onItemClick(data: StudyList, itemPosition: Int) {
                             // 클린 이벤트에 필요한 내용
-
-                            val intent = Intent(applicationContext, DetailActivity::class.java)
-                            intent.putExtra("data", data)
-                            startActivity(intent)
+                            if (data is StudyList.StudyFragmentList) {
+                                val intent = Intent(applicationContext, DetailActivity::class.java)
+                                intent.putExtra("data", data)
+                                startActivity(intent)
+                            } else if (data is StudyList.StudyActivityList) {
+                                val intent = Intent(applicationContext, data.classInfo.java)
+                                startActivity(intent)
+                            }
                         }
                     }
 
@@ -57,16 +63,24 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
     }
 
     private fun setStudyList(): MutableList<StudyList> {
+
         return mutableListOf(
-            StudyList(
+            StudyList.StudyFragmentList(
                 "DataBinding",
-                "com.aio.kotlin.jetpack.binding.databinding.DataBindingExampleFragment"
+                DataBindingExampleFragment().getFullFragmentName()
             ),
-            StudyList(
+            StudyList.StudyFragmentList(
                 "ViewBinding",
-                "com.aio.kotlin.jetpack.binding.databinding.ViewBindingExampleFragment"
+                ViewBindingExampleFragment().getFullFragmentName()
             ),
-            StudyList("Not Adding Yet", "")
+            StudyList.StudyFragmentList(
+                "RecyclerView",
+                RecyclerViewExampleFragment().getFullFragmentName()
+            ),
+            StudyList.StudyFragmentList(
+                "Thread",
+                MultiThreadFragment().getFullFragmentName()
+            ),
         )
     }
 }
