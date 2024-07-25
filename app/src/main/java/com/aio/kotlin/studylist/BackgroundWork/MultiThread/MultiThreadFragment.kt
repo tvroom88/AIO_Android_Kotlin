@@ -1,12 +1,18 @@
 package com.aio.kotlin.studylist.backgroundWork.multiThread
 
-import android.util.Log
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentMultiThreadBinding
 import com.aio.kotlin.utils.CheckThreadUtils
 import java.lang.Thread.sleep
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.Executors
+
 
 /**
  * 기존 멀티 스레드 프로그래밍 방식
@@ -28,6 +34,9 @@ class MultiThreadFragment :
         // 3. Executor Service를 활용해 Thread Pool을 만들어 Runnable을 submit 하는 방식
         useExecutor()
 
+        // 4. Executor Service의 주어진 Thread 숫자보다 많은 Task가 있을 경우
+        testMoreExecutor()
+
         checkThreadUtils.getThreadList(activityContext)
     }
 
@@ -39,7 +48,6 @@ class MultiThreadFragment :
                 wrapRunOnUiThread {
                     binding.tvMultithreadThreadTest1.text = "1. 새로 생성한 Thread에 의해 Text가 변경되었습니다."
                 }
-
             }
         }
         thread.start()
@@ -58,7 +66,7 @@ class MultiThreadFragment :
         runnableTestThread.start()
     }
 
-    // 3.
+    // 3. Executor Service를 이용해서 Thread Pool을 만들어 Runnable에 submit 하는 방식
     private fun useExecutor() {
         val executorService = Executors.newFixedThreadPool(2)
         val runnable = Runnable {
@@ -70,11 +78,51 @@ class MultiThreadFragment :
         executorService.submit(
             runnable
         )
+
+        executorService.shutdown();
+    }
+
+    // 4. Executor Service 테스트
+    private fun testMoreExecutor() {
+        val executorService = Executors.newFixedThreadPool(2) //Thread 2
+
+        val addRunnable: (Int, Int) -> Runnable = { num1, num2 ->
+            Runnable {
+                println("------  result: ${(num1 + num2)} 실행: ${getTime()} -----");
+                println("------ result: " + (num1 + num2) + " (" + Thread.currentThread().name + ") ------")
+            }
+        }
+
+        executorService.submit(addRunnable(1, 2))
+        executorService.submit(addRunnable(1, 3))
+        executorService.submit(addRunnable(1, 4))
+        executorService.submit(addRunnable(1, 5))
+
+        executorService.shutdown()
     }
 
     private fun wrapRunOnUiThread(action: () -> Unit) {
         requireActivity().runOnUiThread {
             action()
         }
+    }
+
+    private fun getTime(): String {
+        val formatter = SimpleDateFormat("yyyyMMdd-HH-mm-ss-SSS", Locale.KOREA)
+        val date = Date();
+        val currentDate = formatter.format(date)
+        return currentDate
+    }
+}
+
+class ThreadExample : Thread() {
+    override fun run() {
+
+    }
+}
+
+class RunnableExample : Runnable {
+    override fun run() {
+
     }
 }
