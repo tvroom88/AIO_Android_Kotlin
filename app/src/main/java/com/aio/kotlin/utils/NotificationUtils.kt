@@ -9,7 +9,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.aio.kotlin.activities.MainActivity
+import com.aio.kotlin.activities.AndroidStudyActivity
 import com.google.firebase.messaging.RemoteMessage
 
 
@@ -29,7 +29,7 @@ class NotificationUtils(val context: Context) {
         remoteMessage: RemoteMessage
     ) {
 
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, AndroidStudyActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             context, 0, intent,

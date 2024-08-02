@@ -11,7 +11,5 @@ class ViewBindingExampleActivity : ViewBindingBaseActivity<ActivityViewBindingBi
         return ActivityViewBindingBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    override fun initOnCreate() {}
 }
