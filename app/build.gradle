@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
 }
 
 android {
@@ -50,9 +52,11 @@ android {
 
     buildFeatures {
         viewBinding = true
-        dataBinding = true
         compose = true
+//        dataBinding = true
     }
+
+    dataBinding { enabled = true }
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
@@ -65,6 +69,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+<<<<<<< HEAD
+    implementation 'androidx.activity:activity-ktx:1.9.1'
+=======
+>>>>>>> parent of f502ea8 (BaseActivity에 onCreate 부분 정비 및 추가)
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -89,4 +97,9 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // RxJava & RxKotlin & RxAndroid
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.5")
+    implementation("io.reactivex.rxjava3:rxkotlin:3.0.0")
 }

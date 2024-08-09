@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.backgroundWork.multiThread
+package com.aio.kotlin.studylist.backgroundwork.multithread
 
 import android.os.Build
 import androidx.annotation.RequiresApi
