@@ -2,10 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.AndroidStudyActivity"
-    android:id="@+id/rxjava_root">
+    android:id="@+id/rxjava_root"
+    tools:context=".activities.AndroidStudyActivity">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.aio.kotlin.studylist.backgroundwork.rx.RxJavaViewModel" />

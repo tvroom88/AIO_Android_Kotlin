@@ -4,4 +4,8 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="Theme.AIO_Android_Kotlin" parent="Base.Theme.AIO_Android_Kotlin" >
+        <item name="android:windowBackground">@color/backgroundColor</item>
+    </style>
 </resources>
