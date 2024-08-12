@@ -31,9 +31,9 @@ class RxJavaBasicViewModel : ViewModel() {
 
     init {
         // 초기 데이터 설정
-        _rxLiveData1.value = "Start Timer with Observalbe & Zip & Just"
-        _rxLiveData2.value = "Start Timer with Observalbe & Zip & Range"
-        _rxLiveData3.value = "Sample Rx Data3"
+        _rxLiveData1.value = "Start Timer 1"
+        _rxLiveData2.value = "Start Timer 2"
+        _rxLiveData3.value = "Start Timer 3"
     }
 
 
@@ -53,7 +53,7 @@ class RxJavaBasicViewModel : ViewModel() {
             }, { throwable ->
                 throwable.printStackTrace()  // 에러 처리 (선택 사항)
             }, {
-                _rxLiveData1.postValue("Timer is finished. Thank you")
+                _rxLiveData1.postValue("1. Timer is finished. Thank you")
             })
     }
 
@@ -86,7 +86,7 @@ class RxJavaBasicViewModel : ViewModel() {
             }
 
             override fun onComplete() {
-                _rxLiveData2.postValue("Timer is finished. Thank you")
+                _rxLiveData2.postValue("2. Timer is finished. Thank you")
                 disposable?.apply {
                     if (!isDisposed) {
                         disposable?.dispose()
@@ -142,12 +142,12 @@ class RxJavaBasicViewModel : ViewModel() {
 
             override fun onError(e: Throwable) {}
             override fun onComplete() {
-                _rxLiveData3.postValue("Timer is finished. Thank you")
+                _rxLiveData3.postValue("3. Timer is finished. Thank you")
             }
         }
 
         val observable = Observable.create { emitter ->
-            val messages = listOf("5", "4", "3", "2", "1")
+            val messages = listOf("1", "2", "3", "4", "5")
             for (message in messages) {
                 if (!emitter.isDisposed) {
                     Thread.sleep(1000) // 1초 지연
