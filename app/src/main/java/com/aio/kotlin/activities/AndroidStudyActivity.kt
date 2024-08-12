@@ -8,7 +8,7 @@ import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.ActivityAndroidStudyBinding
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
-import com.aio.kotlin.studylist.backgroundwork.rx.RxJavaBasicFragment
+import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration

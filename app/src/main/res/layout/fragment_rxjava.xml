@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.aio.kotlin.studylist.backgroundwork.rx.RxJavaViewModel" />
+            type="com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

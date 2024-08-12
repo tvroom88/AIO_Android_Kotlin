@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.backgroundwork.rx
+package com.aio.kotlin.studylist.backgroundwork.rx.basic
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
  * Create, Defer
  */
 
-class RxJavaViewModel : ViewModel() {
+class RxJavaBasicViewModel : ViewModel() {
 
     // LiveData 변수 선언
     private val _rxLiveData1 = MutableLiveData<String>()
@@ -37,9 +37,12 @@ class RxJavaViewModel : ViewModel() {
     }
 
 
+    /**
+     * Class : Observable
+     * Operator : zip(), just(), interval()
+     */
     fun rxJavaExample1() {
         val disposable1: Disposable = Flowable.just("Hello, World").subscribe(::println)
-
         val disposable2 = Observable
             .zip(
                 Observable.just("1", "2", "3", "4", "5"),
@@ -54,6 +57,12 @@ class RxJavaViewModel : ViewModel() {
             })
     }
 
+    /**
+     * Observable : Observable
+     * Observer : Observer
+     * Operator : zip(), just(), interval()
+     * Scheduler : Schedulers.computation(), Schedulers.io()
+     */
     fun rxJavaExample2() {
         var disposable: Disposable? = null
         val observable = Observable
@@ -90,14 +99,14 @@ class RxJavaViewModel : ViewModel() {
         observable
             .subscribeOn(Schedulers.computation()) // Observable의 연산을 계산 스레드에서 실행
             .observeOn(Schedulers.io()) // Observer의 콜백을 IO 스레드에서 실행
-            .subscribe(observer);
+            .subscribe(observer)
     }
 
 
     /**
-     * (1) Observer 데이터 스트림을 소배할 방법
-     * (2) Observable 데이터 스트림 생성
-     * (3) Observable로 Observer 구독
+     * Observable : Observable
+     * Observer : DisposableObserver
+     * Scheduler : Schedulers.computation(), Schedulers.io()
      */
     fun rxJavaExample3() {
         var disposable: Disposable? = null
@@ -107,7 +116,7 @@ class RxJavaViewModel : ViewModel() {
             }
 
             override fun onNext(s: String) {
-                _rxLiveData1.postValue(s)
+                _rxLiveData3.postValue(s)
             }
 
             override fun onError(e: Throwable) {
@@ -115,7 +124,7 @@ class RxJavaViewModel : ViewModel() {
             }
 
             override fun onComplete() {
-                _rxLiveData1.postValue("Timer is finished. Thank you")
+                _rxLiveData3.postValue("Timer is finished. Thank you")
 
                 disposable?.apply {
                     if (!isDisposed) {
@@ -128,12 +137,12 @@ class RxJavaViewModel : ViewModel() {
 
         val disposableObserver = object : DisposableObserver<String>() {
             override fun onNext(s: String) {
-                _rxLiveData1.postValue(s)
+                _rxLiveData3.postValue(s)
             }
 
             override fun onError(e: Throwable) {}
             override fun onComplete() {
-                _rxLiveData1.postValue("Timer is finished. Thank you")
+                _rxLiveData3.postValue("Timer is finished. Thank you")
             }
         }
 
@@ -151,7 +160,7 @@ class RxJavaViewModel : ViewModel() {
         observable
             .subscribeOn(Schedulers.io())        // Observable이 동작을 시작할 스레드"를 지정한다.
             .observeOn(Schedulers.computation()) // Computation 스케줄러를 사용하여 데이터 처리
-            .subscribe(observer)
+            .subscribe(disposableObserver)
     }
 
 }
