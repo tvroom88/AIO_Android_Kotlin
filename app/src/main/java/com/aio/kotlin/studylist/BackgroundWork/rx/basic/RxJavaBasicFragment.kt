@@ -9,7 +9,7 @@ class RxJavaBasicFragment : DataBindingBaseFragment<FragmentRxjavaBinding>(R.lay
     private lateinit var rxJavaViewModel: RxJavaBasicViewModel
     override fun initContentInOnViewCreated() {
         rxJavaViewModel = ViewModelProvider(this)[RxJavaBasicViewModel::class.java]
-        binding.viewModel = rxJavaViewModel
+        binding?.viewModel = rxJavaViewModel
 
         /**
          * Class : Observable

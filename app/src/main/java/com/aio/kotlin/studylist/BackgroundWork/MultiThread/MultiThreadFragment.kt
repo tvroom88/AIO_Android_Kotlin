@@ -46,7 +46,7 @@ class MultiThreadFragment :
             override fun run() {
                 sleep(1000L)
                 wrapRunOnUiThread {
-                    binding.tvMultithreadThreadTest1.text = "1. 새로 생성한 Thread에 의해 Text가 변경되었습니다."
+                    binding?.tvMultithreadThreadTest1?.text = "1. 새로 생성한 Thread에 의해 Text가 변경되었습니다."
                 }
             }
         }
@@ -58,7 +58,7 @@ class MultiThreadFragment :
         val runnable = Runnable {
             sleep(1000L)
             wrapRunOnUiThread {
-                binding.tvMultithreadRunnableTest.text = "2. Runnable 방식을 사용해서 Text를 변경하였습니다."
+                binding?.tvMultithreadRunnableTest?.text = "2. Runnable 방식을 사용해서 Text를 변경하였습니다."
             }
         }
 
@@ -72,7 +72,7 @@ class MultiThreadFragment :
         val runnable = Runnable {
             sleep(1000L)
             wrapRunOnUiThread {
-                binding.tvMultithreadRunnableTest.text = "3. Executor 방식을 사용해서 Text를 변경하였습니다."
+                binding?.tvMultithreadRunnableTest?.text = "3. Executor 방식을 사용해서 Text를 변경하였습니다."
             }
         }
         executorService.submit(
@@ -102,7 +102,7 @@ class MultiThreadFragment :
     }
 
     private fun wrapRunOnUiThread(action: () -> Unit) {
-        requireActivity().runOnUiThread {
+        activity.runOnUiThread {
             action()
         }
     }

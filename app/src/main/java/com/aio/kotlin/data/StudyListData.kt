@@ -26,11 +26,11 @@ class StudyListData {
         val jetpackCategory = StudyCategory("Jetpack Example")
         jetpackCategory.studyList.addAll(
             mutableListOf(
-                StudyList.StudyFragmentList(
+                StudyFragmentList(
                     "DataBinding",
                     DataBindingExampleFragment().getFullFragmentName()
                 ),
-                StudyList.StudyFragmentList(
+                StudyFragmentList(
                     "ViewBinding",
                     ViewBindingExampleFragment().getFullFragmentName()
                 )

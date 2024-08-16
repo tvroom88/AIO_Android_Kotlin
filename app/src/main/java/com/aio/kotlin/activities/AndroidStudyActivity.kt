@@ -1,6 +1,7 @@
 package com.aio.kotlin.activities
 
 import android.content.Intent
+import android.graphics.Color
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,8 +35,7 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
                 false
             )
             adapter = studyListAdapter.apply {
-                onItemClickListener =
-                    object : BaseRecyclerViewAdapter.OnItemClickListener<StudyList> {
+                onItemClickListener = object : BaseRecyclerViewAdapter.OnItemClickListener<StudyList> {
                         override fun onItemClick(
                             binding: ViewDataBinding,
                             data: StudyList,
@@ -56,21 +56,22 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
                                 }
 
                                 is StudyList.StudyCategory -> {
-
                                     if (binding is ItemStudyListBinding) { // binding 사용을 특정지어주기 위해서
-                                        if (binding.cvMainHiddenItems.visibility == View.VISIBLE) {
-                                            binding.cvMainHiddenItems.visibility = View.GONE
-                                            binding.ivRecyclerDropdown.animate().apply {
-                                                duration = 1000
-                                                rotation(0f)
-                                            }
-                                        } else {
-                                            binding.cvMainHiddenItems.visibility = View.VISIBLE
-                                            binding.ivRecyclerDropdown.animate().apply {
-                                                duration = 1000
-                                                rotation(180f)
-                                            }
-                                        }
+
+                                        binding.expandable.toggleLayout()
+//                                        if (binding.cvMainHiddenItems.visibility == View.VISIBLE) {
+//                                            binding.cvMainHiddenItems.visibility = View.GONE
+//                                            binding.ivRecyclerDropdown.animate().apply {
+//                                                duration = 1000
+//                                                rotation(0f)
+//                                            }
+//                                        } else {
+//                                            binding.cvMainHiddenItems.visibility = View.VISIBLE
+//                                            binding.ivRecyclerDropdown.animate().apply {
+//                                                duration = 1000
+//                                                rotation(180f)
+//                                            }
+//                                        }
                                     }
                                 }
                             }
@@ -79,8 +80,8 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
 
                 val studyList = StudyListData().setStudyList() // 학습 리스트
                 setItemList(studyList) // RecyclerView에 데이터 추가
-                addItemDecoration(ExampleItemDecoration(30, 60, 60))
             }
+            addItemDecoration(ExampleItemDecoration(30, 60, 60))
         }
     }
 }
