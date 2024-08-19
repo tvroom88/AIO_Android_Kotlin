@@ -1,6 +1,8 @@
 package com.aio.kotlin.studylist.recyclerview
 
 import android.util.Log
+import android.view.View
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
@@ -23,7 +25,7 @@ class RecyclerViewExampleFragment : ViewBindingBaseFragment<FragmentRecyclerView
             )
             adapter = testAdapter.apply {
                 onItemClickListener = object : BaseRecyclerViewAdapter.OnItemClickListener<String> {
-                    override fun onItemClick(data: String, itemPosition: Int) {
+                    override fun onItemClick(binding: ViewDataBinding, data: String, itemPosition: Int) {
                         // 클린 이벤트에 필요한 내용
                         Log.d("RecyclerViewExampleFragment", "item$itemPosition, data : $data")
                     }

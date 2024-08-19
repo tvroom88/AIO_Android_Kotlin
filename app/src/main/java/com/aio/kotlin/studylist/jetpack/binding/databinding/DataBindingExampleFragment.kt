@@ -10,6 +10,6 @@ class DataBindingExampleFragment : DataBindingBaseFragment<FragmentDataBindingBi
     private lateinit var dbViewModel: DataBindingViewModel
     override fun initContentInOnViewCreated() {
         dbViewModel = ViewModelProvider(this)[DataBindingViewModel::class.java]
-        binding.viewModel = dbViewModel
+        binding?.viewModel = dbViewModel
     }
 }

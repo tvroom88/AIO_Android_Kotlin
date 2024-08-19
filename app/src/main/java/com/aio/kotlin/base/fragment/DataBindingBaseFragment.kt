@@ -16,7 +16,7 @@ abstract class DataBindingBaseFragment<T : ViewDataBinding>(@LayoutRes private v
     Fragment() {
 
     private var _binding: T? = null
-    protected val binding get() = _binding!!
+    protected val binding get() = _binding
 
     // --- context, activity ---
     private var _context: Context? = null
@@ -39,12 +39,12 @@ abstract class DataBindingBaseFragment<T : ViewDataBinding>(@LayoutRes private v
     ): View? {
         _binding =
             DataBindingUtil.inflate(inflater, layoutResId, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding?.lifecycleOwner = viewLifecycleOwner
         initContentInOnViewCreated()
     }
 
