@@ -1,6 +1,10 @@
 package com.aio.kotlin.adapters
 
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.view.View
 import android.view.ViewGroup
 import com.aio.kotlin.R
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
@@ -26,7 +30,6 @@ class StudySubListAdapter :
         override fun bind(studyList: StudyList) {
             binding.subStudyList = studyList // databinding으로 데이터 세팅. xml에서 title 세팅 예정
         }
-
         override fun recycled() {}
     }
 }

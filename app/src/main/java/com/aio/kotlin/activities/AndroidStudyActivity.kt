@@ -1,10 +1,14 @@
 package com.aio.kotlin.activities
 
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aio.kotlin.R
 import com.aio.kotlin.adapters.StudyListAdapter
 import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
@@ -35,12 +39,17 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
                 false
             )
             adapter = studyListAdapter.apply {
-                onItemClickListener = object : BaseRecyclerViewAdapter.OnItemClickListener<StudyList> {
+                onItemClickListener =
+                    object : BaseRecyclerViewAdapter.OnItemClickListener<StudyList> {
                         override fun onItemClick(
                             binding: ViewDataBinding,
                             data: StudyList,
                             itemPosition: Int
                         ) {
+
+                            // 버튼 클릭시 애니매이션
+                            makeObjectAnimator(binding.root)
+
                             // 클린 이벤트에 필요한 내용
                             when (data) {
                                 is StudyList.StudyFragmentList -> {
@@ -57,21 +66,7 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
 
                                 is StudyList.StudyCategory -> {
                                     if (binding is ItemStudyListBinding) { // binding 사용을 특정지어주기 위해서
-
                                         binding.expandable.toggleLayout()
-//                                        if (binding.cvMainHiddenItems.visibility == View.VISIBLE) {
-//                                            binding.cvMainHiddenItems.visibility = View.GONE
-//                                            binding.ivRecyclerDropdown.animate().apply {
-//                                                duration = 1000
-//                                                rotation(0f)
-//                                            }
-//                                        } else {
-//                                            binding.cvMainHiddenItems.visibility = View.VISIBLE
-//                                            binding.ivRecyclerDropdown.animate().apply {
-//                                                duration = 1000
-//                                                rotation(180f)
-//                                            }
-//                                        }
                                     }
                                 }
                             }
@@ -83,5 +78,18 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
             }
             addItemDecoration(ExampleItemDecoration(30, 60, 60))
         }
+    }
+
+    @SuppressLint("ObjectAnimatorBinding")
+    fun makeObjectAnimator(view: View) {
+        val animator = ObjectAnimator.ofObject(
+            view,
+            "cardBackgroundColor", // 애니메이션 할 속성
+            ArgbEvaluator(),        // 색상 변환기
+            Color.WHITE,            // 시작 색상
+            view.resources.getColor(R.color.basicSubListColor, null) // 끝 색상
+        )
+        animator.duration = 300 // 애니메이션 지속 시간 (밀리초)
+        animator.start()
     }
 }

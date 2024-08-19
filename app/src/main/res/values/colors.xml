@@ -9,8 +9,9 @@
 
     <!--  android basic study button color  -->
     <color name="basicBtnColor">#7F9BFF</color>
-    <color name="basicBtnInsideColor">#619df8</color>
+    <color name="basicBtnInsideColor">#519df8</color>
     <color name="basicSubListColor">#7FAFFF</color>
+    <color name="basicSubListBorderColor">#7F9FFF</color>
 
 
     <!--  expandable view library color  -->
