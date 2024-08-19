@@ -1,6 +1,7 @@
 package com.aio.kotlin.base.recyclerview
 
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -15,15 +16,18 @@ abstract class BaseRecyclerViewAdapter<VH : BaseViewHolder<ViewDataBinding, E>, 
     var onItemClickListener: OnItemClickListener<E>? = null
 
     interface OnItemClickListener<E> {
-        fun onItemClick(data: E, itemPosition: Int)
+        fun onItemClick(binding: ViewDataBinding, data: E, itemPosition: Int)
     }
 
     abstract fun getViewHolder(parent: ViewGroup): VH
+
+    // Todo: 여기에 OnClickListener 내용 추가하기
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         Log.d("BaseRecyclerViewAdapter", "onCreateViewHolder")
         return getViewHolder(parent).apply {
             itemView.setOnClickListener {
                 onItemClickListener?.onItemClick(
+                    binding,
                     getItem(adapterPosition),
                     adapterPosition
                 )

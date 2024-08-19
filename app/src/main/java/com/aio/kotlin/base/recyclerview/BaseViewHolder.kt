@@ -17,10 +17,9 @@ abstract class BaseViewHolder<out B : ViewDataBinding, D>(
 ) :
     RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)) {
 
-    protected val context: Context = itemView.context
-    protected val binding: B = DataBindingUtil.bind(itemView)!!
+    val context: Context = itemView.context
+    val binding: B = DataBindingUtil.bind(itemView)!!
 
     abstract fun bind(data: D)
-    open fun recycled() {
-    }
+    open fun recycled() {}
 }

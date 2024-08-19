@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/multithread_root">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--    title    -->
+        <TextView
+            android:id="@+id/tv_multithread_title_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Basic Multi Thread"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--    subtitle    -->
+        <TextView
+            android:id="@+id/tv_multithread_title_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="모든 Text가 3가지 방식의 Thread로 만든 코드로 1초후 Text가 변환합니다"
+            android:textAlignment="center"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_multithread_title_main" />
+
+        <!--    1. Thread를 직접 만들어서 사용하는 방식    -->
+        <TextView
+            android:id="@+id/tv_multithread_thread_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="1. Thread를 직접 만들어서 사용하는 방식"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_multithread_title_sub" />
+
+        <TextView
+            android:id="@+id/tv_multithread_thread_test1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Thread 테스트용 TextView입니다."
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_multithread_thread_explain" />
+
+
+        <!--    2. Runnable을 만든 후, Thread에 Runnable을 넘겨서 실행하도록 하는 방식    -->
+        <TextView
+            android:id="@+id/tv_multithread_Runnable_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="2. Runnable을 사용하는 방식"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_multithread_thread_test1" />
+
+        <TextView
+            android:id="@+id/tv_multithread_Runnable_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Thread 테스트용 TextView입니다."
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_multithread_Runnable_explain" />
+
+
+        <!--    3. Executor Service를 이용해서 Thread Pool을 만들어 Runnable에 submit 하는 방식    -->
+        <TextView
+            android:id="@+id/tv_multithread_executor_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="3. Executor Service을 사용하는 방식"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_multithread_Runnable_test" />
+
+        <TextView
+            android:id="@+id/tv_multithread_executor_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Thread 테스트용 TextView입니다."
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_multithread_executor_explain" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
