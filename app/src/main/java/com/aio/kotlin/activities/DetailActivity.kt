@@ -12,7 +12,16 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
     }
 
     override fun initOnCreate() {
+
         val fragmentName = intent.getSerializableExtra("data") as StudyList.StudyFragmentList
+
+        // toolbar 설정
+        setToolbar(
+            binding.layout.toolbar,
+            binding.layout.toolbarImage,
+            binding.layout.tooblarTitle,
+            fragmentName.title
+        )
 
         try {
             val fragmentClass = Class.forName(fragmentName.fragmentName)

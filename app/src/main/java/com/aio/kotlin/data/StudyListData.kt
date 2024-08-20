@@ -4,6 +4,8 @@ import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
+import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
+import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesViewModel
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
@@ -18,7 +20,8 @@ class StudyListData {
                 "RecyclerView",
                 RecyclerViewExampleFragment().getFullFragmentName()
             ),
-            addAsyncExample()
+            addAsyncExample(),
+            StudyFragmentList("RxJava Base Classes", RxJavaBaseClassesFragment().getFullFragmentName())
         )
     }
 

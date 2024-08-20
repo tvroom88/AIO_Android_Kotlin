@@ -1,14 +1,11 @@
 package com.aio.kotlin.studylist.backgroundwork.multithread
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentMultiThreadBinding
 import com.aio.kotlin.utils.CheckThreadUtils
 import java.lang.Thread.sleep
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.Executors
