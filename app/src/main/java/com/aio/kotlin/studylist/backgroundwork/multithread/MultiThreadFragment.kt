@@ -4,6 +4,7 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentMultiThreadBinding
 import com.aio.kotlin.utils.CheckThreadUtils
+import com.aio.kotlin.utils.HandlerUtil
 import java.lang.Thread.sleep
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -20,7 +21,9 @@ import java.util.concurrent.Executors
 class MultiThreadFragment :
     DataBindingBaseFragment<FragmentMultiThreadBinding>(R.layout.fragment_multi_thread) {
 
-    private val checkThreadUtils by lazy { CheckThreadUtils() }
+    private val checkThreadUtils by lazy { CheckThreadUtils() } // 현재 thread 리스트
+    private val handlerUtils by lazy { HandlerUtil() } // handler util - 비동기로 UI 변경
+    
     override fun initContentInOnViewCreated() {
         // 1. Thread를 직접 사용하는 방식
         addThread()
@@ -37,12 +40,12 @@ class MultiThreadFragment :
         checkThreadUtils.getThreadList(activityContext)
     }
 
-    // 1. Thread를 직접 사용하는 방식
+    // 1. Thread를 직접 사용하는 방식 (Handler.post() 사용)
     private fun addThread() {
         val thread = object : Thread() {
             override fun run() {
                 sleep(1000L)
-                wrapRunOnUiThread {
+                handlerUtils.handlerPost {
                     binding?.tvMultithreadThreadTest1?.text = "1. 새로 생성한 Thread에 의해 Text가 변경되었습니다."
                 }
             }
@@ -50,11 +53,11 @@ class MultiThreadFragment :
         thread.start()
     }
 
-    // 2. Runnable을 만든 후, Thread에 Runnable을 넘겨서 실행하도록 한 방식
+    // 2. Runnable을 만든 후, Thread에 Runnable을 넘겨서 실행하도록 한 방식 (runOnUiThread() 사용)
     private fun useRunnable() {
         val runnable = Runnable {
             sleep(1000L)
-            wrapRunOnUiThread {
+            handlerUtils.runOnUiThread(activity) {
                 binding?.tvMultithreadRunnableTest?.text = "2. Runnable 방식을 사용해서 Text를 변경하였습니다."
             }
         }
