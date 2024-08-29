@@ -43,10 +43,8 @@ class ObservableClass {
 
             override fun onNext(t: Int) {
                 Log.d("Observer", "onNext : $t")
-//                rxStatus1.postValue("onNext 진행중입니다.")
-//                rxTimer1.postValue("Timer : $t")
-                rxTimer1.value = "Timer : $t"
-
+                rxStatus1.postValue("onNext 진행중입니다.")
+                rxTimer1.postValue("Timer : $t")
             }
 
             override fun onError(e: Throwable) {
