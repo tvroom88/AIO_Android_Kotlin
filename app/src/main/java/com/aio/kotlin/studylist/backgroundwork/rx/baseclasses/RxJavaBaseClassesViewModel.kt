@@ -5,9 +5,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.fiveclass.CompletableClass
+import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.fiveclass.FlowableClass
+import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.fiveclass.MaybeClass
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.fiveclass.ObservableClass
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.fiveclass.SingleClass
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.CompletableObserver
+import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.MaybeObserver
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
@@ -29,18 +36,13 @@ class RxJavaBaseClassesViewModel : ViewModel() {
     // Single Class LiveData
     private val _rxStatus2 = MutableLiveData<String>()  // 현재 상태 : onNext, onComplete를 나타내줌
     val rxStatus2: LiveData<String> get() = _rxStatus2
-    private val _rxTimer2 = MutableLiveData<String>()
-    val rxTimer2: LiveData<String> get() = _rxTimer2
 
+    // Single Class LiveData
     private val _rxStatus3 = MutableLiveData<String>()  // 현재 상태 : onNext, onComplete를 나타내줌
     val rxStatus3: LiveData<String> get() = _rxStatus3
-    private val _rxTimer3 = MutableLiveData<String>()
-    val rxTimer3: LiveData<String> get() = _rxTimer3
 
     private val _rxStatus4 = MutableLiveData<String>()  // 현재 상태 : onNext, onComplete를 나타내줌
     val rxStatus4: LiveData<String> get() = _rxStatus4
-    private val _rxTimer4 = MutableLiveData<String>()
-    val rxTimer4: LiveData<String> get() = _rxTimer4
 
     private val _rxStatus5 = MutableLiveData<String>()  // 현재 상태 : onNext, onComplete를 나타내줌
     val rxStatus5: LiveData<String> get() = _rxStatus5
@@ -58,9 +60,6 @@ class RxJavaBaseClassesViewModel : ViewModel() {
     init {
         // 초기 데이터 설정
         _rxTimer1.value = "Timer 0"
-        _rxTimer2.value = "Timer 0"
-        _rxTimer3.value = "Timer 0"
-        _rxTimer4.value = "Timer 0"
         _rxTimer5.value = "Timer 0"
 
         _rxStatus1.value = "아직 시작하지 전입니다."
@@ -72,7 +71,7 @@ class RxJavaBaseClassesViewModel : ViewModel() {
 
     /**
      * 1. Observable class
-     * 데이터 발행자 :Observable
+     * 데이터 발행자 : Observable
      * 데이터 수신자 (Observer) : Observer
      */
     fun rxJavaObservableClass() {
@@ -89,14 +88,14 @@ class RxJavaBaseClassesViewModel : ViewModel() {
 
     /**
      * 2. Single class
-     * 데이터 발행자 :Single
+     * 데이터 발행자 : Single
      * 데이터 수신자 (Observer) : SingleObserver
      */
     @SuppressLint("CheckResult")
     fun rxJavaSingleClass() {
         val singleClass = SingleClass()
         val singleObserver: SingleObserver<Int> =
-            singleClass.createSingleObserver(_rxStatus2, _rxTimer2)
+            singleClass.createSingleObserver(_rxStatus2)
         val single: Single<Int> = singleClass.createSingle()
         disposable2 = singleClass.getDisposable()
         single.subscribeOn(Schedulers.io())
@@ -105,6 +104,62 @@ class RxJavaBaseClassesViewModel : ViewModel() {
 
         Log.d("aaaaa", "dispose : ${disposable2?.isDisposed?.not()}")
     }
+
+
+    /**
+     * 3. Maybe class
+     * 데이터 발행자 :Maybe
+     * 데이터 수신자 (Observer) : MaybeObserver
+     */
+    @SuppressLint("CheckResult")
+    fun rxJavaMaybeClass() {
+        val maybeClass = MaybeClass()
+        val maybeObserver: MaybeObserver<Int> = maybeClass.createMaybeObserver(_rxStatus3)
+        val maybe: Maybe<Int> = maybeClass.createMaybe()
+        disposable3 = maybeClass.getDisposable()
+        maybe.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(maybeObserver)
+
+        Log.d("aaaaa", "dispose : ${disposable2?.isDisposed?.not()}")
+    }
+
+
+    /**
+     * 4. Completable class
+     * 데이터 발행자 : Completable
+     * 데이터 수신자 (Observer) : CompletableObserver
+     */
+    @SuppressLint("CheckResult")
+    fun rxJavaCompletableClass() {
+        val completableClass = CompletableClass()
+        val completableObserver: CompletableObserver = completableClass.createCompletableObserver(_rxStatus4)
+        val completable: Completable = completableClass.createCompletable()
+        disposable4 = completableClass.getDisposable()
+        completable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(completableObserver)
+
+        Log.d("aaaaa", "dispose : ${disposable2?.isDisposed?.not()}")
+    }
+
+
+    /**
+     * 5. Flowable class
+     * 데이터 발행자 : Flowable
+     * 데이터 수신자 (Observer) : Observer
+     */
+    fun rxJavaFlowableClass() {
+        val flowableClass = FlowableClass()
+        val observer = flowableClass.createDisposableSubscriber(_rxStatus5, _rxTimer5)
+        val flowable = flowableClass.createFlowable()
+        disposable5 = flowableClass.getDisposable()
+        flowable
+            .subscribeOn(Schedulers.io()) // 백그라운드 작업은 IO 스레드에서
+            .observeOn(AndroidSchedulers.mainThread()) // 결과는 메인 스레드에서 관찰
+            .subscribe(observer)
+    }
+
 
     fun disposableDispose() {
         disposable1?.dispose()

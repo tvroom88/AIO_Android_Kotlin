@@ -6,6 +6,7 @@
     tools:context=".activities.AndroidStudyActivity">
 
     <data>
+
         <variable
             name="rxJavaBaseViewModel"
             type="com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesViewModel" />
@@ -17,62 +18,58 @@
 
         <!--    1. Observable class 예제    -->
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/ll_rxjavabase_observable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_rxjavabase_status1"
+                android:id="@+id/tv_rxjavabase_observable_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@{rxJavaBaseViewModel.rxStatus1}" />
 
             <TextView
-                android:id="@+id/tv_rxjavabase_timer1"
+                android:id="@+id/tv_rxjavabase_observable_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="@{rxJavaBaseViewModel.rxTimer1}" />
 
             <Button
-                android:id="@+id/btn_rxjavabase_start"
+                android:id="@+id/btn_rxjavabase_observable_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Button" />
+                android:text="Start Observable Class Example" />
 
         </LinearLayout>
 
-
         <!--    2. Single class 예제    -->
         <LinearLayout
+            android:id="@+id/ll_rxjavabase_single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavabase_observable">
 
             <TextView
-                android:id="@+id/tv_rxjavabase_status2"
+                android:id="@+id/tv_rxjavabase_single_status2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@{rxJavaBaseViewModel.rxStatus2}" />
 
-            <TextView
-                android:id="@+id/tv_rxjavabase_timer2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@{rxJavaBaseViewModel.rxTimer2}" />
-
             <Button
-                android:id="@+id/btn_rxjavabase_start2"
+                android:id="@+id/btn_rxjavabase_single_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -80,5 +77,95 @@
                 android:text="Start Single Class Example" />
 
         </LinearLayout>
+
+        <!--    3. Maybe class 예제    -->
+        <LinearLayout
+            android:id="@+id/ll_rxjavabase_maybe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavabase_single">
+
+            <TextView
+                android:id="@+id/tv_rxjavabase_maybe_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@{rxJavaBaseViewModel.rxStatus3}" />
+
+            <Button
+                android:id="@+id/btn_rxjavabase_maybe_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Start Maybe Class Example" />
+
+        </LinearLayout>
+
+        <!--    4. Completable class 예제    -->
+        <LinearLayout
+            android:id="@+id/ll_rxjavabase_completable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavabase_maybe">
+
+            <TextView
+                android:id="@+id/tv_rxjavabase_completable_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@{rxJavaBaseViewModel.rxStatus4}" />
+
+            <Button
+                android:id="@+id/btn_rxjavabase_completable_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Start Completable Class Example" />
+
+        </LinearLayout>
+
+        <!--    5. Flowable class 예제    -->
+        <LinearLayout
+            android:id="@+id/ll_rxjavabase_flowable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavabase_completable">
+
+            <TextView
+                android:id="@+id/tv_rxjavabase_flowable_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@{rxJavaBaseViewModel.rxStatus5}" />
+
+            <TextView
+                android:id="@+id/tv_rxjavabase_flowable_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@{rxJavaBaseViewModel.rxTimer5}" />
+
+            <Button
+                android:id="@+id/btn_rxjavabase_flowable_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Start Flowable Class Example" />
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
