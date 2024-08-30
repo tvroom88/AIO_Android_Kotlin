@@ -4,6 +4,7 @@ import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
+import com.aio.kotlin.studylist.backgroundwork.rx.operators.RxjavaOperators
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesViewModel
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
@@ -13,6 +14,7 @@ import com.aio.kotlin.studylist.recyclerview.RecyclerViewExampleFragment
 
 class StudyListData {
 
+    // 안드로이드 학습 리스트 데이터
     fun setStudyList(): MutableList<StudyList> {
         return mutableListOf(
             addJetPack(),
@@ -21,11 +23,11 @@ class StudyListData {
                 RecyclerViewExampleFragment().getFullFragmentName()
             ),
             addAsyncExample(),
-            StudyFragmentList("RxJava Base Classes", RxJavaBaseClassesFragment().getFullFragmentName())
+
         )
     }
 
-    private fun addJetPack() : StudyCategory {
+    private fun addJetPack(): StudyCategory {
         val jetpackCategory = StudyCategory("Jetpack Example")
         jetpackCategory.studyList.addAll(
             mutableListOf(
@@ -42,7 +44,7 @@ class StudyListData {
         return jetpackCategory
     }
 
-    private fun addAsyncExample() : StudyCategory {
+    private fun addAsyncExample(): StudyCategory {
         val asyncCategory = StudyCategory("AsyncTask Example")
         asyncCategory.studyList.addAll(
             mutableListOf(
@@ -54,6 +56,14 @@ class StudyListData {
                     "RxJavaBasic",
                     RxJavaBasicFragment().getFullFragmentName()
                 ),
+                StudyFragmentList(
+                    "RxJava Base Classes",
+                    RxJavaBaseClassesFragment().getFullFragmentName()
+                ),
+                StudyFragmentList(
+                    "RxJava Operators",
+                    RxjavaOperators().getFullFragmentName()
+                )
             )
         )
         return asyncCategory
