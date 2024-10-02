@@ -3,6 +3,7 @@ package com.aio.kotlin.data
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
+import com.aio.kotlin.studylist.architecturepattern.MvvmSimpleExample
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.operators.RxjavaOperators
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
@@ -18,12 +19,9 @@ class StudyListData {
     fun setStudyList(): MutableList<StudyList> {
         return mutableListOf(
             addJetPack(),
-            StudyFragmentList(
-                "RecyclerView",
-                RecyclerViewExampleFragment().getFullFragmentName()
-            ),
+            StudyFragmentList("RecyclerView", RecyclerViewExampleFragment().getFullFragmentName()),
             addAsyncExample(),
-
+            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName())
         )
     }
 

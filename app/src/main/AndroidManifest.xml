@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
     <!-- INTERNET 퍼미션 추가! -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
@@ -16,42 +16,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AIO_Android_Kotlin"
-        tools:targetApi="31">
-
-        <!--    앱 시작화면    -->
+        tools:targetApi="31" >
+        <!-- 앱 시작화면 -->
         <activity
             android:name=".activities.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!--    안드로이드 공부 리스트 화면   -->
+        </activity> <!-- 안드로이드 공부 리스트 화면 -->
         <activity
             android:name=".activities.AndroidStudyActivity"
-            android:exported="false" />
-
-        <!-- Detail 화면 -->
+            android:exported="false"
+            android:configChanges="orientation|screenSize"/> <!-- Detail 화면 -->
         <activity
             android:name=".activities.DetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".studylist.jetpack.binding.databinding.DataBindingExampleActivity"
             android:exported="false" />
         <activity
             android:name=".studylist.jetpack.binding.viewbinding.ViewBindingExampleActivity"
             android:exported="false" />
-
         <activity
             android:name=".studylist.jetpack.compose.ComposeExample"
             android:exported="false" /> <!-- FCM -->
         <service
             android:name=".fcm.MyFirebaseMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

@@ -27,7 +27,8 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>() {
             val fragmentClass = Class.forName(fragmentName.fragmentName)
             val fragment: Fragment = fragmentClass.newInstance() as Fragment
             supportFragmentManager.beginTransaction()
-                .add(R.id.fcv_detail, fragment)
+                .replace(R.id.fcv_detail, fragment)
+                .addToBackStack(null)
                 .commit()
 
         } catch (e: ClassNotFoundException) {

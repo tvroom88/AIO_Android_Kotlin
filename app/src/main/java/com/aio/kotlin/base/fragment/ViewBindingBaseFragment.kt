@@ -3,6 +3,7 @@ package com.aio.kotlin.base.fragment
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,8 @@ abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
     protected abstract fun getViewBinding(): T
     protected abstract fun initContentInOnViewCreated()
 
+    var initOnce = 0
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         _context = context
@@ -40,6 +43,8 @@ abstract class ViewBindingBaseFragment<T : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d("MvvmSimpleExample", "onViewCreated")
         initContentInOnViewCreated()
     }
 

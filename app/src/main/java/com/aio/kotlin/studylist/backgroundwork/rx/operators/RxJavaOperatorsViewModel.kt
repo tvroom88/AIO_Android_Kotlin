@@ -26,8 +26,13 @@ class RxJavaOperatorsViewModel : ViewModel() {
     }
 
     /**
+     * https://smashandroid.tistory.com/73
      * 1. 생성 연산자 : creating observables
      * just, create, interval, range, timer, intervalRange, defer, repeat
+     *
+     * just : 인자를 받는 데이터를 순서대로 발행하는 Observable
+     * create : emitter를 이용하여 데이터를 발행하고, onNext(), onComplete(), onError() 함수를 이용하여 데이터를 발행하거나 완료처리, 에러처리
+     * interval : 시간 간격을 두고 데이터를 전달하는 stream을 만든다.
      */
     fun makeObservable() {
 
