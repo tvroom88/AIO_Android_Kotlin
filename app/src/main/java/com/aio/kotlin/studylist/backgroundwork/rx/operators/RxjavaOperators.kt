@@ -19,8 +19,13 @@ class RxjavaOperators :
         binding?.apply {
             myRxJavaOperatorsViewModel = rxjavaOperatorsViewModel
 
-            btnRxjavaoperatorsCreatingCounter.setOnClickListener{
-                rxjavaOperatorsViewModel.makeObservable()
+            // 생성 연산자 : creating observables
+            btnRxjavaoperatorsJust.setOnClickListener{
+                rxjavaOperatorsViewModel.operatorJust()
+            }
+
+            btnRxjavaoperatorsCreate.setOnClickListener {
+                rxjavaOperatorsViewModel.operatorCreate()
             }
         }
 

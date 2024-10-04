@@ -17,28 +17,50 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll_rxjavaoperators_creating"
+            android:id="@+id/ll_rxjavaoperators_just"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"/>
-
             <TextView
-                android:id="@+id/tv_rxjavaoperators_creating_counter"
+                android:id="@+id/tv_rxjavaoperators_just"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="@{myRxJavaOperatorsViewModel.rxCreatingLiveData}" />
+                android:text="@{myRxJavaOperatorsViewModel.rxJustLiveData}" />
 
             <Button
-                android:id="@+id/btn_rxjavaoperators_creating_counter"
+                android:id="@+id/btn_rxjavaoperators_just"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Start Create Operator Just Example" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_rxjavaoperators_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_just">
+
+            <TextView
+                android:id="@+id/tv_rxjavaoperators_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@{myRxJavaOperatorsViewModel.rxCreateLiveData}" />
+
+            <Button
+                android:id="@+id/btn_rxjavaoperators_create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -18,7 +18,6 @@ class ObservableClass {
                     for (message in 1..5) {
                         if (!emitter.isDisposed) {
                             Thread.sleep(1000) // 1초 지연
-                            Log.d("aaaa", "$message")
                             emitter.onNext(message)
                         }
                     }
