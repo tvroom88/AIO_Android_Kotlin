@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentRxjavaOperatorsBinding
-import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesViewModel
 
 /**
  * Rxjava 연산자들
@@ -19,14 +18,25 @@ class RxjavaOperators :
         binding?.apply {
             myRxJavaOperatorsViewModel = rxjavaOperatorsViewModel
 
-            // 생성 연산자 : creating observables
-            btnRxjavaoperatorsJust.setOnClickListener{
+            // 생성 연산자 : just(), create(), interval()
+            btnRxjavaoperatorsJust.setOnClickListener {
                 rxjavaOperatorsViewModel.operatorJust()
             }
 
             btnRxjavaoperatorsCreate.setOnClickListener {
                 rxjavaOperatorsViewModel.operatorCreate()
             }
+
+            btnRxjavaoperatorsInterval.setOnClickListener {
+                rxjavaOperatorsViewModel.operatorInterval()
+            }
+
+            // Transforming Observables : map()
+            btnRxjavaoperatorsMap.setOnClickListener {
+                rxjavaOperatorsViewModel.operatorMap()
+            }
+
+            // Filtering Observables
         }
 
     }

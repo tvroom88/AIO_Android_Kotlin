@@ -16,6 +16,10 @@ class MvvmSimpleExample : ViewBindingBaseFragment<FragmentMvvmSimpleExampleBindi
         Log.d("MvvmSimpleExample", "initContentInOnViewCreated")
         mMvvmSimpleViewModel = ViewModelProvider(requireActivity())[MvvmSimpleViewModel::class.java]
 
+        mMvvmSimpleViewModel.someLiveData.observe(this) {
+            binding.tvMvvmsimpleNumber.text = it.toString()
+        }
+
         mMvvmSimpleViewModel.someLiveData.observe(viewLifecycleOwner) {
             binding.tvMvvmsimpleNumber.text = it.toString()
         }
