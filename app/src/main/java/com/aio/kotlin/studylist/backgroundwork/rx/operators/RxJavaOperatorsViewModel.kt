@@ -32,6 +32,10 @@ class RxJavaOperatorsViewModel : ViewModel() {
     private val _rxMapLiveData = MutableLiveData<String>()
     val rxMapLiveData: LiveData<String> get() = _rxMapLiveData
 
+    // Filter Observables (Debounce)
+    private val _rxDebounceLiveData = MutableLiveData<String>()
+    val rxDebounceLiveData: LiveData<String> get() = _rxDebounceLiveData
+
     init {
         // Creating Observables
         _rxJustLiveData.value = "Just 예제 시작 전입니다."
@@ -39,7 +43,9 @@ class RxJavaOperatorsViewModel : ViewModel() {
         _rxIntervalLiveData.value = "Interval 예제 시작 전입니다."
 
         // Transforming  Observables
-        _rxMapLiveData.value = "Map 예제 시작 전입니다. "
+        _rxMapLiveData.value = "Map 예제 시작 전입니다."
+
+        // Filter Observables
     }
 
     /**
@@ -47,7 +53,6 @@ class RxJavaOperatorsViewModel : ViewModel() {
      * 1. 생성 연산자 : creating observables
      * just, create, interval, range, timer, intervalRange, defer, repeat
      */
-
     // just : 인자를 받는 데이터를 순서대로 발행하는 Observable 생성 연산자이며, 최대 10개 까지 발행할 수 있다.
     fun operatorJust() {
         val source = Observable.just("1", "2", "3", "4", "5")
@@ -113,7 +118,6 @@ class RxJavaOperatorsViewModel : ViewModel() {
     /**
      * 3. 필터연산자 Filtering Observables
      */
-
     // Debounce : 이벤트를 그룹화하여 특정시간이 지난 후 하나의 이벤트만 발생하도록 하는 기술이다.
     // 예제 : 이벤트1 이벤트2 (— 4.9ms— ) 이벤트4 이벤트5(— 5ms — )
     fun operatorDebounce() {

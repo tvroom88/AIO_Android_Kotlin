@@ -38,4 +38,8 @@
     <color name="md_blue_200">#0091EA</color>
     <color name="md_purple_100">#AA00FF</color>
     <color name="md_purple_200">#7200CA</color>
+
+    <color name="pressed">#B3CA6F</color>
+    <color name="non_pressed">#4D5052</color>
+
 </resources>
