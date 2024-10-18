@@ -28,12 +28,13 @@ sealed class StudyList : Serializable {
     // Fragment Study
     data class StudyFragmentList(
         override var title: String,
-        val fragmentName: String
+        val fragmentName: String,
+        val numOfMenu: Int,
+        val urlString: String? = null // 추가된 nullable String
     ) : StudyList()
 
 
-
-    fun categoryVisibility(studyContent: StudyList) : Int{
+    fun categoryVisibility(studyContent: StudyList): Int {
         return if (isStudyCategoryOpened(studyContent)) View.VISIBLE else View.GONE
     }
 

@@ -30,6 +30,15 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
     }
 
     override fun initOnCreate() {
+
+        // toolbar 설정
+        setToolbar(
+            binding.layout.toolbar,
+            binding.layout.toolbarImage,
+            binding.layout.tooblarTitle,
+            "안드로이드 학습 리스트"
+        );
+        
         permissionUtils.askNotificationPermission(this, this) // 권한 요청
 
         binding.rvMain.run {
