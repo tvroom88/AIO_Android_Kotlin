@@ -34,14 +34,3 @@ class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
         }
     }
 }
-
-fun getAppName(context: Context): String {
-    var appName = ""
-    try {
-        val pm = context.packageManager
-        val i = pm.getPackageInfo(context.packageName, 0)
-        appName = i.applicationInfo.loadLabel(pm).toString() + ""
-    } catch (e: PackageManager.NameNotFoundException) {
-    }
-    return appName
-}

@@ -37,8 +37,6 @@
             android:id="@+id/bnv_detail_with_two_btn_inside"
             layout="@layout/bottom_navigation_view_with_two" />
     </LinearLayout>
-
-
     <LinearLayout
         android:id="@+id/Bnv_detail_with_three_btn"
         android:layout_width="match_parent"

@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,8 +12,7 @@
         android:id="@+id/toolbar_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        android:src="@drawable/arrow_left_black_foreground"/>
 
     <TextView
         android:id="@+id/tooblar_title"
@@ -21,6 +21,7 @@
         android:layout_gravity="center"
         android:text="기본 타이틀"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
 
 </androidx.appcompat.widget.Toolbar>

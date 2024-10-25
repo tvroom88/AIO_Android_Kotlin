@@ -3,6 +3,7 @@
     <style name="Base.Theme.AIO_Android_Kotlin" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:backgroundTint">@null</item>
     </style>
 
     <style name="Theme.AIO_Android_Kotlin" parent="Theme.Material3.DayNight.NoActionBar" >

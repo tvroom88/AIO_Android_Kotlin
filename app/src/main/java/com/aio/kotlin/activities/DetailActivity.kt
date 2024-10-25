@@ -2,6 +2,7 @@ package com.aio.kotlin.activities
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -53,8 +54,9 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>(),
         )
 
 
-        goToWebFragment(fragmentName)
         currentFragmentId = binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.id
+        goToWebFragment(fragmentName)
+
         binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setOnClickListener(this)
         binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setOnClickListener(this)
     }
@@ -99,13 +101,13 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>(),
         if (num == binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.id) {
             binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setBackgroundResource(R.drawable.btn_detail_pressed)
             binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setBackgroundResource(R.drawable.btn_detail_non_pressed)
-            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setTextColor(R.color.black)
-            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setTextColor(R.color.white)
+            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setTextColor(ContextCompat.getColor(this, R.color.black))
+            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setTextColor(ContextCompat.getColor(this, R.color.white))
         } else if (num == binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.id) {
             binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setBackgroundResource(R.drawable.btn_detail_non_pressed)
             binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setBackgroundResource(R.drawable.btn_detail_pressed)
-            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setTextColor(R.color.white)
-            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setTextColor(R.color.black)
+            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setTextColor(ContextCompat.getColor(this, R.color.white))
+            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setTextColor(ContextCompat.getColor(this, R.color.black))
         }
     }
 
@@ -113,6 +115,7 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>(),
         if(currentFragmentId==v?.id){
             return
         }
+
         when (v?.id) {
             binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.id -> {
                 currentFragmentId = binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.id

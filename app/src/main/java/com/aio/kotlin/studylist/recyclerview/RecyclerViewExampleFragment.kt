@@ -1,7 +1,6 @@
 package com.aio.kotlin.studylist.recyclerview
 
 import android.util.Log
-import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
