@@ -36,7 +36,12 @@ class RxJavaOperatorsViewModel : ViewModel() {
     private val _rxDebounceLiveData = MutableLiveData<String>()
     val rxDebounceLiveData: LiveData<String> get() = _rxDebounceLiveData
 
+    // Filter Observables (Debounce)
+    private val _rxThrottleLiveData = MutableLiveData<String>()
+    val rxThrottleLiveData: LiveData<String> get() = _rxThrottleLiveData
+
     init {
+
         // Creating Observables
         _rxJustLiveData.value = "Just 예제 시작 전입니다."
         _rxCreateLiveData.value = "Create 예제 시작 전입니다."
@@ -45,7 +50,9 @@ class RxJavaOperatorsViewModel : ViewModel() {
         // Transforming  Observables
         _rxMapLiveData.value = "Map 예제 시작 전입니다."
 
-        // Filter Observables
+        // Filtering Observables
+        _rxDebounceLiveData.value = "Debounce 예제 시작 전입니다."
+        _rxThrottleLiveData.value = "Throttle 예제 시작 전입니다."
     }
 
     /**
@@ -111,22 +118,60 @@ class RxJavaOperatorsViewModel : ViewModel() {
 
         val result = source.observeOn(AndroidSchedulers.mainThread()) // 결과는 메인 스레드에서 관찰
             .subscribe {
-                _rxIntervalLiveData.value = "$it"
+                _rxMapLiveData.value = "$it"
             }
     }
 
     /**
      * 3. 필터연산자 Filtering Observables
+     * filter(), take(), skip(), distinct(), Debounce(), Throttle
      */
     // Debounce : 이벤트를 그룹화하여 특정시간이 지난 후 하나의 이벤트만 발생하도록 하는 기술이다.
     // 예제 : 이벤트1 이벤트2 (— 4.9ms— ) 이벤트4 이벤트5(— 5ms — )
     fun operatorDebounce() {
+        val numberList = arrayOf("1", "2", "3", "4", "5")
 
+        val result = Observable.fromArray(*numberList) // 배열의 값을 하나씩 방출
+            .concatMap { item ->
+                // 각 아이템을 Observable로 감싸고 1초 지연
+                Observable.just(item).delay(1001, TimeUnit.MILLISECONDS)
+            }
+            .debounce(1000, TimeUnit.MILLISECONDS) // 1초 동안 이벤트가 없으면 해당 아이템을 방출
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { item ->
+                    _rxDebounceLiveData.postValue(item) // 방출된 값을 LiveData에 전달
+                },
+                { error ->
+                    Log.e("operatorDebounce", "Error: ${error.message}")
+                }
+            )
     }
 
     // Throttle : 이벤트를 일정한 주기마다 발생하도록 하는 기술이다.
     // 예제 : 이벤트1 ( — 1ms —) 이벤트2 ( — 1ms — ) 이벤트3
     fun operatorThrottle() {
 
+        val numberList = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+        val source = Observable.create { emitter ->
+            numberList.forEach {
+                emitter.onNext(it)
+                Thread.sleep(1000) // 1초 지연
+            }
+            emitter.onComplete()
+        }
+        val result = source
+
+            .throttleFirst(2, TimeUnit.SECONDS) // 1초 간격으로 최신 이벤트만 방출
+            .subscribeOn(Schedulers.io()) // 데이터 생성은 IO 스레드에서 실행
+            .observeOn(AndroidSchedulers.mainThread()) // 결과는 메인 스레드에서 관찰
+            .subscribe {
+                _rxThrottleLiveData.value = it
+            }
     }
+
+    /**
+     * 4. 결합 연산자 :
+     * zip, Merge
+     */
 }

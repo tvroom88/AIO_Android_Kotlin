@@ -36,7 +36,16 @@ class RxjavaOperators :
                 rxjavaOperatorsViewModel.operatorMap()
             }
 
-            // Filtering Observables
+            // Filtering Observables : Debounce, Throttle
+            btnRxjavaoperatorsDebounce.setOnClickListener {
+                rxjavaOperatorsViewModel.operatorDebounce()
+            }
+
+            btnRxjavaoperatorsThrottle.setOnClickListener {
+                rxjavaOperatorsViewModel.operatorThrottle()
+            }
+
+
         }
 
     }
