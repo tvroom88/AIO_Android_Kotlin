@@ -12,139 +12,217 @@
             type="com.aio.kotlin.studylist.backgroundwork.rx.operators.RxJavaOperatorsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <!--  Creating Observables  -->
-        <TextView
-            android:id="@+id/tv_rxjavaoperators_creating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Creating Observables"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- just -->
-        <LinearLayout
-            android:id="@+id/ll_rxjavaoperators_just"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/tv_rxjavaoperators_creating">
+            android:layout_height="match_parent">
 
+            <!--  Creating Observables  -->
             <TextView
-                android:id="@+id/tv_rxjavaoperators_just"
+                android:id="@+id/tv_rxjavaoperators_creating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="@{myRxJavaOperatorsViewModel.rxJustLiveData}" />
-
-            <Button
-                android:id="@+id/btn_rxjavaoperators_just"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Start Create Operator Just Example" />
-        </LinearLayout>
+                android:text="Creating Observables"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- create -->
-        <LinearLayout
-            android:id="@+id/ll_rxjavaoperators_create"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_just">
-
-            <TextView
-                android:id="@+id/tv_rxjavaoperators_create"
-                android:layout_width="wrap_content"
+            <!-- just -->
+            <LinearLayout
+                android:id="@+id/ll_rxjavaoperators_just"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="@{myRxJavaOperatorsViewModel.rxCreateLiveData}" />
-
-            <Button
-                android:id="@+id/btn_rxjavaoperators_create"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="Start Single Class Example" />
-
-        </LinearLayout>
-
-        <!--  interval  -->
-        <LinearLayout
-            android:id="@+id/ll_rxjavaoperators_interval"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_create">
-
-            <TextView
-                android:id="@+id/tv_rxjavaoperators_interval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="@{myRxJavaOperatorsViewModel.rxIntervalLiveData}" />
-
-            <Button
-                android:id="@+id/btn_rxjavaoperators_interval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="Start Single Class Example" />
-        </LinearLayout>
-
-        <!--  Transforming Observables  -->
-        <TextView
-            android:id="@+id/tv_rxjavaoperators_transforming"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Transforming Observables"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_interval" />
-
-        <!-- map -->
-        <LinearLayout
-            android:id="@+id/ll_rxjavaoperators_map"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_create">
-
-            <TextView
-                android:id="@+id/tv_rxjavaoperators_map"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="@{myRxJavaOperatorsViewModel.rxIntervalLiveData}" />
-
-            <Button
-                android:id="@+id/btn_rxjavaoperators_map"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="Start Single Class Example" />
-        </LinearLayout>
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_rxjavaoperators_creating">
+
+                <TextView
+                    android:id="@+id/tv_rxjavaoperators_just"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@{myRxJavaOperatorsViewModel.rxJustLiveData}"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_rxjavaoperators_just"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="Start Creating Operator Just Example" />
+            </LinearLayout>
+
+            <!-- create -->
+            <LinearLayout
+                android:id="@+id/ll_rxjavaoperators_create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_just">
+
+                <TextView
+                    android:id="@+id/tv_rxjavaoperators_create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@{myRxJavaOperatorsViewModel.rxCreateLiveData}"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_rxjavaoperators_create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="Start Creating Operator Create Example" />
+
+            </LinearLayout>
+
+            <!--  interval  -->
+            <LinearLayout
+                android:id="@+id/ll_rxjavaoperators_interval"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_create">
+
+                <TextView
+                    android:id="@+id/tv_rxjavaoperators_interval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@{myRxJavaOperatorsViewModel.rxIntervalLiveData}"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_rxjavaoperators_interval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="Start Creating Operator Interval Example" />
+            </LinearLayout>
+
+            <!--  Transforming Observables  -->
+            <TextView
+                android:id="@+id/tv_rxjavaoperators_transforming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Transforming Observables"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_interval" />
+
+            <!-- map -->
+            <LinearLayout
+                android:id="@+id/ll_rxjavaoperators_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_rxjavaoperators_transforming">
+
+                <TextView
+                    android:id="@+id/tv_rxjavaoperators_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@{myRxJavaOperatorsViewModel.rxMapLiveData}"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_rxjavaoperators_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="Start Transforming Operator Map Example"/>
+            </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--  Filtering Observables  -->
+            <TextView
+                android:id="@+id/tv_rxjavaoperators_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Filtering Observables"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_map" />
+
+            <!-- debounce -->
+            <LinearLayout
+                android:id="@+id/ll_rxjavaoperators_debounce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_rxjavaoperators_filter">
+
+                <TextView
+                    android:id="@+id/tv_rxjavaoperators_debounce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@{myRxJavaOperatorsViewModel.rxDebounceLiveData}"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_rxjavaoperators_debounce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="Start Debounce Example" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_rxjavaoperators_throttle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/ll_rxjavaoperators_debounce">
+
+                <TextView
+                    android:id="@+id/tv_rxjavaoperators_throttle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@{myRxJavaOperatorsViewModel.rxThrottleLiveData}"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_rxjavaoperators_throttle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="Start Throttle Example" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>
