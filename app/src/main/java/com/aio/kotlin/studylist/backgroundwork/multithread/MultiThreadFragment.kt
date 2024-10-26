@@ -6,11 +6,7 @@ import com.aio.kotlin.databinding.FragmentMultiThreadBinding
 import com.aio.kotlin.utils.CheckThreadUtils
 import com.aio.kotlin.utils.HandlerUtil
 import java.lang.Thread.sleep
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import java.util.concurrent.Executors
-
 
 /**
  * 기존 멀티 스레드 프로그래밍 방식
@@ -23,19 +19,31 @@ class MultiThreadFragment :
 
     private val checkThreadUtils by lazy { CheckThreadUtils() } // 현재 thread 리스트
     private val handlerUtils by lazy { HandlerUtil() } // handler util - 비동기로 UI 변경
-    
+
     override fun initContentInOnViewCreated() {
-        // 1. Thread를 직접 사용하는 방식
-        addThread()
+        binding?.apply{
 
-        // 2. Runnable을 만든 후, Thread에 Runnable을 넘겨서 실행하도록 한 방식
-        useRunnable()
+            // 1. Thread를 직접 사용하는 방식
+            btnMultithreadThreadTest.setOnClickListener {
+                addThread()
+            }
 
-        // 3. Executor Service를 활용해 Thread Pool을 만들어 Runnable을 submit 하는 방식
-        useExecutor()
+            // 2. Runnable을 만든 후, Thread에 Runnable을 넘겨서 실행하도록 한 방식
+            btnMultithreadRunnableTest.setOnClickListener {
+                useRunnable()
+            }
 
-        // 4. Executor Service의 주어진 Thread 숫자보다 많은 Task가 있을 경우
-        testMoreExecutor()
+            // 3. Executor Service를 활용해 Thread Pool을 만들어 Runnable을 submit 하는 방식
+            btnMultithreadExecutorTest.setOnClickListener {
+                useExecutor()
+            }
+
+            // 4. Executor Service의 주어진 Thread 숫자보다 많은 Task가 있을 경우
+            btnMultithreadExecutorTestMore.setOnClickListener {
+                testMoreExecutor()
+            }
+        }
+
 
         checkThreadUtils.getThreadList(activityContext)
     }
@@ -44,9 +52,11 @@ class MultiThreadFragment :
     private fun addThread() {
         val thread = object : Thread() {
             override fun run() {
-                sleep(1000L)
-                handlerUtils.handlerPost {
-                    binding?.tvMultithreadThreadTest1?.text = "1. 새로 생성한 Thread에 의해 Text가 변경되었습니다."
+                for (num in 0..10) {
+                    handlerUtils.handlerPost {
+                        binding?.tvMultithreadThreadTest?.text = "$num"
+                    }
+                    sleep(1000L)
                 }
             }
         }
@@ -56,12 +66,13 @@ class MultiThreadFragment :
     // 2. Runnable을 만든 후, Thread에 Runnable을 넘겨서 실행하도록 한 방식 (runOnUiThread() 사용)
     private fun useRunnable() {
         val runnable = Runnable {
-            sleep(1000L)
-            handlerUtils.runOnUiThread(activity) {
-                binding?.tvMultithreadRunnableTest?.text = "2. Runnable 방식을 사용해서 Text를 변경하였습니다."
+            for (num in 0..10) {
+                handlerUtils.runOnUiThread(activity) {
+                    binding?.tvMultithreadRunnableTest?.text = "$num"
+                }
+                sleep(1000L)
             }
         }
-
         val runnableTestThread = Thread(runnable)
         runnableTestThread.start()
     }
@@ -70,9 +81,11 @@ class MultiThreadFragment :
     private fun useExecutor() {
         val executorService = Executors.newFixedThreadPool(2)
         val runnable = Runnable {
-            sleep(1000L)
-            wrapRunOnUiThread {
-                binding?.tvMultithreadRunnableTest?.text = "3. Executor 방식을 사용해서 Text를 변경하였습니다."
+            for (num in 0..10) {
+                handlerUtils.runOnUiThread(activity) {
+                    binding?.tvMultithreadExecutorTest?.text = "$num"
+                }
+                sleep(1000L)
             }
         }
         executorService.submit(
@@ -82,36 +95,36 @@ class MultiThreadFragment :
         executorService.shutdown();
     }
 
-    // 4. Executor Service 테스트
+    /**
+     * 4. Executor Service 테스트
+     * Thread Pool이 2개인데 Task는 2개 이상일 경우
+     */
     private fun testMoreExecutor() {
         val executorService = Executors.newFixedThreadPool(2) //Thread 2
-
-        val addRunnable: (Int, Int) -> Runnable = { num1, num2 ->
+        val addRunnable: (Int) -> Runnable = { idx ->
             Runnable {
-                println("------  result: ${(num1 + num2)} 실행: ${getTime()} -----");
-                println("------ result: " + (num1 + num2) + " (" + Thread.currentThread().name + ") ------")
+                for(num in 0..10){
+                    binding?.apply {
+                        handlerUtils.runOnUiThread(activity) {
+                            when(idx){
+                                1 -> tvMultithreadExecutorTestMore1.text = "$num"
+                                2 -> tvMultithreadExecutorTestMore2.text = "$num"
+                                3 -> tvMultithreadExecutorTestMore3.text = "$num"
+                                4 -> tvMultithreadExecutorTestMore4.text = "$num"
+                            }
+                        }
+                    }
+                    sleep(1000L)
+                }
             }
         }
 
-        executorService.submit(addRunnable(1, 2))
-        executorService.submit(addRunnable(1, 3))
-        executorService.submit(addRunnable(1, 4))
-        executorService.submit(addRunnable(1, 5))
+        executorService.submit(addRunnable(1))
+        executorService.submit(addRunnable(2))
+        executorService.submit(addRunnable(3))
+        executorService.submit(addRunnable(4))
 
         executorService.shutdown()
-    }
-
-    private fun wrapRunOnUiThread(action: () -> Unit) {
-        activity.runOnUiThread {
-            action()
-        }
-    }
-
-    private fun getTime(): String {
-        val formatter = SimpleDateFormat("yyyyMMdd-HH-mm-ss-SSS", Locale.KOREA)
-        val date = Date();
-        val currentDate = formatter.format(date)
-        return currentDate
     }
 }
 

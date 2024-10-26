@@ -19,15 +19,15 @@ class StudyListData {
     // 안드로이드 학습 리스트 데이터
     fun setStudyList(): MutableList<StudyList> {
         return mutableListOf(
-            addJetPack(),
-            StudyFragmentList(
-                "RecyclerView",
-                RecyclerViewExampleFragment().getFullFragmentName(),
-                2
-            ),
+//            addJetPack(),
+//            StudyFragmentList(
+//                "RecyclerView",
+//                RecyclerViewExampleFragment().getFullFragmentName(),
+//                2
+//            ),
             addAsyncExample(),
-            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
-            addComposeable()
+//            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
+//            addComposeable()
         )
     }
 
@@ -61,7 +61,8 @@ class StudyListData {
                 StudyFragmentList(
                     "Thread",
                     MultiThreadFragment().getFullFragmentName(),
-                    2
+                    2,
+                    "https://from-android-to-server.tistory.com/163"
                 ),
                 StudyFragmentList(
                     "RxJavaBasic",
