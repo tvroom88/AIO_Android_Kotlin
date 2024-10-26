@@ -7,10 +7,11 @@ import com.aio.kotlin.studylist.architecturepattern.MvvmSimpleExample
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.operators.RxjavaOperators
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
-import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesViewModel
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
+import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
+import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
 import com.aio.kotlin.studylist.recyclerview.RecyclerViewExampleFragment
 
 class StudyListData {
@@ -21,7 +22,8 @@ class StudyListData {
             addJetPack(),
             StudyFragmentList("RecyclerView", RecyclerViewExampleFragment().getFullFragmentName()),
             addAsyncExample(),
-            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName())
+            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName()),
+            addComposeable()
         )
     }
 
@@ -36,7 +38,7 @@ class StudyListData {
                 StudyFragmentList(
                     "ViewBinding",
                     ViewBindingExampleFragment().getFullFragmentName()
-                )
+                ),
             )
         )
         return jetpackCategory
@@ -65,5 +67,22 @@ class StudyListData {
             )
         )
         return asyncCategory
+    }
+
+    private fun addComposeable(): StudyCategory {
+        val jetpackCategory = StudyCategory("Jetpack Example")
+        jetpackCategory.studyList.addAll(
+            mutableListOf(
+                StudyList.StudyActivityList(
+                    "DiverseLayouts",
+                    ComposeALayouts::class
+                ),
+                StudyList.StudyActivityList(
+                    "List",
+                    ComposeBList::class
+                )
+            )
+        )
+        return jetpackCategory
     }
 }

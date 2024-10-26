@@ -40,7 +40,7 @@ fun getAppName(context: Context): String {
     try {
         val pm = context.packageManager
         val i = pm.getPackageInfo(context.packageName, 0)
-        appName = i.applicationInfo.loadLabel(pm).toString() + ""
+        appName = i.applicationInfo?.loadLabel(pm).toString() + ""
     } catch (e: PackageManager.NameNotFoundException) {
     }
     return appName
