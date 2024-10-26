@@ -1,12 +1,9 @@
 package com.aio.kotlin.activities
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.widget.Toast
 import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.databinding.ActivityMainBinding
-
 
 class MainActivity : ViewBindingBaseActivity<ActivityMainBinding>() {
     override fun getViewBinding(): ActivityMainBinding {

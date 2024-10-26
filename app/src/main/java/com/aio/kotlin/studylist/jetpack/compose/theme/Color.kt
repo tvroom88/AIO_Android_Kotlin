@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.jetpack.compose.ui
+package com.aio.kotlin.studylist.jetpack.compose.theme
 
 import androidx.compose.ui.graphics.Color
 

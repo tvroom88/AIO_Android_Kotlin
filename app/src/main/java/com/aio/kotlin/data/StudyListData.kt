@@ -10,6 +10,8 @@ import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.operators.RxjavaOperators
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
+import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
+import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
 import com.aio.kotlin.studylist.recyclerview.RecyclerViewExampleFragment
 
 class StudyListData {
@@ -24,7 +26,8 @@ class StudyListData {
                 2
             ),
             addAsyncExample(),
-            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2)
+            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
+            addComposeable()
         )
     }
 
@@ -43,6 +46,7 @@ class StudyListData {
                     "ViewBinding",
                     ViewBindingExampleFragment().getFullFragmentName(),
                     2
+
                 )
             )
         )
@@ -86,5 +90,22 @@ class StudyListData {
         )
 
         return urlList[idx]
+    }
+
+    private fun addComposeable(): StudyCategory {
+        val jetpackCategory = StudyCategory("Jetpack Example")
+        jetpackCategory.studyList.addAll(
+            mutableListOf(
+                StudyList.StudyActivityList(
+                    "DiverseLayouts",
+                    ComposeALayouts::class
+                ),
+                StudyList.StudyActivityList(
+                    "List",
+                    ComposeBList::class
+                )
+            )
+        )
+        return jetpackCategory
     }
 }
