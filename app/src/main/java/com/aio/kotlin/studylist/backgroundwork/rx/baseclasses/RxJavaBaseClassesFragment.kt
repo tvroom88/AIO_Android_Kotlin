@@ -5,7 +5,6 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentRxJavaBaseClassesBinding
 
-
 class RxJavaBaseClassesFragment :
     DataBindingBaseFragment<FragmentRxJavaBaseClassesBinding>(R.layout.fragment_rx_java_base_classes) {
     private var rxJavaViewModel: RxJavaBaseClassesViewModel? = null

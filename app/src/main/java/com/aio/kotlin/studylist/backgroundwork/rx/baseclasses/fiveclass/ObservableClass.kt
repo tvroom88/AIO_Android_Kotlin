@@ -6,6 +6,10 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 
+/**
+ * Observable : 데이터 흐름에 맞게 알림을 보내줘서 구독한 Observer이 데이터를 사용할 수 있도록 해준다.
+ * 소량의 데이터 스트림을 다룰 때 사용된다. BackPressure 지원 안함
+ */
 class ObservableClass {
 
     var observableDisposable: Disposable? = null
@@ -15,14 +19,13 @@ class ObservableClass {
         return Observable
             .create { emitter ->
                 try {
-                    for (message in 1..5) {
+                    for (message in 0..5) {
                         if (!emitter.isDisposed) {
-                            Thread.sleep(1000) // 1초 지연
                             emitter.onNext(message)
+                            Thread.sleep(1000) // 1초 지연
                         }
                     }
                     emitter.onComplete()
-
                 } catch (e: Exception) {
                     emitter.onError(e)
                 }

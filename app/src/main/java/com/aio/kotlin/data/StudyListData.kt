@@ -73,7 +73,8 @@ class StudyListData {
                 StudyFragmentList(
                     "RxJava Base Classes",
                     RxJavaBaseClassesFragment().getFullFragmentName(),
-                    2
+                    2,
+                    "https://from-android-to-server.tistory.com/139"
                 ),
                 StudyFragmentList(
                     "RxJava Operators",

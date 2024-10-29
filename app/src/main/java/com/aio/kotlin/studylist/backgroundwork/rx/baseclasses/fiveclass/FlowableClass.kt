@@ -6,6 +6,10 @@ import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.subscribers.DisposableSubscriber
 
+/**
+ * Flowable : 많은 양의 데이터 스트림을 다룰 때 사용되며, BackPressure 전략이 제공된다.
+ * 소비자가 생성된 데이터를 충분히 빠르게 처리하지 못할 때 발생하는 문제를 관리하는 매커니즘이다.
+ */
 class FlowableClass {
     private var flowableDisposable: Disposable? = null
 
@@ -15,8 +19,8 @@ class FlowableClass {
             try {
                 for (message in 1..5) {
                     if (!emitter.isCancelled) {
-                        Thread.sleep(1000) // 1초 지연
                         emitter.onNext(message)
+                        Thread.sleep(1000) // 1초 지연
                     }
                 }
                 emitter.onComplete()

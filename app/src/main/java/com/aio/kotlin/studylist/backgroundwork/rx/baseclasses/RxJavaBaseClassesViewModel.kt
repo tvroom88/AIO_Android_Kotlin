@@ -62,17 +62,18 @@ class RxJavaBaseClassesViewModel : ViewModel() {
         _rxTimer1.value = "Timer 0"
         _rxTimer5.value = "Timer 0"
 
-        _rxStatus1.value = "아직 시작하지 전입니다."
-        _rxStatus2.value = "아직 시작하지 전입니다."
-        _rxStatus3.value = "아직 시작하지 전입니다."
-        _rxStatus4.value = "아직 시작하지 전입니다."
-        _rxStatus5.value = "아직 시작하지 전입니다."
+        _rxStatus1.value = "Observable class 예제 입니다."
+        _rxStatus2.value = "Single class 예제 입니다."
+        _rxStatus3.value = "Maybe class 예제 입니다."
+        _rxStatus4.value = "Completable class 예제 입니다."
+        _rxStatus5.value = "Flowable class 예제 입니다."
     }
 
     /**
      * 1. Observable class
      * 데이터 발행자 : Observable
      * 데이터 수신자 (Observer) : Observer
+     * 연산자 : (생성) create
      */
     fun rxJavaObservableClass() {
         val observableClass = ObservableClass()

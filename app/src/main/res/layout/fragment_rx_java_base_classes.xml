@@ -29,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:text="@{rxJavaBaseViewModel.rxStatus1}" />
 
@@ -37,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="@{rxJavaBaseViewModel.rxTimer1}" />
@@ -61,10 +63,11 @@
             app:layout_constraintTop_toBottomOf="@+id/ll_rxjavabase_observable">
 
             <TextView
-                android:id="@+id/tv_rxjavabase_single_status2"
+                android:id="@+id/tv_rxjavabase_single_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:text="@{rxJavaBaseViewModel.rxStatus2}" />
 
@@ -92,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:text="@{rxJavaBaseViewModel.rxStatus3}" />
 
@@ -119,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:text="@{rxJavaBaseViewModel.rxStatus4}" />
 
@@ -146,6 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
                 android:text="@{rxJavaBaseViewModel.rxStatus5}" />
 
             <TextView
@@ -155,6 +161,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:layout_marginTop="20dp"
+                android:textColor="@color/black"
                 android:text="@{rxJavaBaseViewModel.rxTimer5}" />
 
             <Button

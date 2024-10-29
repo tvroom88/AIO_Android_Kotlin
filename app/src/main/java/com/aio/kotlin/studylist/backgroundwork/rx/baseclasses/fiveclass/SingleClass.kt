@@ -18,12 +18,20 @@ class SingleClass {
             .create { emitter ->
                 try {
                     if (!emitter.isDisposed) {
-                        emitter.onSuccess(1)
+                        emitter.onSuccess(computation())
                     }
                 } catch (e: Exception) {
                     emitter.onError(e)
                 }
             }
+    }
+
+    private fun computation() : Int{
+        var num = 2
+        for(a in 0..20){
+            num *= 2
+        }
+        return num
     }
 
     // SingleObserver 생성

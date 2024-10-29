@@ -31,10 +31,12 @@
             android:name=".activities.AndroidStudyActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" /> <!-- Detail 화면 -->
+
         <activity
             android:name=".activities.DetailActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:exported="false" />
+
         <activity
             android:name=".studylist.jetpack.binding.databinding.DataBindingExampleActivity"
             android:exported="false" />
