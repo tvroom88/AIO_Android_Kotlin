@@ -23,6 +23,7 @@
             android:layout_marginTop="30dp"
             android:text="Basic RxJava Example"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,39 +35,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="RxJava 예제입니다."
+            android:text="RxJava 기초 예제입니다."
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_rxjava_title" />
 
+
+        <!--   1번째 예제 : Hello, World 표시   -->
         <TextView
             android:id="@+id/tv_sample_rxjava1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@{viewModel.rxLiveData1}"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_rxjava_title_sub" />
 
-        <TextView
-            android:id="@+id/tv_sample_rxjava2"
+        <Button
+            android:id="@+id/btn_sample_rxjava1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@{viewModel.rxLiveData2}"
+            android:text="Show Hello World"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_sample_rxjava1" />
 
+
+        <!--   2번째 예제 : Count from 1 to 5   -->
         <TextView
-            android:id="@+id/tv_sample_rxjava3"
+            android:id="@+id/tv_sample_rxjava2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@{viewModel.rxLiveData2}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sample_rxjava1" />
+
+        <Button
+            android:id="@+id/btn_sample_rxjava2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@{viewModel.rxLiveData3}"
+            android:text="Count from 1 to 5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_sample_rxjava2" />

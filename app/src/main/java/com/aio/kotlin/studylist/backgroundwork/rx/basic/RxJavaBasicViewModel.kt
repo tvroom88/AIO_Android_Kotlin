@@ -1,9 +1,11 @@
 package com.aio.kotlin.studylist.backgroundwork.rx.basic
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
@@ -26,141 +28,67 @@ class RxJavaBasicViewModel : ViewModel() {
     private val _rxLiveData2 = MutableLiveData<String>()
     val rxLiveData2: LiveData<String> get() = _rxLiveData2
 
-    private val _rxLiveData3 = MutableLiveData<String>()
-    val rxLiveData3: LiveData<String> get() = _rxLiveData3
-
     init {
         // 초기 데이터 설정
-        _rxLiveData1.value = "Start Timer 1"
-        _rxLiveData2.value = "Start Timer 2"
-        _rxLiveData3.value = "Start Timer 3"
+        _rxLiveData1.value = "예제 1 TextView 입니다."
+        _rxLiveData2.value = "예제 2 TextView 입니다."
     }
 
-
     /**
+     * 1. Hello, World 예제
      * Class : Observable
-     * Operator : zip(), just(), interval()
+     * Operator : create
      */
     fun rxJavaExample1() {
+
+        // 아주 간단하게
         val disposable1: Disposable = Flowable.just("Hello, World").subscribe(::println)
-        val disposable2 = Observable
-            .zip(
-                Observable.just("1", "2", "3", "4", "5"),
-                Observable.interval(1, TimeUnit.SECONDS)
-            ) { item, _ -> item } // 각 항목을 그대로 반환
-            .subscribe({ s ->
-                _rxLiveData1.postValue(s)
-            }, { throwable ->
-                throwable.printStackTrace()  // 에러 처리 (선택 사항)
-            }, {
-                _rxLiveData1.postValue("1. Timer is finished. Thank you")
-            })
-    }
 
-    /**
-     * Observable : Observable
-     * Observer : Observer
-     * Operator : zip(), just(), interval()
-     * Scheduler : Schedulers.computation(), Schedulers.io()
-     */
-    fun rxJavaExample2() {
-        var disposable: Disposable? = null
-        val observable = Observable
-            .zip(
-                Observable.range(1, 5),
-                Observable.interval(1, TimeUnit.SECONDS)
-            ) { item, _ -> item } // 각 항목을 그대로 반환
+        val observer = object : Observer<String> {
+            override fun onSubscribe(d: Disposable) {}
 
-        // Observer 정의
-        val observer: Observer<Int> = object : Observer<Int> {
-            override fun onSubscribe(d: Disposable) {
-                disposable = d
+            override fun onNext(t: String) {
+                _rxLiveData1.value = t
             }
 
-            override fun onNext(number: Int) {
-                _rxLiveData2.postValue(number.toString())
+            override fun onError(e: Throwable) {}
 
-            }
-
-            override fun onError(e: Throwable) {
-            }
-
-            override fun onComplete() {
-                _rxLiveData2.postValue("2. Timer is finished. Thank you")
-                disposable?.apply {
-                    if (!isDisposed) {
-                        disposable?.dispose()
-                    }
-                }
-            }
+            override fun onComplete() {}
         }
 
-        // Observable 구독 및 Scheduler 적용
+        val observable = Observable.create { emitter ->
+            emitter.onNext("Hello, World")
+        }
+
         observable
-            .subscribeOn(Schedulers.computation()) // Observable의 연산을 계산 스레드에서 실행
-            .observeOn(Schedulers.io()) // Observer의 콜백을 IO 스레드에서 실행
+            .subscribeOn(Schedulers.io()) // Observable의 연산을 계산 스레드에서 실행
+            .observeOn(AndroidSchedulers.mainThread())         // Observer의 콜백을 IO 스레드에서 실행
             .subscribe(observer)
     }
 
 
     /**
-     * Observable : Observable
-     * Observer : DisposableObserver
-     * Scheduler : Schedulers.computation(), Schedulers.io()
+     * 2. 0부터 5까지 숫자 세는 예제
+     * Class : Observable
+     * Operator : create
      */
-    fun rxJavaExample3() {
-        var disposable: Disposable? = null
-        val observer = object : Observer<String> {
-            override fun onSubscribe(d: Disposable) {
-                disposable = d
-            }
-
-            override fun onNext(s: String) {
-                _rxLiveData3.postValue(s)
-            }
-
-            override fun onError(e: Throwable) {
-                Log.d("error", e.toString())
-            }
-
-            override fun onComplete() {
-                _rxLiveData3.postValue("Timer is finished. Thank you")
-
-                disposable?.apply {
-                    if (!isDisposed) {
-                        disposable?.dispose()
-                    }
-                }
-
-            }
-        }
-
-        val disposableObserver = object : DisposableObserver<String>() {
-            override fun onNext(s: String) {
-                _rxLiveData3.postValue(s)
-            }
-
-            override fun onError(e: Throwable) {}
-            override fun onComplete() {
-                _rxLiveData3.postValue("3. Timer is finished. Thank you")
-            }
-        }
-
-        val observable = Observable.create { emitter ->
-            val messages = listOf("1", "2", "3", "4", "5")
-            for (message in messages) {
-                if (!emitter.isDisposed) {
-                    Thread.sleep(1000) // 1초 지연
-                    emitter.onNext(message)
-                }
+    @SuppressLint("CheckResult")
+    fun rxJavaExample2() {
+        Observable.create { emitter ->
+            for (num in 0..5) {
+                emitter.onNext("num : $num")
+                Thread.sleep(1000) // 1초 지연
             }
             emitter.onComplete()
-        }
-
-        observable
-            .subscribeOn(Schedulers.io())        // Observable이 동작을 시작할 스레드"를 지정한다.
-            .observeOn(Schedulers.computation()) // Computation 스케줄러를 사용하여 데이터 처리
-            .subscribe(disposableObserver)
+        }.subscribeOn(Schedulers.io()) // Observable의 연산을 계산 스레드에서 실행
+            .observeOn(AndroidSchedulers.mainThread()) // Observer의 콜백을 IO 스레드에서 실행
+            .subscribe({
+                _rxLiveData2.value = it  // onNext
+            }, {
+                _rxLiveData2.value = it.toString() // onError
+            }, {
+                _rxLiveData2.value = "Complete Counting from 0 to 5" // onComplete
+            })
     }
 
 }
