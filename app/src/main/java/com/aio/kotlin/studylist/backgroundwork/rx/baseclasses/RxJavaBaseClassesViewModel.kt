@@ -26,7 +26,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  */
 class RxJavaBaseClassesViewModel : ViewModel() {
 
-
     // Observable Class LiveData
     private val _rxStatus1 = MutableLiveData<String>()  // 현재 상태 : onNext, onComplete를 나타내줌
     val rxStatus1: LiveData<String> get() = _rxStatus1
@@ -91,6 +90,7 @@ class RxJavaBaseClassesViewModel : ViewModel() {
      * 2. Single class
      * 데이터 발행자 : Single
      * 데이터 수신자 (Observer) : SingleObserver
+     * 연산자 : (생성) create
      */
     @SuppressLint("CheckResult")
     fun rxJavaSingleClass() {
@@ -103,7 +103,7 @@ class RxJavaBaseClassesViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(singleObserver)
 
-        Log.d("aaaaa", "dispose : ${disposable2?.isDisposed?.not()}")
+        Log.d("RxJavaBaseClassesViewModel", "dispose : ${disposable2?.isDisposed?.not()}")
     }
 
 
@@ -111,6 +111,7 @@ class RxJavaBaseClassesViewModel : ViewModel() {
      * 3. Maybe class
      * 데이터 발행자 :Maybe
      * 데이터 수신자 (Observer) : MaybeObserver
+     * 연산자 : (생성) create
      */
     @SuppressLint("CheckResult")
     fun rxJavaMaybeClass() {
@@ -122,7 +123,7 @@ class RxJavaBaseClassesViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(maybeObserver)
 
-        Log.d("aaaaa", "dispose : ${disposable2?.isDisposed?.not()}")
+        Log.d("RxJavaBaseClassesViewModel", "dispose : ${disposable2?.isDisposed?.not()}")
     }
 
 
@@ -141,7 +142,7 @@ class RxJavaBaseClassesViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(completableObserver)
 
-        Log.d("aaaaa", "dispose : ${disposable2?.isDisposed?.not()}")
+        Log.d("RxJavaBaseClassesViewModel", "dispose : ${disposable2?.isDisposed?.not()}")
     }
 
 

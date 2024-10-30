@@ -18,18 +18,26 @@ class MaybeClass {
 
     var maybeDisposable: Disposable? = null
 
-    // Single 생성
+    // Maybe 생성
     fun createMaybe(): Maybe<Int> {
         Log.d("Maybe", "createMaybe")
         return Maybe
             .create { emitter ->
                 try {
-                    emitter.onSuccess(1)
+                    emitter.onSuccess(computation())
                     emitter.onComplete() // Maybe class에서는 onSuccess 호출로 데이터를 방출하면 onComplete는 호출되지 않는다.
                 } catch (e: Exception) {
                     emitter.onError(e)
                 }
             }
+    }
+
+    private fun computation(): Int {
+        var num = 2
+        for (a in 0..20) {
+            num *= 2
+        }
+        return num
     }
 
     // SingleObserver 생성
@@ -41,16 +49,14 @@ class MaybeClass {
                 maybeDisposable = d
             }
 
-            override fun onError(e: Throwable) {
-
-            }
+            override fun onError(e: Throwable) {}
 
             override fun onSuccess(t: Int) {
                 rxStatus3.postValue("onSuccess 호출되었습니다. 전달 받은 데이터는 $t 입니다.")
             }
 
             override fun onComplete() {
-                rxStatus3.postValue("onComplete 방출후 완료되었습니다.")
+                rxStatus3.postValue("onComplete에 도달하였습니다.")
                 Log.d("Maybe", "onComplete")
             }
         }
