@@ -30,7 +30,8 @@ sealed class StudyList : Serializable {
         override var title: String,
         val fragmentName: String,
         val numOfMenu: Int,
-        val urlString: String? = null // 추가된 nullable String
+        val urlString: String? = null, // 추가된 nullable String
+        val secondUrlString: String? = null // 추가된 nullable String
     ) : StudyList()
 
 

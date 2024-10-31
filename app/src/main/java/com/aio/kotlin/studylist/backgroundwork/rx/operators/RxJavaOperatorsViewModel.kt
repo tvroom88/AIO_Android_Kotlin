@@ -56,7 +56,6 @@ class RxJavaOperatorsViewModel : ViewModel() {
     }
 
     /**
-     *
      * 1. 생성 연산자 : creating observables
      * just, create, interval, range, timer, intervalRange, defer, repeat
      */
@@ -151,7 +150,6 @@ class RxJavaOperatorsViewModel : ViewModel() {
     // Throttle : 이벤트를 일정한 주기마다 발생하도록 하는 기술이다.
     // 예제 : 이벤트1 ( — 1ms —) 이벤트2 ( — 1ms — ) 이벤트3
     fun operatorThrottle() {
-
         val numberList = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
         val source = Observable.create { emitter ->
             numberList.forEach {
@@ -161,7 +159,6 @@ class RxJavaOperatorsViewModel : ViewModel() {
             emitter.onComplete()
         }
         val result = source
-
             .throttleFirst(2, TimeUnit.SECONDS) // 1초 간격으로 최신 이벤트만 방출
             .subscribeOn(Schedulers.io()) // 데이터 생성은 IO 스레드에서 실행
             .observeOn(AndroidSchedulers.mainThread()) // 결과는 메인 스레드에서 관찰
@@ -170,8 +167,4 @@ class RxJavaOperatorsViewModel : ViewModel() {
             }
     }
 
-    /**
-     * 4. 결합 연산자 :
-     * zip, Merge
-     */
 }
