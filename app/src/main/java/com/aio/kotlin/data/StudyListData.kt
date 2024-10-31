@@ -7,6 +7,7 @@ import com.aio.kotlin.studylist.architecturepattern.MvvmSimpleExample
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
+import com.aio.kotlin.studylist.backgroundwork.rx.edittext.RxAndEtFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.operators.RxjavaOperators
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
@@ -82,6 +83,13 @@ class StudyListData {
                     3,
                     "https://from-android-to-server.tistory.com/169",
                     "https://from-android-to-server.tistory.com/175"
+                ),
+
+                StudyFragmentList(
+                    "RxJava With EditText",
+                    RxAndEtFragment().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/142"
                 )
             )
         )

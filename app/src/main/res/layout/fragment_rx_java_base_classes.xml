@@ -16,32 +16,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tv_rxjavabase_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="5가지 Rxjava Class 예제 입니다"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!--    1. Observable class 예제    -->
         <LinearLayout
             android:id="@+id/ll_rxjavabase_observable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/tv_rxjavabase_title">
 
             <TextView
                 android:id="@+id/tv_rxjavabase_observable_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="@{rxJavaBaseViewModel.rxStatus1}" />
+                android:text="@{rxJavaBaseViewModel.rxStatus1}"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_rxjavabase_observable_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="@{rxJavaBaseViewModel.rxTimer1}" />
+                android:gravity="center"
+                android:text="@{rxJavaBaseViewModel.rxTimer1}"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btn_rxjavabase_observable_start"
@@ -67,9 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="@{rxJavaBaseViewModel.rxStatus2}" />
+                android:text="@{rxJavaBaseViewModel.rxStatus2}"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btn_rxjavabase_single_start"
@@ -95,9 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="@{rxJavaBaseViewModel.rxStatus3}" />
+                android:text="@{rxJavaBaseViewModel.rxStatus3}"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btn_rxjavabase_maybe_start"
@@ -123,9 +136,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
                 android:gravity="center"
-                android:text="@{rxJavaBaseViewModel.rxStatus4}" />
+                android:text="@{rxJavaBaseViewModel.rxStatus4}"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btn_rxjavabase_completable_start"
@@ -151,18 +164,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:text="@{rxJavaBaseViewModel.rxStatus5}" />
+                android:text="@{rxJavaBaseViewModel.rxStatus5}"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_rxjavabase_flowable_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/black"
-                android:text="@{rxJavaBaseViewModel.rxTimer5}" />
+                android:gravity="center"
+                android:text="@{rxJavaBaseViewModel.rxTimer5}"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/btn_rxjavabase_flowable_start"
