@@ -1,0 +1,79 @@
+package com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui
+
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
+import com.aio.kotlin.R
+import com.aio.kotlin.base.fragment.DataBindingBaseFragment
+import com.aio.kotlin.databinding.FragmentRxJavaRetrofitBinding
+
+/**
+ * 개방되어있는 테스트용 Api와 연결
+ * https://jsonplaceholder.typicode.com/posts
+ */
+class RxJavaRetrofitFragment :
+    DataBindingBaseFragment<FragmentRxJavaRetrofitBinding>(R.layout.fragment_rx_java_retrofit) {
+
+    private lateinit var rxRetrofitTestViewModel: RxRetrofitTestViewModel
+
+    override fun initContentInOnViewCreated() {
+        rxRetrofitTestViewModel = ViewModelProvider(this)[RxRetrofitTestViewModel::class.java]
+
+        rxRetrofitTestViewModel.rxRetrofitTestData.observe(this) { rxRetrofitTestState ->
+
+            when (rxRetrofitTestState.status) {
+                Status.SUCCESS -> {
+                    showLoadedData()
+                }
+
+                Status.LOADING -> {
+                    showLoadingView()
+                }
+
+                Status.ERROR -> {
+                    showErrorMsg(rxRetrofitTestState.message)
+                }
+            }
+
+        }
+
+        binding?.apply {
+            rxRetrofitTestVM = rxRetrofitTestViewModel
+
+            btnRxRetrofitLoad.setOnClickListener {
+                rxRetrofitTestViewModel.fetchAllData()
+            }
+        }
+    }
+
+    private fun showLoadedData(){
+        hideLoadingView()
+    }
+
+
+    private fun showLoadingView() {
+        binding?.apply {
+            if (!pbRxRetrofitLoading.isVisible) {
+                pbRxRetrofitLoading.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun hideLoadingView() {
+        binding?.apply {
+            if (pbRxRetrofitLoading.isVisible) {
+                pbRxRetrofitLoading.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showErrorMsg(errMsg: String?) {
+        hideLoadingView()
+        Toast.makeText(activityContext, "에러 : $errMsg", Toast.LENGTH_SHORT).show()
+        if (errMsg != null) {
+            Log.d("errorerror", errMsg)
+        }
+    }
+}

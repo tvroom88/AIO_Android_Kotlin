@@ -3,17 +3,16 @@ package com.aio.kotlin.data
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
-import com.aio.kotlin.studylist.architecturepattern.MvvmSimpleExample
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.edittext.RxAndEtFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.operators.RxjavaOperators
+import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.RxJavaRetrofitFragment
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
-import com.aio.kotlin.studylist.recyclerview.RecyclerViewExampleFragment
 
 class StudyListData {
 
@@ -88,6 +87,13 @@ class StudyListData {
                 StudyFragmentList(
                     "RxJava With EditText",
                     RxAndEtFragment().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/142"
+                ),
+
+                StudyFragmentList(
+                    "RxJava With Retrofit",
+                    RxJavaRetrofitFragment().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/142"
                 )
