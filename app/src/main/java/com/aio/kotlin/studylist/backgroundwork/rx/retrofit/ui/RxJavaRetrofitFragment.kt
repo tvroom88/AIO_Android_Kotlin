@@ -8,11 +8,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentRxJavaRetrofitBinding
+import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.dto.RxRetrofitTestDTO
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 개방되어있는 테스트용 Api와 연결
  * https://jsonplaceholder.typicode.com/posts
  */
+@AndroidEntryPoint
 class RxJavaRetrofitFragment :
     DataBindingBaseFragment<FragmentRxJavaRetrofitBinding>(R.layout.fragment_rx_java_retrofit) {
 
@@ -25,7 +28,7 @@ class RxJavaRetrofitFragment :
 
             when (rxRetrofitTestState.status) {
                 Status.SUCCESS -> {
-                    showLoadedData()
+                    showLoadedData(rxRetrofitTestState.data)
                 }
 
                 Status.LOADING -> {
@@ -48,8 +51,13 @@ class RxJavaRetrofitFragment :
         }
     }
 
-    private fun showLoadedData(){
+    private fun showLoadedData(data: List<RxRetrofitTestDTO>?) {
         hideLoadingView()
+        binding?.apply {
+            data?.let {
+                tvRxRetrofitDataContent.text = it[0].title
+            }
+        }
     }
 
 

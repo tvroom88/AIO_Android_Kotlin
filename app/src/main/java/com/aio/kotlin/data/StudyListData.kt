@@ -25,9 +25,10 @@ class StudyListData {
 //                RecyclerViewExampleFragment().getFullFragmentName(),
 //                2
 //            ),
-            addAsyncExample(),
+            AsyncExample().addAsyncExample(),
 //            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
-//            addComposeable()
+//            addComposeable(),
+
         )
     }
 
@@ -53,61 +54,12 @@ class StudyListData {
         return jetpackCategory
     }
 
-    // 비동기 방식 데이터 추가
-    private fun addAsyncExample(): StudyCategory {
-        val asyncCategory = StudyCategory("AsyncTask Example")
-        asyncCategory.studyList.addAll(
-            mutableListOf(
-                StudyFragmentList(
-                    "Thread",
-                    MultiThreadFragment().getFullFragmentName(),
-                    2,
-                    "https://from-android-to-server.tistory.com/163"
-                ),
-                StudyFragmentList(
-                    "RxJavaBasic",
-                    RxJavaBasicFragment().getFullFragmentName(),
-                    2,
-                    "https://from-android-to-server.tistory.com/135"
-                ),
-                StudyFragmentList(
-                    "RxJava Base Classes",
-                    RxJavaBaseClassesFragment().getFullFragmentName(),
-                    2,
-                    "https://from-android-to-server.tistory.com/139"
-                ),
-                StudyFragmentList(
-                    "RxJava Operators",
-                    RxjavaOperators().getFullFragmentName(),
-                    3,
-                    "https://from-android-to-server.tistory.com/169",
-                    "https://from-android-to-server.tistory.com/175"
-                ),
-
-                StudyFragmentList(
-                    "RxJava With EditText",
-                    RxAndEtFragment().getFullFragmentName(),
-                    2,
-                    "https://from-android-to-server.tistory.com/142"
-                ),
-
-                StudyFragmentList(
-                    "RxJava With Retrofit",
-                    RxJavaRetrofitFragment().getFullFragmentName(),
-                    2,
-                    "https://from-android-to-server.tistory.com/142"
-                )
-            )
-        )
-        return asyncCategory
-    }
 
     // WebView url list
     private fun getUrl(idx: Int): String {
         val urlList = arrayListOf(
             "https://from-android-to-server.tistory.com/51"
         )
-
         return urlList[idx]
     }
 
@@ -123,6 +75,21 @@ class StudyListData {
                     "List",
                     ComposeBList::class
                 )
+            )
+        )
+        return jetpackCategory
+    }
+
+    private fun addDI(): StudyCategory {
+        val jetpackCategory = StudyCategory("Jetpack Example")
+        jetpackCategory.studyList.addAll(
+            mutableListOf(
+                StudyList.StudyFragmentList(
+                    "의존성 주입 & Dagger Hilt",
+                    ViewBindingExampleFragment().getFullFragmentName(),
+                    3,
+                    "https://from-android-to-server.tistory.com/113"
+                ),
             )
         )
         return jetpackCategory

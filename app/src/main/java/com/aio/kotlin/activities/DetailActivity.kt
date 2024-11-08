@@ -24,6 +24,7 @@ import com.aio.kotlin.models.StudyList
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.navigation.NavigationBarView
+import dagger.hilt.android.AndroidEntryPoint
 
 
 /**
@@ -31,6 +32,7 @@ import com.google.android.material.navigation.NavigationBarView
  * 1) WebView : 이론설명
  * 2) 실습 : 이거는 이미지와 실습화면을 같이 보여주는 방식으로. 2개를 나눌수도 있고 같이 할 수도 있다.
  */
+@AndroidEntryPoint
 class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>(),
     OnClickListener {
 
@@ -55,7 +57,9 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>(),
             fragmentName.title
         )
 
-        if(pageNum == 2){
+        if(pageNum == 1){
+
+        } else if(pageNum == 2){
             currentFragmentId = binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.id
             binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setOnClickListener(this)
             binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setOnClickListener(this)

@@ -21,7 +21,6 @@ abstract class BaseRecyclerViewAdapter<VH : BaseViewHolder<ViewDataBinding, E>, 
 
     abstract fun getViewHolder(parent: ViewGroup): VH
 
-    // Todo: 여기에 OnClickListener 내용 추가하기
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         Log.d("BaseRecyclerViewAdapter", "onCreateViewHolder")
         return getViewHolder(parent).apply {
@@ -46,7 +45,6 @@ abstract class BaseRecyclerViewAdapter<VH : BaseViewHolder<ViewDataBinding, E>, 
     }
 
     open fun getItem(position: Int): E = items[position]
-
 
     override fun onViewRecycled(holder: VH) {
         holder.recycled()

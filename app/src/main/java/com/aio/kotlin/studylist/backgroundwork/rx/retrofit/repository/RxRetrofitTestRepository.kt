@@ -5,13 +5,14 @@ import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.dto.RxRetrofitTestDTO
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RxRetrofitTestRepository {
-
+@Singleton
+class RxRetrofitTestRepository @Inject constructor(
+    private val rxRetrofitTestApi: RxRetrofitTestApi
+){
     fun fetchAllRxRetrofitTestData(): Single<List<RxRetrofitTestDTO>> {
-        val rxRetrofitTestApi = RxRetrofitTestApi.create()
-        return rxRetrofitTestApi.getTestSingle()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        return rxRetrofitTestApi.getRxRetrofitTestData()
     }
 }
