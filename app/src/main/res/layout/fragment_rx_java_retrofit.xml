@@ -50,17 +50,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <TextView
-            android:id="@+id/tv_rx_retrofit_data_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="No data yet"
-            android:textColor="@color/black"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_rx_retrofit_test"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_rx_retrofit_load" />
+
+
+        <!--        <TextView-->
+<!--            android:id="@+id/tv_rx_retrofit_data_content"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:text="No data yet"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/btn_rx_retrofit_load" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

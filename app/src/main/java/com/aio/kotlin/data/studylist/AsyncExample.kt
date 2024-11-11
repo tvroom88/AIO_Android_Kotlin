@@ -1,4 +1,4 @@
-package com.aio.kotlin.data
+package com.aio.kotlin.data.studylist
 
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
@@ -53,7 +53,7 @@ class AsyncExample {
                     "RxJava With Retrofit",
                     RxJavaRetrofitFragment().getFullFragmentName(),
                     2,
-                    "https://from-android-to-server.tistory.com/142"
+                    "https://from-android-to-server.tistory.com/178"
                 )
             )
         )

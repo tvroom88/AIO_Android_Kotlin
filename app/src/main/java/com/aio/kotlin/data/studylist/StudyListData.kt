@@ -1,14 +1,8 @@
-package com.aio.kotlin.data
+package com.aio.kotlin.data.studylist
 
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
-import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
-import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
-import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
-import com.aio.kotlin.studylist.backgroundwork.rx.edittext.RxAndEtFragment
-import com.aio.kotlin.studylist.backgroundwork.rx.operators.RxjavaOperators
-import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.RxJavaRetrofitFragment
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts

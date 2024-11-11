@@ -12,7 +12,7 @@ import com.aio.kotlin.R
 import com.aio.kotlin.adapters.StudyListAdapter
 import com.aio.kotlin.base.activity.ViewBindingBaseActivity
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
-import com.aio.kotlin.data.StudyListData
+import com.aio.kotlin.data.studylist.StudyListData
 import com.aio.kotlin.databinding.ActivityAndroidStudyBinding
 import com.aio.kotlin.databinding.ItemStudyListBinding
 import com.aio.kotlin.models.StudyList

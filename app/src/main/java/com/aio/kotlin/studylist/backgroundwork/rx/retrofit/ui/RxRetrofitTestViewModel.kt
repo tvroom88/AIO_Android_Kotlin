@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.dto.RxRetrofitTestDTO
-import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.repository.RxRetrofitTestRepository
 import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.usecases.RxRetrofitUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.disposables.Disposable

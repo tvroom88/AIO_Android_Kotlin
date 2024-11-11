@@ -4,11 +4,15 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
+import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.FragmentRxJavaRetrofitBinding
 import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.dto.RxRetrofitTestDTO
+import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -20,6 +24,7 @@ class RxJavaRetrofitFragment :
     DataBindingBaseFragment<FragmentRxJavaRetrofitBinding>(R.layout.fragment_rx_java_retrofit) {
 
     private lateinit var rxRetrofitTestViewModel: RxRetrofitTestViewModel
+    private val rxRetrofitTestAdapter by lazy { RxRetrofitTestAdapter() }
 
     override fun initContentInOnViewCreated() {
         rxRetrofitTestViewModel = ViewModelProvider(this)[RxRetrofitTestViewModel::class.java]
@@ -49,13 +54,37 @@ class RxJavaRetrofitFragment :
                 rxRetrofitTestViewModel.fetchAllData()
             }
         }
+
+        binding?.rvRxRetrofitTest?.run {
+            layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            adapter = rxRetrofitTestAdapter.apply {
+                onItemClickListener =
+                    object : BaseRecyclerViewAdapter.OnItemClickListener<RxRetrofitTestDTO> {
+                        override fun onItemClick(
+                            binding: ViewDataBinding,
+                            data: RxRetrofitTestDTO,
+                            itemPosition: Int
+                        ) {
+
+                        }
+                    }
+
+                setItemList(null) // RecyclerView에 데이터 추가
+            }
+            addItemDecoration(ExampleItemDecoration(30, 60, 60))
+        }
     }
 
     private fun showLoadedData(data: List<RxRetrofitTestDTO>?) {
         hideLoadingView()
         binding?.apply {
             data?.let {
-                tvRxRetrofitDataContent.text = it[0].title
+//                tvRxRetrofitDataContent.text = it[0].title
+                rxRetrofitTestAdapter.setItemList(data.toMutableList())
             }
         }
     }
