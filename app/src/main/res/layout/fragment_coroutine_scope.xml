@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".studylist.backgroundwork.coroutine.CoroutineBuilderFragment">
+
+    <!--  코루틴 Builder 타이틀  -->
+    <TextView
+        android:id="@+id/tv_coroutine_builder_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Coroutine Builder Example"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_coroutine_builder_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_builder_title" />
+
+    <!-- 첫 번째 버튼 -->
+    <Button
+        android:id="@+id/btn_coroutine_builder_launch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="launch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_coroutine_builder_async"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <!-- 두 번째 버튼 -->
+    <Button
+        android:id="@+id/btn_coroutine_builder_async"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="async"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_coroutine_builder_runblocking"
+        app:layout_constraintStart_toEndOf="@id/btn_coroutine_builder_launch"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <!-- 세 번째 버튼 -->
+    <Button
+        android:id="@+id/btn_coroutine_builder_runblocking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="runblocking"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_coroutine_builder_withcontext"
+        app:layout_constraintStart_toEndOf="@id/btn_coroutine_builder_async"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <!-- 네 번째 버튼 -->
+    <Button
+        android:id="@+id/btn_coroutine_builder_withcontext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="withcontext"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_coroutine_builder_runblocking"
+        app:layout_constraintWidth_percent="0.2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

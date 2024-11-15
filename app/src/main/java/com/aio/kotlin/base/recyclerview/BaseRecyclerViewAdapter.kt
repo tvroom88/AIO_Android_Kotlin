@@ -40,7 +40,6 @@ abstract class BaseRecyclerViewAdapter<VH : BaseViewHolder<ViewDataBinding, E>, 
     }
 
     override fun getItemCount(): Int {
-        Log.d("BaseRecyclerViewAdapter", "getItemCount ${items.size}")
         return items.size
     }
 

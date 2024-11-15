@@ -2,6 +2,7 @@ package com.aio.kotlin.data.studylist
 
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
+import com.aio.kotlin.studylist.backgroundwork.coroutine.CoroutineBuilderFragment
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
@@ -54,7 +55,16 @@ class AsyncExample {
                     RxJavaRetrofitFragment().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/178"
+                ),
+
+                StudyFragmentList(
+                    "Coroutine Diverse Builder",
+                    CoroutineBuilderFragment().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/143"
                 )
+
+
             )
         )
         return asyncCategory
