@@ -57,19 +57,24 @@ class DetailActivity : ViewBindingBaseActivity<ActivityDetailBinding>(),
             fragmentName.title
         )
 
-        if(pageNum == 1){
-
-        } else if(pageNum == 2){
-            currentFragmentId = binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.id
-            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setOnClickListener(this)
-            binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setOnClickListener(this)
-        } else if(pageNum == 3){
-            binding.BnvDetailWithThreeBtn.visibility = View.VISIBLE
-            binding.BnvDetailWithTwoBtn.visibility = View.GONE
-            currentFragmentId = binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavLeft.id
-            binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavLeft.setOnClickListener(this)
-            binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavMiddle.setOnClickListener(this)
-            binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavRight.setOnClickListener(this)
+        when (pageNum) {
+            1 -> {
+                binding.BnvDetailWithTwoBtn.visibility = View.GONE // 어쩌피 하나만 있다면 가리면 됨.
+                binding.BnvDetailWithOneBtn.visibility = View.GONE
+            }
+            2 -> {
+                currentFragmentId = binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.id
+                binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavLeft.setOnClickListener(this)
+                binding.bnvDetailWithTwoBtnInside.btnDetailBtmNavRight.setOnClickListener(this)
+            }
+            3 -> {
+                binding.BnvDetailWithThreeBtn.visibility = View.VISIBLE
+                binding.BnvDetailWithTwoBtn.visibility = View.GONE
+                currentFragmentId = binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavLeft.id
+                binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavLeft.setOnClickListener(this)
+                binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavMiddle.setOnClickListener(this)
+                binding.bnvDetailWithThreeBtnInside.btnDetailBtmNavRight.setOnClickListener(this)
+            }
         }
 
         goToWebFragment(fragmentName)

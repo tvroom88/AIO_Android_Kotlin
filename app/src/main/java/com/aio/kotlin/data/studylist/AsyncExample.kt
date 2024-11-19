@@ -60,10 +60,17 @@ class AsyncExample {
                 StudyFragmentList(
                     "Coroutine Diverse Builder",
                     CoroutineBuilderFragment().getFullFragmentName(),
-                    2,
-                    "https://from-android-to-server.tistory.com/143"
-                )
+                    3,
+                    "https://from-android-to-server.tistory.com/143",
+                    "https://from-android-to-server.tistory.com/181"
+                ),
 
+                StudyFragmentList(
+                    "Coroutine Scope",
+                    CoroutineBuilderFragment().getFullFragmentName(),
+                    1,
+                    "https://from-android-to-server.tistory.com/143",
+                )
 
             )
         )
