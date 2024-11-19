@@ -2,7 +2,6 @@ package com.aio.kotlin.studylist.backgroundwork.coroutine
 
 import android.util.Log
 import android.widget.TextView
-import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentCoroutineBuilderBinding
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +49,6 @@ class CoroutineBuilderFragment : ViewBindingBaseFragment<FragmentCoroutineBuilde
      *   launch는 코루틴 블록을 만드는 코루틴 빌더중 하나입니다.
      *   launch는 현재 스레드를 차단하지 않고 새로운 코루틴을 생성할 수 있습니다.
      *   특정 결과값을 반환하지 않고 Job객체를 반환합니다.
-     *   https://jutole.tistory.com/15
      */
     private fun coroutineLaunch() {
         val sb = StringBuilder()
@@ -73,23 +71,31 @@ class CoroutineBuilderFragment : ViewBindingBaseFragment<FragmentCoroutineBuilde
      * async는 launch와 비슷하게 코루틴을 만들고 해당 코루틴에 대한 래퍼런스를 받아오는데,
      * launch - Job / async - Deferred<T>의 형태를 반환한다.
      *
-     * async는 미래의 계산 결과로 예상되는 비동기 작업에 대해 사용, 결과를 얻어서 다른 작업에 사용할 때  async의 Deferred<T>는 join()대신 await() 함수를 통해 대기하고 결과값을 받아오는 점이 차이점.
+     * launch는 미래의 계산 결과로 예상되는 비동기 작업에 대해 사용, 결과를 얻어서 다른 작업에 사용할 때  async의 Deferred<T>는 join()대신 await() 함수를 통해 대기하고 결과값을 받아오는 점이 차이점.
      */
     private fun coroutineAsync() {
         val myCharacter = CoroutineCharacter(null, null, null)
         val sb = StringBuilder()
         runBlocking {
             myCharacter.name = "John"
-            setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+            setStringWithStringBuilder(sb, "1. myCharacter : $myCharacter", resultTextView)
+            Log.d("coroutineAsync", "1. $myCharacter")
+
             val result = async {
                 delay(1000L)
                 myCharacter.weapon = "sword"
-                setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+                setStringWithStringBuilder(sb, "2. myCharacter : $myCharacter", resultTextView)
+                Log.d("coroutineAsync", "2. $myCharacter")
+
             }
             myCharacter.age = 11
-            setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+            setStringWithStringBuilder(sb, "3. myCharacter : $myCharacter", resultTextView)
+            Log.d("coroutineAsync", "3. $myCharacter")
+
             result.await()
-            setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+            setStringWithStringBuilder(sb, "4. myCharacter : $myCharacter", resultTextView)
+            Log.d("coroutineAsync", "4. $myCharacter")
+
         }
     }
 
@@ -103,14 +109,20 @@ class CoroutineBuilderFragment : ViewBindingBaseFragment<FragmentCoroutineBuilde
         val myCharacter = CoroutineCharacter(null, null, null)
         val sb = StringBuilder()
         myCharacter.name = "John"
-        setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+        setStringWithStringBuilder(sb, "1.myCharacter : $myCharacter", resultTextView)
+        Log.d("coroutineRunBlocking", "1. $myCharacter")
+
         runBlocking {
             delay(1000L)
             myCharacter.weapon = "sword"
-            setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+            setStringWithStringBuilder(sb, "2. myCharacter : $myCharacter", resultTextView)
+            Log.d("coroutineRunBlocking", "2. $myCharacter")
+
         }
         myCharacter.age = 11
-        setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+        setStringWithStringBuilder(sb, "3. myCharacter : $myCharacter", resultTextView)
+        Log.d("coroutineRunBlocking", "3. $myCharacter")
+
     }
 
     /**
@@ -126,13 +138,19 @@ class CoroutineBuilderFragment : ViewBindingBaseFragment<FragmentCoroutineBuilde
         runBlocking {
             myCharacter.name = "John"
             setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+            Log.d("coroutineWithContext", "1. $myCharacter")
+
             withContext(Dispatchers.IO) {
                 delay(1000L)
                 myCharacter.weapon = "sword"
                 setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+                Log.d("coroutineWithContext", "2. $myCharacter")
+
             }
             myCharacter.age = 11
             setStringWithStringBuilder(sb, "myCharacter : $myCharacter", resultTextView)
+            Log.d("coroutineWithContext","3. $myCharacter")
+
         }
     }
 
