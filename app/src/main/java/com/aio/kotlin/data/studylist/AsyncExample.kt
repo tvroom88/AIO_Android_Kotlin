@@ -3,6 +3,7 @@ package com.aio.kotlin.data.studylist
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.backgroundwork.coroutine.CoroutineBuilderFragment
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home.CoroutineTestFragment
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
@@ -42,21 +43,18 @@ class AsyncExample {
                     "https://from-android-to-server.tistory.com/169",
                     "https://from-android-to-server.tistory.com/175"
                 ),
-
                 StudyFragmentList(
                     "RxJava With EditText",
                     RxAndEtFragment().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/142"
                 ),
-
                 StudyFragmentList(
                     "RxJava With Retrofit",
                     RxJavaRetrofitFragment().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/178"
                 ),
-
                 StudyFragmentList(
                     "Coroutine Diverse Builder",
                     CoroutineBuilderFragment().getFullFragmentName(),
@@ -64,14 +62,18 @@ class AsyncExample {
                     "https://from-android-to-server.tistory.com/143",
                     "https://from-android-to-server.tistory.com/181"
                 ),
-
                 StudyFragmentList(
                     "Coroutine Scope",
                     CoroutineBuilderFragment().getFullFragmentName(),
                     1,
                     "https://from-android-to-server.tistory.com/143",
+                ),
+                StudyFragmentList(
+                    "Coroutine & Retrofit & Clean Architecture",
+                    CoroutineTestFragment().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/143",
                 )
-
             )
         )
         return asyncCategory

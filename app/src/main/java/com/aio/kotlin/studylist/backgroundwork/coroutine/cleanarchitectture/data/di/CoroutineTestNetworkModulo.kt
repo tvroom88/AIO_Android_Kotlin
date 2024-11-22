@@ -1,7 +1,6 @@
-package com.aio.kotlin.studylist.backgroundwork.rx.retrofit.di
+package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.di
 
 import com.aio.kotlin.constants.Constants
-import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.api.RxRetrofitTestApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,16 +13,16 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModulo {
+class CoroutineTestNetworkModulo {
 
+    // RxJava 예제에서도 Retrofit에 Dependency Injection을 해서 이렇게 나눠준단다. 혹시나 2개 이상 사용하지 않는다면 굳이 이렇게 할 필요는 없다.
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class RxjavaTestRetrofit
+    annotation class CoroutineTestRetrofit
 
-
-    @RxjavaTestRetrofit
-    @Provides
+    @CoroutineTestRetrofit
     @Singleton
+    @Provides
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -32,9 +31,4 @@ class NetworkModulo {
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun provideApiService(@RxjavaTestRetrofit retrofit: Retrofit): RxRetrofitTestApi {
-        return retrofit.create(RxRetrofitTestApi::class.java)
-    }
 }

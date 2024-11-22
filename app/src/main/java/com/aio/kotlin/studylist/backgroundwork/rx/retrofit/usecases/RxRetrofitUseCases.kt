@@ -10,7 +10,6 @@ import javax.inject.Inject
 class RxRetrofitUseCases @Inject constructor(
     private val rxRetrofitTestRepository: RxRetrofitTestRepository
 ) {
-
     fun execute(): Single<List<RxRetrofitTestDTO>> {
         return rxRetrofitTestRepository.fetchAllRxRetrofitTestData()
             .subscribeOn(Schedulers.io())
