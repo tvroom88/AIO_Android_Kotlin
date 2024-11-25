@@ -83,7 +83,6 @@ class RxJavaRetrofitFragment :
         hideLoadingView()
         binding?.apply {
             data?.let {
-//                tvRxRetrofitDataContent.text = it[0].title
                 rxRetrofitTestAdapter.setItemList(data.toMutableList())
             }
         }

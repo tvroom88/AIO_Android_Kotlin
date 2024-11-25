@@ -1,13 +1,23 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home
 
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
+import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.FragmentCoroutineTestBinding
 import com.aio.kotlin.databinding.FragmentRxJavaRetrofitBinding
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.adapter.CoroutineTestAdapter
+import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.dto.RxRetrofitTestDTO
+import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.RxRetrofitTestAdapter
 import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.Status
+import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -32,30 +42,66 @@ class CoroutineTestFragment :
     DataBindingBaseFragment<FragmentCoroutineTestBinding>(R.layout.fragment_coroutine_test) {
 
     private val coroutineTestViewModel by viewModels<CoroutineTestViewModel>()
+    private val coroutineTestAdapter by lazy { CoroutineTestAdapter() }
 
     override fun initContentInOnViewCreated() {
         binding?.apply {
+            coroutineTestVM = coroutineTestViewModel
+
             btnCoroutineTestStart.setOnClickListener {
                 coroutineTestViewModel.getCoroutineTestData()
             }
+
+            rvCoroutineTest.run {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+                adapter = coroutineTestAdapter.apply {
+                    setItemList(null) // RecyclerView에 데이터 추가
+                }
+                addItemDecoration(ExampleItemDecoration(30, 60, 60))
+            }
         }
 
-        coroutineTestViewModel.coroutineTestData.observe(this) {
+        coroutineTestViewModel.apply {
+            coroutineTestData.observe(viewLifecycleOwner) {
+                showLoadedData(it)
+            }
 
-            when (it.status) {
+            errorMsg.observe(viewLifecycleOwner) {
+                Toast.makeText(activityContext, it, Toast.LENGTH_SHORT).show()
+            }
+        }
 
-                Status.ERROR -> {
-                    Log.d("goodgood", "1")
-                }
+    }
 
-                Status.SUCCESS -> {
-                    Log.d("goodgood", "2")
-                }
 
-                Status.LOADING -> {
-                    Log.d("goodgood", "3")
-                }
+    private fun showLoadedData(data: List<CoroutineTest>?) {
+        hideLoadingView()
+        binding?.apply {
+            data?.let {
+                coroutineTestAdapter.setItemList(data.toMutableList())
             }
         }
     }
+
+
+    private fun showLoadingView() {
+        binding?.apply {
+            if (!pbCoroutineTestLoading.isVisible) {
+                pbCoroutineTestLoading.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun hideLoadingView() {
+        binding?.apply {
+            if (pbCoroutineTestLoading.isVisible) {
+                pbCoroutineTestLoading.visibility = View.GONE
+            }
+        }
+    }
+
 }

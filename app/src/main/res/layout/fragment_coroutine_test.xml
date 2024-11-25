@@ -4,33 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".studylist.backgroundwork.coroutine.cleanarchitectture.ui.home.CoroutineTestFragment">
 
+    <data>
+        <import type="android.view.View" /> <!-- View 클래스 import -->
+
+        <variable
+            name="coroutineTestVM"
+            type="com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home.CoroutineTestViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
-            android:id="@+id/tv_coroutine_test_result"
+            android:id="@+id/tv_coroutine_architecture_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="aaa"
+            android:layout_marginTop="20dp"
+            android:text="Coroutine with architecture"
+            android:textAlignment="center"
             android:textColor="@color/black"
+            android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_coroutine_architecture_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Coroutine + Retrofit + Dagger Hilt + 3layer archit"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_architecture_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_coroutine_test"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_test_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_architecture_subtitle" />
 
         <Button
             android:id="@+id/btn_coroutine_test_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@color/black"
             android:text="Button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/pb_coroutine_test_loading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{coroutineTestVM.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_test_result" />
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

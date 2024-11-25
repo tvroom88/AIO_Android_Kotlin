@@ -6,7 +6,6 @@
     tools:context=".studylist.backgroundwork.rx.retrofit.ui.RxJavaRetrofitFragment">
 
     <data>
-
         <variable
             name="rxRetrofitTestVM"
             type="com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.RxRetrofitTestViewModel" />
