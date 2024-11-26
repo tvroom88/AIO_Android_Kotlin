@@ -1,10 +1,13 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.di
 
+import android.util.Log
 import com.aio.kotlin.constants.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,11 +26,34 @@ class CoroutineTestNetworkModulo {
     @CoroutineTestRetrofit
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .baseUrl(Constants.URLS.BASE_URL)
+            .build()
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideOkHttp(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor { chain ->
+                val url = chain
+                    .request()
+                    .url
+                    .newBuilder()
+                    .addQueryParameter("123", "123")
+                    .build()
+
+                Log.d("urlurl", "url : $url")
+                chain.proceed(chain.request().newBuilder().url(url).build())
+            }
             .build()
     }
 
