@@ -85,7 +85,7 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
                 val studyList = StudyListData().setStudyList() // 학습 리스트
                 setItemList(studyList) // RecyclerView에 데이터 추가
             }
-            addItemDecoration(ExampleItemDecoration(30, 60, 60))
+            addItemDecoration(ExampleItemDecoration(0, 0, 0))
         }
     }
 
