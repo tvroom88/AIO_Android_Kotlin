@@ -19,6 +19,8 @@ class StudyListData {
 //                RecyclerViewExampleFragment().getFullFragmentName(),
 //                2
 //            ),
+
+            addDI(),
             AsyncExample().addAsyncExample(),
 //            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
 //            addComposeable(),
@@ -75,14 +77,26 @@ class StudyListData {
     }
 
     private fun addDI(): StudyCategory {
-        val jetpackCategory = StudyCategory("Jetpack Example")
+        val jetpackCategory = StudyCategory("Dependency Injection")
         jetpackCategory.studyList.addAll(
             mutableListOf(
                 StudyList.StudyFragmentList(
-                    "의존성 주입 & Dagger Hilt",
+                    "(DI - 1편) 의존성 주입이란",
                     ViewBindingExampleFragment().getFullFragmentName(),
-                    3,
+                    1,
                     "https://from-android-to-server.tistory.com/113"
+                ),
+                StudyList.StudyFragmentList(
+                    "(DI - 2편) 안드로이드 의존성 수동 주입",
+                    ViewBindingExampleFragment().getFullFragmentName(),
+                    1,
+                    "https://from-android-to-server.tistory.com/180"
+                ),
+                StudyList.StudyFragmentList(
+                    "(DI - 3편) DI 라이브러리 Hilt Annotations",
+                    ViewBindingExampleFragment().getFullFragmentName(),
+                    1,
+                    "https://from-android-to-server.tistory.com/117"
                 ),
             )
         )
