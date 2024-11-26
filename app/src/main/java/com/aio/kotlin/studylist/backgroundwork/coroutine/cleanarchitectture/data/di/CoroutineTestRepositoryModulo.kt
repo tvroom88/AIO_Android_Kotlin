@@ -3,6 +3,7 @@ package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.dat
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.datasource.remote.CoroutineTestRemoteDataSource
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.repository.CoroutineTestRepository
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.repository.CoroutineTestRepositoryImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,11 +12,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class CoroutineTestRepositoryModulo {
+abstract class CoroutineTestRepositoryModulo {
 
-    @Singleton
-    @Provides
-    fun provideCoroutineTestRepository(coroutineTestRemoteDataSource: CoroutineTestRemoteDataSource): CoroutineTestRepository {
-        return CoroutineTestRepositoryImpl(coroutineTestRemoteDataSource)
-    }
+    @Binds
+    abstract fun provideCoroutineTestRepository(
+        coroutineTestRepositoryImpl: CoroutineTestRepositoryImpl
+    ): CoroutineTestRepository
 }

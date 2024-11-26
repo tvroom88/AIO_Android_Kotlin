@@ -1,31 +1,27 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home
 
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
-import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.FragmentCoroutineTestBinding
-import com.aio.kotlin.databinding.FragmentRxJavaRetrofitBinding
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.adapter.CoroutineTestAdapter
-import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.dto.RxRetrofitTestDTO
-import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.RxRetrofitTestAdapter
-import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.Status
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 코루틴에 Clean Architecture를 접목한 예제
  *
- * local : RoomDataBase
- * remote : Retrofit
+ * 1. Coroutine + Retrofit + LiveData (O)
+ * 2. Coroutine + RoomDataBase (X)
+ * 3. Coroutine + Retrofit + Flow + StateFlow (X)
  *
+ * remote : Retrofit
+ * local : RoomDataBase
  *
  * remote: 생성 과정
  * (1) CoroutineTestDto (data class)
@@ -34,7 +30,10 @@ import dagger.hilt.android.AndroidEntryPoint
  * (4) RemoteDataSource 생성 (여기서 CoroutineTestApi로 데이터 받는 부분 생성)
  * (5) di (이것도 di로 생성)
  *
- * Repository 생성
+ * DI 방법:
+ * 거의 모든 부분을 @Provides로 했지만
+ * CoroutineTestRepositoryModulo 부분만 @Binds로 했다.
+ * DI 사용방법을 익히기 위해서다.
  */
 
 @AndroidEntryPoint
