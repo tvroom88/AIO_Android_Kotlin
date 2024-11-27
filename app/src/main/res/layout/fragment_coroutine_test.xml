@@ -5,6 +5,7 @@
     tools:context=".studylist.backgroundwork.coroutine.cleanarchitectture.ui.home.CoroutineTestFragment">
 
     <data>
+
         <import type="android.view.View" /> <!-- View 클래스 import -->
 
         <variable
@@ -43,29 +44,98 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_architecture_title" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_coroutine_test"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <TextView
+            android:id="@+id/tv_coroutine_architecture_data_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:overScrollMode="never"
-            app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_test_start"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_architecture_subtitle" />
 
-        <Button
-            android:id="@+id/btn_coroutine_test_start"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_coroutine_test"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_test_load_data_from_remote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_architecture_data_type" />
+
+        <!--   remote로 데이터 불러오는 부분     -->
+        <TextView
+            android:id="@+id/tv_coroutine_test_remote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Remote"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_coroutine_test_load_data_from_remote"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_coroutine_test_load_data_from_remote" />
+
+        <Button
+            android:id="@+id/btn_coroutine_test_load_data_from_remote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginBottom="20dp"
             android:background="@color/black"
-            android:text="Button"
+            android:text="Load Data"
+            app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_test_load_data_from_Local"
+            app:layout_constraintStart_toEndOf="@+id/tv_coroutine_test_remote" />
+
+
+        <!--   local에서 데이터 불러오는 부분     -->
+        <TextView
+            android:id="@+id/tv_coroutine_test_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Local"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_coroutine_test_load_data_from_Local"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_coroutine_test_load_data_from_Local" />
+
+        <Button
+            android:id="@+id/btn_coroutine_test_load_data_from_Local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@color/black"
+            android:text="Load"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_coroutine_test_delete_all_data_from_Local"
+            app:layout_constraintStart_toEndOf="@+id/tv_coroutine_test_local" />
+
+        <Button
+            android:id="@+id/btn_coroutine_test_insert_data_to_Local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@color/black"
+            android:text="Insert"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_coroutine_test_delete_all_data_from_Local"
+            app:layout_constraintStart_toEndOf="@+id/btn_coroutine_test_load_data_from_Local" />
+
+        <Button
+            android:id="@+id/btn_coroutine_test_delete_all_data_from_Local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/black"
+            android:text="Delete All"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/btn_coroutine_test_insert_data_to_Local" />
+
 
         <ProgressBar
             android:id="@+id/pb_coroutine_test_loading"

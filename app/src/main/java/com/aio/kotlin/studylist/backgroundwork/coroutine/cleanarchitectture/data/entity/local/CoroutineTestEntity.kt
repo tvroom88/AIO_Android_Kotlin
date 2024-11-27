@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "coroutine_test_table")
 data class CoroutineTestEntity(
-    @PrimaryKey val myId: Int,
+    @PrimaryKey(autoGenerate = true) val myId: Int? = null,  // autoGenerate 설정
     @ColumnInfo(name = "userId")
-    val userId: String,
+    val userId: Int,
     @ColumnInfo(name = "id")
-    val customId: String,
+    val customId: Int,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "body")

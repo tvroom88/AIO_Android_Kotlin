@@ -1,8 +1,6 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home
 
-import android.view.View
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.R
@@ -47,8 +45,22 @@ class CoroutineTestFragment :
         binding?.apply {
             coroutineTestVM = coroutineTestViewModel
 
-            btnCoroutineTestStart.setOnClickListener {
+            btnCoroutineTestLoadDataFromRemote.setOnClickListener {
+                tvCoroutineArchitectureDataType.text = "Remote Data"
                 coroutineTestViewModel.getCoroutineTestData()
+            }
+
+            btnCoroutineTestLoadDataFromLocal.setOnClickListener {
+                tvCoroutineArchitectureDataType.text = "Local Data"
+                coroutineTestViewModel.getCoroutineTestLocalData()
+            }
+
+            btnCoroutineTestInsertDataToLocal.setOnClickListener {
+                coroutineTestViewModel.insertCoroutineTestToLocal()
+            }
+
+            btnCoroutineTestDeleteAllDataFromLocal.setOnClickListener {
+                coroutineTestViewModel.deleteAllCoroutineDataFromLocal()
             }
 
             rvCoroutineTest.run {
@@ -69,38 +81,31 @@ class CoroutineTestFragment :
                 showLoadedData(it)
             }
 
+            coroutineTestDataFromLocal.observe(viewLifecycleOwner) {
+                showLoadedData(it)
+            }
+
             errorMsg.observe(viewLifecycleOwner) {
                 Toast.makeText(activityContext, it, Toast.LENGTH_SHORT).show()
             }
-        }
 
+            successMsg.observe(viewLifecycleOwner) {
+                Toast.makeText(activityContext, it, Toast.LENGTH_SHORT).show()
+            }
+
+            numOfData.observe(viewLifecycleOwner) {
+                if (binding?.tvCoroutineArchitectureDataType?.text?.contains("Local") == true) {
+                    binding?.tvCoroutineArchitectureDataType?.text = "Local Data, num of data : $it"
+                }
+            }
+        }
     }
 
-
     private fun showLoadedData(data: List<CoroutineTest>?) {
-        hideLoadingView()
         binding?.apply {
             data?.let {
                 coroutineTestAdapter.setItemList(data.toMutableList())
             }
         }
     }
-
-
-    private fun showLoadingView() {
-        binding?.apply {
-            if (!pbCoroutineTestLoading.isVisible) {
-                pbCoroutineTestLoading.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun hideLoadingView() {
-        binding?.apply {
-            if (pbCoroutineTestLoading.isVisible) {
-                pbCoroutineTestLoading.visibility = View.GONE
-            }
-        }
-    }
-
 }

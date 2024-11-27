@@ -15,9 +15,10 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
     private val coroutineTestRepository: CoroutineTestRepository
 ) : GetUseCase.GetCoroutineTestUseCase {
 
+    // Remote
     override suspend operator fun invoke(): CoroutinesTestState<List<CoroutineTest>> {
         return try {
-            CoroutinesTestState.success(coroutineTestRepository.getAllCoroutineTestResultData())
+            CoroutinesTestState.success(coroutineTestRepository.getAllCoroutineTestResultDataFromRemote())
         } catch (e: MalformedURLException) {
             CoroutinesTestState.error("Invalid URL: ${e.localizedMessage}") // URL 형식 오류
         } catch (e: UnknownHostException) {
@@ -34,5 +35,22 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
             // 기타 오류 처리
             CoroutinesTestState.error("Unknown error: ${e.localizedMessage}")
         }
+    }
+
+    // Local
+    override suspend fun getAllLocalData(): Result<List<CoroutineTest>> {
+        return coroutineTestRepository.getAllFromLocal()
+    }
+
+    override suspend fun saveAllDataToLocal(list : List<CoroutineTest>): Result<Boolean> {
+        return coroutineTestRepository.insertAllDataToLocal(list)
+    }
+
+    override suspend fun deleteAlLDataFromLocal(): Result<Boolean> {
+        return coroutineTestRepository.removeAllData()
+    }
+
+    override suspend fun numOfDataInDb(): Result<Int> {
+        return coroutineTestRepository.numOfDataInDb()
     }
 }

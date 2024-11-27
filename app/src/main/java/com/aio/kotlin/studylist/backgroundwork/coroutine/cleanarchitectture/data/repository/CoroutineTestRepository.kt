@@ -3,5 +3,16 @@ package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.dat
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 
 interface CoroutineTestRepository {
-    suspend fun getAllCoroutineTestResultData(): List<CoroutineTest>
+
+    // Local
+    suspend fun insertAllDataToLocal(list : List<CoroutineTest>): Result<Boolean>
+
+    suspend fun getAllFromLocal(): Result<List<CoroutineTest>>
+
+    suspend fun removeAllData(): Result<Boolean>
+
+    suspend fun numOfDataInDb(): Result<Int>
+
+    // Remote
+    suspend fun getAllCoroutineTestResultDataFromRemote(): List<CoroutineTest>
 }
