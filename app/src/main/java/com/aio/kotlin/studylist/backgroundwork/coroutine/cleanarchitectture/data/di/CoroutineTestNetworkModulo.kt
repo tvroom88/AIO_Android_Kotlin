@@ -51,7 +51,6 @@ class CoroutineTestNetworkModulo {
                     .addQueryParameter("123", "123")
                     .build()
 
-                Log.d("urlurl", "url : $url")
                 chain.proceed(chain.request().newBuilder().url(url).build())
             }
             .build()

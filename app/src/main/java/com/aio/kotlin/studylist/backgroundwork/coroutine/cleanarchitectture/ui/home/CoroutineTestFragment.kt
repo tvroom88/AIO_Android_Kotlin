@@ -2,6 +2,7 @@ package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.
 
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
@@ -10,6 +11,7 @@ import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.doma
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.adapter.CoroutineTestAdapter
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 /**
  * 코루틴에 Clean Architecture를 접목한 예제
@@ -108,4 +110,9 @@ class CoroutineTestFragment :
             }
         }
     }
+
+    private fun initObserver() {
+
+    }
+
 }

@@ -15,5 +15,5 @@ class CoroutinesTestState<out T>(val status: CoroutineStatus, val data: T?, val 
 
 enum class CoroutineStatus {
     SUCCESS,
-    ERROR
+    ERROR,
 }

@@ -1,10 +1,19 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.network
 
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.entity.remote.CoroutineCommentDto
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.entity.remote.CoroutineTestDto
-import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 
-interface CoroutineTestApi {
-    @GET("posts")  // 데이터를 한번만 받아오기 때문에 Single을 사용한다.
-    suspend fun getRxRetrofitTestData(): List<CoroutineTestDto>
+/**
+ * open api
+ * https://jsonplaceholder.typicode.com/posts
+ * https://jsonplaceholder.typicode.com/comments
+ */
+interface
+CoroutineTestApi {
+    @GET("posts")
+    suspend fun getPostDataWithCoroutine(): List<CoroutineTestDto>
+
+    @GET("comments")
+    suspend fun getCommentsDataWithCoroutine(): List<CoroutineCommentDto>
 }

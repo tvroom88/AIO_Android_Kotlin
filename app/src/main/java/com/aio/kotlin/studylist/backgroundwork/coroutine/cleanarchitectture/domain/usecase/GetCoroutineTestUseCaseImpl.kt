@@ -1,8 +1,11 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.usecase
 
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.repository.CoroutineTestRepository
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutinesTestState
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.net.MalformedURLException
 import java.net.UnknownHostException
@@ -37,12 +40,16 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
         }
     }
 
+    override fun getCoroutineCommentData(): Flow<Result<List<CoroutineComment>>> {
+        return coroutineTestRepository.getAllCoroutineCommentResultDataFromRemote()
+    }
+
     // Local
     override suspend fun getAllLocalData(): Result<List<CoroutineTest>> {
         return coroutineTestRepository.getAllFromLocal()
     }
 
-    override suspend fun saveAllDataToLocal(list : List<CoroutineTest>): Result<Boolean> {
+    override suspend fun saveAllDataToLocal(list: List<CoroutineTest>): Result<Boolean> {
         return coroutineTestRepository.insertAllDataToLocal(list)
     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutineStatus
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutinesTestState
@@ -14,6 +15,13 @@ import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,6 +30,7 @@ class CoroutineTestViewModel @Inject constructor(
     private val getCoroutineTestUseCase: GetUseCase.GetCoroutineTestUseCase
 ) : ViewModel() {
 
+    // LiveData 사용한 것들
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
@@ -39,6 +48,32 @@ class CoroutineTestViewModel @Inject constructor(
 
     private val _coroutineTestDataFromLocal = MutableLiveData<List<CoroutineTest>>()
     val coroutineTestDataFromLocal: LiveData<List<CoroutineTest>> get() = _coroutineTestDataFromLocal
+
+
+    // Flow을 사용하는 부분 (asStateFlow vs asSharedFlow 차이)
+//    private val _searchUiDataStateFlow: MutableStateFlow<CoroutineTestUiModel> =
+//        MutableStateFlow(CoroutineTestUiModel.Initialize)
+//    val searchUiDataStateFlow = _searchUiDataStateFlow.asStateFlow()
+//
+//    private val _searchUiEventSharedFlow = MutableSharedFlow<CoroutineTestUiModel>()
+//    val searchUiEventSharedFlow = _searchUiEventSharedFlow.asSharedFlow()
+
+    // StateFlow 사용한 부분들
+    fun getCoroutineCommentRemoteData() {
+        viewModelScope.launch {
+            getCoroutineTestUseCase.getCoroutineCommentData()
+                .onStart { _isLoading.postValue(true) }
+                .onCompletion { _isLoading.postValue(false) }
+                .collectLatest { result ->
+                    result.onSuccess { list ->
+
+                    }.onFailure {
+                        // Todo: 에러 메세지 추가
+                    }
+                }
+        }
+    }
+
 
     fun getCoroutineTestData() = viewModelScope.launch(Dispatchers.IO) {
 
