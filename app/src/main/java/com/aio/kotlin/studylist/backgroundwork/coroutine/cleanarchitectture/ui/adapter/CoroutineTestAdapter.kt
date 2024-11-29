@@ -15,9 +15,7 @@ class CoroutineTestAdapter :
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItemList(mutableList: MutableList<CoroutineTest>?) {
-        if (mutableList != null) {
-            items = mutableList
-        }
+        items = mutableList ?: mutableListOf()
         notifyDataSetChanged()
     }
 

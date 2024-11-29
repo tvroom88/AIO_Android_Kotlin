@@ -9,11 +9,15 @@ import javax.inject.Inject
 class CoroutineTestRemoteDataSourceImpl @Inject constructor(private val coroutineTestApi: CoroutineTestApi) :
     CoroutineTestRemoteDataSource {
 
-    // Result 미사용 & Flow 미사용
-    override suspend fun fetchAllCoroutineTestData(): List<CoroutineTestDto> =
-        coroutineTestApi.getPostDataWithCoroutine()
+    // Flow 미사용
+    override suspend fun fetchAllCoroutineTestData(): Result<List<CoroutineTestDto>> = try{
+        val result = coroutineTestApi.getPostDataWithCoroutine()
+        Result.success(result)
+    }catch (e: Exception) {
+        Result.failure(e)
+    }
 
-    // Result 사용 & Flow 사용 예정
+    // Flow 사용
     override suspend fun fetchAllCoroutineCommentData(): Result<List<CoroutineCommentDto>> = try {
         val result = coroutineTestApi.getCommentsDataWithCoroutine()
         Result.success(result)

@@ -20,9 +20,9 @@ class CoroutineTestRepositoryImpl @Inject constructor(
 ) : CoroutineTestRepository {
 
     // Local(Room DB)에서 가져오는 부분
-    override suspend fun insertAllDataToLocal(list: List<CoroutineTest>): Result<Boolean> {
+    override suspend fun insertAllDataToLocal(list: List<CoroutineTest>): Result<List<CoroutineTest>> {
         val entityList = list.map { it.toEntity() }
-        return coroutineTestLocalDataSource.insertAllData(entityList)
+        return coroutineTestLocalDataSource.insertAllData(entityList).map { it.map { f -> f.toDomainModel() } }
     }
 
     override suspend fun getAllFromLocal(): Result<List<CoroutineTest>> {
@@ -38,9 +38,9 @@ class CoroutineTestRepositoryImpl @Inject constructor(
     }
 
     // Remote(Retrofit 으로)에서 가져오는 부분
-    override suspend fun getAllCoroutineTestResultDataFromRemote(): List<CoroutineTest> {
+    override suspend fun getAllCoroutineTestResultDataFromRemote(): Result<List<CoroutineTest>> {
         return coroutineTestRemoteDataSource.fetchAllCoroutineTestData()
-            .map { it.toDomainModel() }
+            .map { it.map { f -> f.toDomainModel() } }
     }
 
     override fun getAllCoroutineCommentResultDataFromRemote(): Flow<Result<List<CoroutineComment>>> =

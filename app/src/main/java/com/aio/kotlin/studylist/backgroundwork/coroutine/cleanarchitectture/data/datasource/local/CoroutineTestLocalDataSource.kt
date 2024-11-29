@@ -6,7 +6,7 @@ interface CoroutineTestLocalDataSource {
 
     suspend fun insertData(coroutineTestEntity: CoroutineTestEntity): Result<CoroutineTestEntity>
 
-    suspend fun insertAllData(list: List<CoroutineTestEntity>): Result<Boolean>
+    suspend fun insertAllData(list: List<CoroutineTestEntity>): Result<List<CoroutineTestEntity>>
 
     suspend fun deleteData(coroutineTestEntity: CoroutineTestEntity): Result<CoroutineTestEntity>
 

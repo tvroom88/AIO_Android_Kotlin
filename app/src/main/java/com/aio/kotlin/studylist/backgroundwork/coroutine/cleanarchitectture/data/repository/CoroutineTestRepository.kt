@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface CoroutineTestRepository {
 
     // Local
-    suspend fun insertAllDataToLocal(list: List<CoroutineTest>): Result<Boolean>
+    suspend fun insertAllDataToLocal(list: List<CoroutineTest>): Result<List<CoroutineTest>>
 
     suspend fun getAllFromLocal(): Result<List<CoroutineTest>>
 
@@ -16,7 +16,7 @@ interface CoroutineTestRepository {
     suspend fun numOfDataInDb(): Result<Int>
 
     // Remote
-    suspend fun getAllCoroutineTestResultDataFromRemote(): List<CoroutineTest>
+    suspend fun getAllCoroutineTestResultDataFromRemote(): Result<List<CoroutineTest>>
 
     fun getAllCoroutineCommentResultDataFromRemote(): Flow<Result<List<CoroutineComment>>>
 }

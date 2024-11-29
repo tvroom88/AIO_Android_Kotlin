@@ -19,25 +19,8 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
 ) : GetUseCase.GetCoroutineTestUseCase {
 
     // Remote
-    override suspend operator fun invoke(): CoroutinesTestState<List<CoroutineTest>> {
-        return try {
-            CoroutinesTestState.success(coroutineTestRepository.getAllCoroutineTestResultDataFromRemote())
-        } catch (e: MalformedURLException) {
-            CoroutinesTestState.error("Invalid URL: ${e.localizedMessage}") // URL 형식 오류
-        } catch (e: UnknownHostException) {
-            CoroutinesTestState.error("Unknown host: ${e.localizedMessage}") // 도메인 없음
-        } catch (e: HttpException) {
-            // 서버 오류 처리 (HTTP 상태 코드 포함)
-            val errorMessage = when (e.code()) {
-                500 -> "Server error: Internal server error"
-                404 -> "Server error: Resource not found"
-                else -> "Server error: ${e.message()}"
-            }
-            CoroutinesTestState.error(errorMessage)
-        } catch (e: Exception) {
-            // 기타 오류 처리
-            CoroutinesTestState.error("Unknown error: ${e.localizedMessage}")
-        }
+    override suspend operator fun invoke(): Result<List<CoroutineTest>> {
+        return coroutineTestRepository.getAllCoroutineTestResultDataFromRemote()
     }
 
     override fun getCoroutineCommentData(): Flow<Result<List<CoroutineComment>>> {
@@ -49,7 +32,7 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
         return coroutineTestRepository.getAllFromLocal()
     }
 
-    override suspend fun saveAllDataToLocal(list: List<CoroutineTest>): Result<Boolean> {
+    override suspend fun saveAllDataToLocal(list: List<CoroutineTest>): Result<List<CoroutineTest>> {
         return coroutineTestRepository.insertAllDataToLocal(list)
     }
 

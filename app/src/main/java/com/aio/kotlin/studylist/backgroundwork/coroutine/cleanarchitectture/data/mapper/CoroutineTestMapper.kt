@@ -16,6 +16,15 @@ fun CoroutineTestDto.toDomainModel(): CoroutineTest {
     )
 }
 
+fun CoroutineTest.toDto(): CoroutineTestDto {
+    return CoroutineTestDto(
+        userId = this.userId,
+        id = this.id,
+        title = this.title,
+        body = this.body
+    )
+}
+
 fun CoroutineTestEntity.toDomainModel(): CoroutineTest {
     return CoroutineTest(
         userId = this.userId,

@@ -1,5 +1,6 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home
 
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -8,6 +9,7 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentCoroutineTestBinding
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutineStatus
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.adapter.CoroutineTestAdapter
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,20 +82,49 @@ class CoroutineTestFragment :
 
         coroutineTestViewModel.apply {
             coroutineTestData.observe(viewLifecycleOwner) {
-                showLoadedData(it)
+                when (it.status) {
+                    CoroutineStatus.LOADING -> {
+                        onOffLoadingImage(true)
+                    }
+
+                    CoroutineStatus.SUCCESS -> {
+                        onOffLoadingImage(false)
+                        showLoadedData(it.data)
+                    }
+
+                    CoroutineStatus.ERROR -> {
+                        onOffLoadingImage(false)
+                    }
+
+                    CoroutineStatus.RELOAD -> {
+                        showLoadedData(it.data)
+                        onOffLoadingImage(false)
+                    }
+                }
             }
 
-            coroutineTestDataFromLocal.observe(viewLifecycleOwner) {
-                showLoadedData(it)
+            coroutineTestLocalData.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    CoroutineStatus.LOADING -> {
+                        onOffLoadingImage(true)
+                    }
+
+                    CoroutineStatus.SUCCESS -> {
+                        onOffLoadingImage(false)
+                        showLoadedData(it.data)
+                    }
+
+                    CoroutineStatus.ERROR -> {
+                        onOffLoadingImage(false)
+                    }
+
+                    CoroutineStatus.RELOAD -> {
+                        showLoadedData(it.data)
+                        onOffLoadingImage(false)
+                    }
+                }
             }
 
-            errorMsg.observe(viewLifecycleOwner) {
-                Toast.makeText(activityContext, it, Toast.LENGTH_SHORT).show()
-            }
-
-            successMsg.observe(viewLifecycleOwner) {
-                Toast.makeText(activityContext, it, Toast.LENGTH_SHORT).show()
-            }
 
             numOfData.observe(viewLifecycleOwner) {
                 if (binding?.tvCoroutineArchitectureDataType?.text?.contains("Local") == true) {
@@ -105,9 +136,18 @@ class CoroutineTestFragment :
 
     private fun showLoadedData(data: List<CoroutineTest>?) {
         binding?.apply {
-            data?.let {
+            if (data != null) {
                 coroutineTestAdapter.setItemList(data.toMutableList())
+            } else {
+                coroutineTestAdapter.setItemList(null)
             }
+        }
+    }
+
+    private fun onOffLoadingImage(flag: Boolean) {
+        binding?.apply {
+            if (flag) pbCoroutineTestLoading.visibility = View.VISIBLE
+            else pbCoroutineTestLoading.visibility = View.GONE
         }
     }
 

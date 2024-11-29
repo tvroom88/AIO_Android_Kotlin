@@ -9,12 +9,12 @@ interface GetUseCase {
     interface GetCoroutineTestUseCase {
         
         // Remote function들
-        suspend operator fun invoke(): CoroutinesTestState<List<CoroutineTest>>
+        suspend operator fun invoke(): Result<List<CoroutineTest>>
         fun getCoroutineCommentData(): Flow<Result<List<CoroutineComment>>>
 
         // Local function들
         suspend fun getAllLocalData(): Result<List<CoroutineTest>>
-        suspend fun saveAllDataToLocal(list: List<CoroutineTest>): Result<Boolean>
+        suspend fun saveAllDataToLocal(list: List<CoroutineTest>): Result<List<CoroutineTest>>
         suspend fun deleteAlLDataFromLocal(): Result<Boolean>
         suspend fun numOfDataInDb(): Result<Int>
     }

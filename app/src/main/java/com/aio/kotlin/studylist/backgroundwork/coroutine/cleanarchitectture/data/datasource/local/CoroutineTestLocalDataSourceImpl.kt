@@ -19,10 +19,10 @@ class CoroutineTestLocalDataSourceImpl @Inject constructor(private val coroutine
             Result.failure(e)
         }
 
-    override suspend fun insertAllData(data: List<CoroutineTestEntity>): Result<Boolean> =
+    override suspend fun insertAllData(list: List<CoroutineTestEntity>): Result<List<CoroutineTestEntity>> =
         try {
-            coroutineTestDao.insertAllData(data)
-            Result.success(true)
+            coroutineTestDao.insertAllData(list)
+            Result.success(list)
         } catch (e: Exception) {
             Result.failure(e)
         }

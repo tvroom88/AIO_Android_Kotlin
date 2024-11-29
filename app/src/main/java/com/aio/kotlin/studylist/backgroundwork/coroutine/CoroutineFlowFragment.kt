@@ -1,5 +1,8 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine
 
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentCoroutineFlowBinding
 import kotlinx.coroutines.CoroutineScope
@@ -20,18 +23,18 @@ class CoroutineFlowFragment : ViewBindingBaseFragment<FragmentCoroutineFlowBindi
     }
 
     override fun initContentInOnViewCreated() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // 1. Producer(생산자)
+                val flowProducerTest = coroutineFlowProducer()
 
-        // 1. Producer(생산자)
-        val flowProducerTest = coroutineFlowProducer()
+                // 2. Intermediary(중간 연산자)
+                val flowIntermediaryTest = coroutineFlowIntermediary(flowProducerTest)
 
-        // 2. Intermediary(중간 연산자)
-        val flowIntermediaryTest = coroutineFlowIntermediary(flowProducerTest)
-
-        // 3. Consumer(소비자)
-        CoroutineScope(Dispatchers.Main).launch {
-            coroutineFlowConsumer(flowIntermediaryTest)
+                // 3. Consumer(소비자)
+                coroutineFlowConsumer(flowIntermediaryTest)
+            }
         }
-
     }
 
     private fun coroutineFlowProducer(): Flow<Int> {
@@ -54,7 +57,8 @@ class CoroutineFlowFragment : ViewBindingBaseFragment<FragmentCoroutineFlowBindi
                 .filter { it % 2 == 1 }
                 .flowOn(Dispatchers.IO)
                 .onEach {
-                    binding.tvCoroutineFlowIntermediaryNumber.text = "filter { it % 2 == 1 } \n\n $it"
+                    binding.tvCoroutineFlowIntermediaryNumber.text =
+                        "filter { it % 2 == 1 } \n\n $it"
                 }
                 .flowOn(Dispatchers.Main)
                 .map { it * 2 }

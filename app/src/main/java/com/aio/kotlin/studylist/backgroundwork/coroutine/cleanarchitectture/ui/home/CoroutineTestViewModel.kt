@@ -1,27 +1,14 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home
 
-import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
-import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutineStatus
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutinesTestState
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.usecase.GetUseCase
-import com.aio.kotlin.studylist.backgroundwork.rx.retrofit.ui.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,138 +17,82 @@ class CoroutineTestViewModel @Inject constructor(
     private val getCoroutineTestUseCase: GetUseCase.GetCoroutineTestUseCase
 ) : ViewModel() {
 
-    // LiveData 사용한 것들
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> get() = _isLoading
+    private val _numOfData = MutableLiveData<CoroutinesTestState<Int>>()
+    val numOfData: LiveData<CoroutinesTestState<Int>> get() = _numOfData
 
-    private val _successMsg = MutableLiveData<String>()
-    val successMsg: LiveData<String> get() = _successMsg
+    private val _coroutineTestData = MutableLiveData<CoroutinesTestState<List<CoroutineTest>>>()
+    val coroutineTestData: LiveData<CoroutinesTestState<List<CoroutineTest>>> get() = _coroutineTestData
 
-    private val _errorMsg = MutableLiveData<String>()
-    val errorMsg: LiveData<String> get() = _errorMsg
-
-    private val _numOfData = MutableLiveData<Int>()
-    val numOfData: LiveData<Int> get() = _numOfData
-
-    private val _coroutineTestData = MutableLiveData<List<CoroutineTest>>()
-    val coroutineTestData: LiveData<List<CoroutineTest>> get() = _coroutineTestData
-
-    private val _coroutineTestDataFromLocal = MutableLiveData<List<CoroutineTest>>()
-    val coroutineTestDataFromLocal: LiveData<List<CoroutineTest>> get() = _coroutineTestDataFromLocal
-
-
-    // Flow을 사용하는 부분 (asStateFlow vs asSharedFlow 차이)
-//    private val _searchUiDataStateFlow: MutableStateFlow<CoroutineTestUiModel> =
-//        MutableStateFlow(CoroutineTestUiModel.Initialize)
-//    val searchUiDataStateFlow = _searchUiDataStateFlow.asStateFlow()
-//
-//    private val _searchUiEventSharedFlow = MutableSharedFlow<CoroutineTestUiModel>()
-//    val searchUiEventSharedFlow = _searchUiEventSharedFlow.asSharedFlow()
-
-    // StateFlow 사용한 부분들
-    fun getCoroutineCommentRemoteData() {
-        viewModelScope.launch {
-            getCoroutineTestUseCase.getCoroutineCommentData()
-                .onStart { _isLoading.postValue(true) }
-                .onCompletion { _isLoading.postValue(false) }
-                .collectLatest { result ->
-                    result.onSuccess { list ->
-
-                    }.onFailure {
-                        // Todo: 에러 메세지 추가
-                    }
-                }
-        }
-    }
-
+    private val _coroutineTestLocalData =
+        MutableLiveData<CoroutinesTestState<List<CoroutineTest>>>()
+    val coroutineTestLocalData: LiveData<CoroutinesTestState<List<CoroutineTest>>> get() = _coroutineTestLocalData
 
     fun getCoroutineTestData() = viewModelScope.launch(Dispatchers.IO) {
-
-        _isLoading.postValue(true)
-        with(getCoroutineTestUseCase()) {
-            when (status) {
-
-                CoroutineStatus.SUCCESS -> {
-                    data?.let {
-                        _coroutineTestData.postValue(it)
-                    }
-                }
-
-                CoroutineStatus.ERROR -> {
-                    message?.let {
-                        _errorMsg.postValue(it)
-                    }
-
-                }
-            }
-            _isLoading.postValue(false)
+        _coroutineTestData.postValue(CoroutinesTestState.loading())
+        val result = getCoroutineTestUseCase()
+        result.onSuccess {
+            _coroutineTestData.postValue(CoroutinesTestState.success(it))
+        }.onFailure {
+            _coroutineTestData.postValue(CoroutinesTestState.error(it.message.toString()))
         }
     }
 
-    fun getCoroutineTestLocalData(): Job {
-        return viewModelScope.launch(Dispatchers.IO) {
-            _isLoading.postValue(true)
+    // Room DB로부터 데이터를 받아온다.
+    fun getCoroutineTestLocalData() {
+        _coroutineTestLocalData.postValue(CoroutinesTestState.loading())
+        viewModelScope.launch(Dispatchers.IO) {
             val result = getCoroutineTestUseCase.getAllLocalData()
             result.onSuccess {
-                _coroutineTestDataFromLocal.postValue(it)
-                getNumOfDataInDb() // delete 완료후 다시 db에 들어있는 숫자를 센다.
+                _coroutineTestLocalData.postValue(CoroutinesTestState.success(it))
             }.onFailure {
-                _errorMsg.postValue(it.message)
+                _coroutineTestLocalData.postValue(CoroutinesTestState.error(it.message.toString()))
             }
-            _isLoading.postValue(false)
         }
     }
 
     /**
      * 데이터 넣기
+     * Room DB 숫자가 0이면 Remote에서 가져온다.
      */
     fun insertCoroutineTestToLocal() {
+        _coroutineTestLocalData.postValue(CoroutinesTestState.loading())
         viewModelScope.launch {
-            _isLoading.postValue(true)
-            if (_coroutineTestData.value != null) {
-                val data = _coroutineTestData.value
-                if (data!!.isNotEmpty()) {
-                    Log.d("LocalData", "isNotEmpty")
-                    Log.d("LocalData", "size : ${data.size}")
-
-                    val result = getCoroutineTestUseCase.saveAllDataToLocal(data)
-                    result.onSuccess {
-                        _successMsg.value = "정상적으로 들어갔습니다."
-                    }.onFailure { throwable -> _errorMsg.value = throwable.message }
-                } else {
-                    _errorMsg.value = "서버에서 데이터를 먼저 불러오세요"
-                    Log.d("LocalData", "서버에서 데이터를 먼저 불러오세요")
+            var remoteDataList: List<CoroutineTest> = mutableListOf()
+            if (_coroutineTestData.value == null || (_coroutineTestData.value != null && _coroutineTestData.value!!.data == null)) { // 만약 _coroutineTestData가 비어있다면
+                getCoroutineTestUseCase().onSuccess { data ->
+                    remoteDataList = data
                 }
             } else {
-                _errorMsg.value = "서버에서 데이터를 먼저 불러오세요"
-                Log.d("LocalData", "서버에서 데이터를 먼저 불러오세요")
+                remoteDataList = _coroutineTestData.value?.data!!
             }
-            _isLoading.postValue(false)
+            val result = getCoroutineTestUseCase.saveAllDataToLocal(remoteDataList)
+            result.onSuccess { data ->
+                _coroutineTestLocalData.postValue(CoroutinesTestState.success(data))
+            }.onFailure { error ->
+                _coroutineTestLocalData.postValue(CoroutinesTestState.error(error.message.toString()))
+            }
         }
     }
 
     fun deleteAllCoroutineDataFromLocal() {
+        _coroutineTestLocalData.postValue(CoroutinesTestState.loading())
         viewModelScope.launch {
-            _isLoading.postValue(true)
             val result = getCoroutineTestUseCase.deleteAlLDataFromLocal()
             result.onSuccess {
-                _successMsg.value = "정상적으로 삭제했습니다."
-                getCoroutineTestLocalData() // 지우고 나서 데이터 지워진것도 업데이트
-            }.onFailure { throwable -> _errorMsg.value = throwable.message }
-
-            _isLoading.postValue(false)
+                _coroutineTestLocalData.postValue(CoroutinesTestState.initialize())
+            }.onFailure {
+                _coroutineTestLocalData.postValue(CoroutinesTestState.error(it.message.toString()))
+            }
         }
     }
 
-    private suspend fun getNumOfDataInDb() {
-        Log.d("viewmodel", "getNumOfDataInDb start")
+    private suspend fun getNumOfDataInDb(callFromUI: Boolean) {
+        if (callFromUI) _numOfData.postValue(CoroutinesTestState.loading()) // UI에서 직접 불러오면 로딩창 보여준다.
         val result = getCoroutineTestUseCase.numOfDataInDb()
         result.onSuccess {
-            _numOfData.postValue(it)
-            Log.d("viewmodel", "getNumOfDataInDb - onSuccess")
+            _numOfData.postValue(CoroutinesTestState.success(it))
         }.onFailure { throwable ->
-            _errorMsg.postValue(throwable.message)
+            _numOfData.postValue(CoroutinesTestState.error(throwable.message.toString()))
         }
-        Log.d("viewmodel", "getNumOfDataInDb end")
     }
 }

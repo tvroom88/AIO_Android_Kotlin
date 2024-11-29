@@ -4,7 +4,7 @@ import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.entity.remote.CoroutineTestDto
 
 interface CoroutineTestRemoteDataSource {
-    suspend fun fetchAllCoroutineTestData(): List<CoroutineTestDto>
+    suspend fun fetchAllCoroutineTestData(): Result<List<CoroutineTestDto>>
 
     suspend fun fetchAllCoroutineCommentData(): Result<List<CoroutineCommentDto>>
 
