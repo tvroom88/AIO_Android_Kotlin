@@ -4,11 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutinesTestState
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.usecase.GetUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,6 +21,7 @@ class CoroutineTestViewModel @Inject constructor(
     private val getCoroutineTestUseCase: GetUseCase.GetCoroutineTestUseCase
 ) : ViewModel() {
 
+    // LiveData 사용
     private val _numOfData = MutableLiveData<CoroutinesTestState<Int>>()
     val numOfData: LiveData<CoroutinesTestState<Int>> get() = _numOfData
 
@@ -27,6 +32,13 @@ class CoroutineTestViewModel @Inject constructor(
         MutableLiveData<CoroutinesTestState<List<CoroutineTest>>>()
     val coroutineTestLocalData: LiveData<CoroutinesTestState<List<CoroutineTest>>> get() = _coroutineTestLocalData
 
+    // StateFlow 데이터
+    private val _coroutineCommentData: MutableStateFlow<CoroutinesTestState<List<CoroutineComment>>> =
+        MutableStateFlow(CoroutinesTestState.initialize())
+    val coroutineCommentData = _coroutineCommentData.asStateFlow()
+
+
+    // Retrofit으로 데이터 가져오는 부분
     fun getCoroutineTestData() = viewModelScope.launch(Dispatchers.IO) {
         _coroutineTestData.postValue(CoroutinesTestState.loading())
         val result = getCoroutineTestUseCase()
@@ -34,6 +46,19 @@ class CoroutineTestViewModel @Inject constructor(
             _coroutineTestData.postValue(CoroutinesTestState.success(it))
         }.onFailure {
             _coroutineTestData.postValue(CoroutinesTestState.error(it.message.toString()))
+        }
+    }
+
+    fun getCoroutineCommentData() {
+        _coroutineCommentData.value = CoroutinesTestState.loading()
+        viewModelScope.launch {
+            getCoroutineTestUseCase.getCoroutineCommentData().collect { result ->
+                result.onSuccess {
+                    _coroutineCommentData.value = CoroutinesTestState.success(it)
+                }.onFailure {
+                    _coroutineCommentData.value = CoroutinesTestState.error(it.message.toString())
+                }
+            }
         }
     }
 

@@ -69,6 +69,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_architecture_data_type" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_coroutine_comment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_test_load_data_from_remote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_architecture_data_type" />
+
         <!--   remote로 데이터 불러오는 부분     -->
         <TextView
             android:id="@+id/tv_coroutine_test_remote"
@@ -91,6 +104,18 @@
             android:text="Load Data"
             app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_test_load_data_from_Local"
             app:layout_constraintStart_toEndOf="@+id/tv_coroutine_test_remote" />
+
+        <Button
+            android:id="@+id/btn_coroutine_comment_load_data_from_remote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/black"
+            android:text="Load Data"
+            app:layout_constraintBottom_toTopOf="@+id/btn_coroutine_test_load_data_from_Local"
+            app:layout_constraintStart_toEndOf="@+id/btn_coroutine_test_load_data_from_remote" />
+
 
 
         <!--   local에서 데이터 불러오는 부분     -->

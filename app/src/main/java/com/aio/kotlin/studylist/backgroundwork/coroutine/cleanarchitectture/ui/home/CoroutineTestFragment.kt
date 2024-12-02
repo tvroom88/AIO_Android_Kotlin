@@ -3,16 +3,21 @@ package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentCoroutineTestBinding
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutineStatus
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.adapter.CoroutineCommentAdapter
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.adapter.CoroutineTestAdapter
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -44,16 +49,25 @@ class CoroutineTestFragment :
 
     private val coroutineTestViewModel by viewModels<CoroutineTestViewModel>()
     private val coroutineTestAdapter by lazy { CoroutineTestAdapter() }
+    private val coroutineCommentAdapter by lazy { CoroutineCommentAdapter() }
 
     override fun initContentInOnViewCreated() {
         binding?.apply {
             coroutineTestVM = coroutineTestViewModel
 
+            // Remote Data 가져오는 부분
             btnCoroutineTestLoadDataFromRemote.setOnClickListener {
                 tvCoroutineArchitectureDataType.text = "Remote Data"
                 coroutineTestViewModel.getCoroutineTestData()
             }
 
+            btnCoroutineCommentLoadDataFromRemote.setOnClickListener {
+                tvCoroutineArchitectureDataType.text = "Remote Data"
+                coroutineTestViewModel.getCoroutineCommentData()
+            }
+
+
+            // Local Data 가져오는 부분
             btnCoroutineTestLoadDataFromLocal.setOnClickListener {
                 tvCoroutineArchitectureDataType.text = "Local Data"
                 coroutineTestViewModel.getCoroutineTestLocalData()
@@ -78,8 +92,61 @@ class CoroutineTestFragment :
                 }
                 addItemDecoration(ExampleItemDecoration(30, 60, 60))
             }
+
+            rvCoroutineComment.run {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+                adapter = coroutineCommentAdapter.apply {
+                    setItemList(null) // RecyclerView에 데이터 추가
+                }
+                addItemDecoration(ExampleItemDecoration(30, 60, 60))
+            }
         }
 
+        initObserver()
+    }
+
+    private fun showLoadedData(data: List<CoroutineTest>?) {
+        binding?.apply {
+            if (data != null) {
+                coroutineTestAdapter.setItemList(data.toMutableList())
+            } else {
+                coroutineTestAdapter.setItemList(null)
+            }
+        }
+    }
+
+    private fun showLoadedCommentData(data: List<CoroutineComment>?) {
+        binding?.apply {
+            if (data != null) {
+                coroutineCommentAdapter.setItemList(data.toMutableList())
+            } else {
+                coroutineCommentAdapter.setItemList(null)
+            }
+        }
+    }
+
+    private fun onOffLoadingImage(flag: Boolean) {
+        binding?.apply {
+            if (flag) pbCoroutineTestLoading.visibility = View.VISIBLE
+            else pbCoroutineTestLoading.visibility = View.GONE
+        }
+    }
+
+    private fun showRvTest() {
+        binding?.rvCoroutineTest?.visibility = View.VISIBLE
+        binding?.rvCoroutineComment?.visibility = View.GONE
+    }
+
+    private fun showRvComment() {
+        binding?.rvCoroutineComment?.visibility = View.VISIBLE
+        binding?.rvCoroutineTest?.visibility = View.GONE
+    }
+
+    private fun initObserver() {
         coroutineTestViewModel.apply {
             coroutineTestData.observe(viewLifecycleOwner) {
                 when (it.status) {
@@ -88,6 +155,7 @@ class CoroutineTestFragment :
                     }
 
                     CoroutineStatus.SUCCESS -> {
+                        showRvTest()
                         onOffLoadingImage(false)
                         showLoadedData(it.data)
                     }
@@ -110,6 +178,7 @@ class CoroutineTestFragment :
                     }
 
                     CoroutineStatus.SUCCESS -> {
+                        showRvTest()
                         onOffLoadingImage(false)
                         showLoadedData(it.data)
                     }
@@ -131,28 +200,37 @@ class CoroutineTestFragment :
                     binding?.tvCoroutineArchitectureDataType?.text = "Local Data, num of data : $it"
                 }
             }
-        }
-    }
 
-    private fun showLoadedData(data: List<CoroutineTest>?) {
-        binding?.apply {
-            if (data != null) {
-                coroutineTestAdapter.setItemList(data.toMutableList())
-            } else {
-                coroutineTestAdapter.setItemList(null)
+            // Flow 부분 시작
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    launch {
+                        coroutineCommentData.collect {
+                            when (it.status) {
+                                CoroutineStatus.LOADING -> {
+                                    onOffLoadingImage(true)
+                                }
+
+                                CoroutineStatus.SUCCESS -> {
+                                    showRvComment()
+                                    onOffLoadingImage(false)
+                                    showLoadedCommentData(it.data)
+                                }
+
+                                CoroutineStatus.ERROR -> {
+                                    onOffLoadingImage(false)
+                                }
+
+                                CoroutineStatus.RELOAD -> {
+                                    onOffLoadingImage(false)
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
-    }
-
-    private fun onOffLoadingImage(flag: Boolean) {
-        binding?.apply {
-            if (flag) pbCoroutineTestLoading.visibility = View.VISIBLE
-            else pbCoroutineTestLoading.visibility = View.GONE
-        }
-    }
-
-    private fun initObserver() {
-
     }
 
 }

@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="coroutineTest"
-            type="com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest" />
+            name="coroutineComment"
+            type="com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{String.valueOf(coroutineTest.id)}"
+            android:text="@{String.valueOf(coroutineComment.id)}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:text="@{coroutineTest.title}"
+            android:text="@{coroutineComment.body}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_rx_retrofit_item_id"
