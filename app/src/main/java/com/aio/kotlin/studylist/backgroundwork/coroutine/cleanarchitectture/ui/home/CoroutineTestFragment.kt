@@ -1,5 +1,6 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -67,9 +68,9 @@ class CoroutineTestFragment :
             }
 
 
-            // Local Data 가져오는 부분
+            // Local Test Data 가져오는 부분
             btnCoroutineTestLoadDataFromLocal.setOnClickListener {
-                tvCoroutineArchitectureDataType.text = "Local Data"
+                tvCoroutineArchitectureDataType.text = "Local Comment Data"
                 coroutineTestViewModel.getCoroutineTestLocalData()
             }
 
@@ -79,6 +80,15 @@ class CoroutineTestFragment :
 
             btnCoroutineTestDeleteAllDataFromLocal.setOnClickListener {
                 coroutineTestViewModel.deleteAllCoroutineDataFromLocal()
+            }
+
+            // Local Comment Data 가져오는 부분
+            btnCoroutineCommentLoadDataFromLocal.setOnClickListener {
+                coroutineTestViewModel.getAllCommentData()
+            }
+
+            btnCoroutineTestInsertDataToLocal.setOnClickListener {
+                coroutineTestViewModel.insertCoroutineCommentToLocal()
             }
 
             rvCoroutineTest.run {
@@ -120,6 +130,7 @@ class CoroutineTestFragment :
     }
 
     private fun showLoadedCommentData(data: List<CoroutineComment>?) {
+        Log.d("herehere", "herehere")
         binding?.apply {
             if (data != null) {
                 coroutineCommentAdapter.setItemList(data.toMutableList())
@@ -131,8 +142,8 @@ class CoroutineTestFragment :
 
     private fun onOffLoadingImage(flag: Boolean) {
         binding?.apply {
-            if (flag) pbCoroutineTestLoading.visibility = View.VISIBLE
-            else pbCoroutineTestLoading.visibility = View.GONE
+            if (flag) pbCoroutineLoading.visibility = View.VISIBLE
+            else pbCoroutineLoading.visibility = View.GONE
         }
     }
 
@@ -144,6 +155,10 @@ class CoroutineTestFragment :
     private fun showRvComment() {
         binding?.rvCoroutineComment?.visibility = View.VISIBLE
         binding?.rvCoroutineTest?.visibility = View.GONE
+    }
+
+    private fun showToastMessage(msg:String?){
+        Toast.makeText(activityContext, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun initObserver() {
@@ -206,6 +221,31 @@ class CoroutineTestFragment :
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     launch {
                         coroutineCommentData.collect {
+                            when (it.status) {
+                                CoroutineStatus.LOADING -> {
+                                    onOffLoadingImage(true)
+                                }
+
+                                CoroutineStatus.SUCCESS -> {
+                                    showRvComment()
+                                    onOffLoadingImage(false)
+                                    showLoadedCommentData(it.data)
+                                }
+
+                                CoroutineStatus.ERROR -> {
+                                    onOffLoadingImage(false)
+                                    showToastMessage(it.message)
+                                }
+
+                                CoroutineStatus.RELOAD -> {
+                                    onOffLoadingImage(false)
+                                }
+                            }
+                        }
+                    }
+
+                    launch {
+                        coroutineCommentDataFromLocal.collect {
                             when (it.status) {
                                 CoroutineStatus.LOADING -> {
                                     onOffLoadingImage(true)

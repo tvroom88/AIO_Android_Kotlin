@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GetUseCase {
     interface GetCoroutineTestUseCase {
-        
+
         // Remote function들
         suspend operator fun invoke(): Result<List<CoroutineTest>>
         fun getCoroutineCommentData(): Flow<Result<List<CoroutineComment>>>
@@ -17,5 +17,7 @@ interface GetUseCase {
         suspend fun saveAllDataToLocal(list: List<CoroutineTest>): Result<List<CoroutineTest>>
         suspend fun deleteAlLDataFromLocal(): Result<Boolean>
         suspend fun numOfDataInDb(): Result<Int>
+        suspend fun saveAllCommentDataToLocal(list: List<CoroutineComment>): Result<List<CoroutineComment>>
+
     }
 }

@@ -43,4 +43,10 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
     override suspend fun numOfDataInDb(): Result<Int> {
         return coroutineTestRepository.numOfDataInDb()
     }
+
+
+    override suspend fun saveAllCommentDataToLocal(list: List<CoroutineComment>): Result<List<CoroutineComment>> {
+        return coroutineTestRepository.insertAllCommentToLocal(list)
+    }
+
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.repository.CoroutineTestRepository
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.teststate.CoroutinesTestState
@@ -12,13 +13,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CoroutineTestViewModel @Inject constructor(
-    private val getCoroutineTestUseCase: GetUseCase.GetCoroutineTestUseCase
+    private val getCoroutineTestUseCase: GetUseCase.GetCoroutineTestUseCase,
+    private val coroutineTestRepository: CoroutineTestRepository
 ) : ViewModel() {
 
     // LiveData 사용
@@ -120,4 +121,40 @@ class CoroutineTestViewModel @Inject constructor(
             _numOfData.postValue(CoroutinesTestState.error(throwable.message.toString()))
         }
     }
+
+
+    private val _coroutineCommentDataFromLocal: MutableStateFlow<CoroutinesTestState<List<CoroutineComment>>> =
+        MutableStateFlow(CoroutinesTestState.initialize())
+
+    val coroutineCommentDataFromLocal = _coroutineCommentDataFromLocal.asStateFlow()
+
+    fun getAllCommentData() {
+        _coroutineCommentDataFromLocal.value = CoroutinesTestState.loading()
+        viewModelScope.launch {
+            val result = coroutineTestRepository.getAllCommentFromLocal()
+            result.onSuccess { flowData ->
+                flowData.collect { data ->
+                    _coroutineCommentDataFromLocal.value = CoroutinesTestState.success(data)
+                }
+            }.onFailure { err ->
+                _coroutineCommentDataFromLocal.value = CoroutinesTestState.error(err.toString())
+            }
+        }
+    }
+
+    fun insertCoroutineCommentToLocal() {
+
+        viewModelScope.launch {
+            if (!_coroutineCommentData.value.data.isNullOrEmpty()) {
+                val result = coroutineTestRepository.insertAllCommentToLocal(_coroutineCommentData.value.data!!)
+                result.onSuccess {
+                    data -> _coroutineCommentDataFromLocal.value = CoroutinesTestState.success(data)
+                }.onFailure { err ->
+                    _coroutineCommentDataFromLocal.value = CoroutinesTestState.error(err.toString())
+                }
+            }
+        }
+    }
+
+
 }

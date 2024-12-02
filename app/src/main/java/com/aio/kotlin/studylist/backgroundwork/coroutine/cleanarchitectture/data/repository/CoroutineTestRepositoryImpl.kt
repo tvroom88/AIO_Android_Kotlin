@@ -8,6 +8,7 @@ import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.doma
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
@@ -36,6 +37,18 @@ class CoroutineTestRepositoryImpl @Inject constructor(
     override suspend fun numOfDataInDb(): Result<Int> {
         return coroutineTestLocalDataSource.getDataCount()
     }
+
+
+    // Local Comment
+    override fun getAllCommentFromLocal() : Result<Flow<List<CoroutineComment>>>{
+        return coroutineTestLocalDataSource.getAllCommentData().map { it.map { f -> f.map { t -> t.toDomainModel() }  } }
+    }
+
+    override suspend fun insertAllCommentToLocal(list: List<CoroutineComment>) : Result<List<CoroutineComment>>{
+        val entityList = list.map { it.toEntity() }
+        return coroutineTestLocalDataSource.insertAllCommentData(entityList).map { it.map { f -> f.toDomainModel() } }
+    }
+
 
     // Remote(Retrofit 으로)에서 가져오는 부분
     override suspend fun getAllCoroutineTestResultDataFromRemote(): Result<List<CoroutineTest>> {

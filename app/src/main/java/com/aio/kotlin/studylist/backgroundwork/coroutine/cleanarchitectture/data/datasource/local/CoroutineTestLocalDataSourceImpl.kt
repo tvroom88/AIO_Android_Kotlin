@@ -1,10 +1,16 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.datasource.local
 
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.database.CoroutineCommentDao
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.database.CoroutineTestDao
+import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.entity.local.CoroutineCommentEntity
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.entity.local.CoroutineTestEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CoroutineTestLocalDataSourceImpl @Inject constructor(private val coroutineTestDao: CoroutineTestDao) :
+class CoroutineTestLocalDataSourceImpl @Inject constructor(
+    private val coroutineTestDao: CoroutineTestDao,
+    private val coroutineCommentDao: CoroutineCommentDao
+) :
     CoroutineTestLocalDataSource {
     override suspend fun insertData(coroutineTestEntity: CoroutineTestEntity): Result<CoroutineTestEntity> =
         try {
@@ -65,4 +71,27 @@ class CoroutineTestLocalDataSourceImpl @Inject constructor(private val coroutine
         } catch (e: Exception) {
             Result.failure(e)
         }
+
+
+    // Comment Data
+    override fun getAllCommentData(): Result<Flow<List<CoroutineCommentEntity>>> =
+        try {
+            val result = coroutineCommentDao.getAllData()
+            Result.success(result)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+
+
+    override suspend fun insertAllCommentData(list: List<CoroutineCommentEntity>): Result<List<CoroutineCommentEntity>> =
+        try {
+            coroutineCommentDao.insertAllData(list)
+            Result.success(list)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+
+    override suspend fun deleteAllCommentData(): Result<Boolean> {
+        return Result.success(true)
+    }
 }
