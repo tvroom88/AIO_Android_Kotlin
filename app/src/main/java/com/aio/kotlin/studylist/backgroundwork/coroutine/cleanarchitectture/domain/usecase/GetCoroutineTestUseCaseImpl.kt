@@ -36,7 +36,7 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
         return coroutineTestRepository.insertAllDataToLocal(list)
     }
 
-    override suspend fun deleteAlLDataFromLocal(): Result<Boolean> {
+    override suspend fun deleteAllDataFromLocal(): Result<Boolean> {
         return coroutineTestRepository.removeAllData()
     }
 
@@ -47,6 +47,10 @@ class GetCoroutineTestUseCaseImpl @Inject constructor(
 
     override suspend fun saveAllCommentDataToLocal(list: List<CoroutineComment>): Result<List<CoroutineComment>> {
         return coroutineTestRepository.insertAllCommentToLocal(list)
+    }
+
+    override suspend fun deleteAllCommentDataFromLocal(): Result<Boolean> {
+        return coroutineTestRepository.removeAllCommentData()
     }
 
 }

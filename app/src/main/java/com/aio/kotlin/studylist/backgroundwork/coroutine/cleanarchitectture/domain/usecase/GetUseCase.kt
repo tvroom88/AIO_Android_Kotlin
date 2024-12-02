@@ -15,9 +15,10 @@ interface GetUseCase {
         // Local function들
         suspend fun getAllLocalData(): Result<List<CoroutineTest>>
         suspend fun saveAllDataToLocal(list: List<CoroutineTest>): Result<List<CoroutineTest>>
-        suspend fun deleteAlLDataFromLocal(): Result<Boolean>
+        suspend fun deleteAllDataFromLocal(): Result<Boolean>
         suspend fun numOfDataInDb(): Result<Int>
-        suspend fun saveAllCommentDataToLocal(list: List<CoroutineComment>): Result<List<CoroutineComment>>
 
+        suspend fun saveAllCommentDataToLocal(list: List<CoroutineComment>): Result<List<CoroutineComment>>
+        suspend fun deleteAllCommentDataFromLocal(): Result<Boolean>
     }
 }

@@ -49,6 +49,9 @@ class CoroutineTestRepositoryImpl @Inject constructor(
         return coroutineTestLocalDataSource.insertAllCommentData(entityList).map { it.map { f -> f.toDomainModel() } }
     }
 
+    override suspend fun removeAllCommentData(): Result<Boolean> {
+        return coroutineTestLocalDataSource.deleteAllCommentData()
+    }
 
     // Remote(Retrofit 으로)에서 가져오는 부분
     override suspend fun getAllCoroutineTestResultDataFromRemote(): Result<List<CoroutineTest>> {

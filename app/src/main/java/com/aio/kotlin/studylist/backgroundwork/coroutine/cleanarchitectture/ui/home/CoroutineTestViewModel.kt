@@ -1,5 +1,6 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -103,7 +104,7 @@ class CoroutineTestViewModel @Inject constructor(
     fun deleteAllCoroutineDataFromLocal() {
         _coroutineTestLocalData.postValue(CoroutinesTestState.loading())
         viewModelScope.launch {
-            val result = getCoroutineTestUseCase.deleteAlLDataFromLocal()
+            val result = getCoroutineTestUseCase.deleteAllDataFromLocal()
             result.onSuccess {
                 _coroutineTestLocalData.postValue(CoroutinesTestState.initialize())
             }.onFailure {
@@ -143,18 +144,33 @@ class CoroutineTestViewModel @Inject constructor(
     }
 
     fun insertCoroutineCommentToLocal() {
-
         viewModelScope.launch {
             if (!_coroutineCommentData.value.data.isNullOrEmpty()) {
                 val result = coroutineTestRepository.insertAllCommentToLocal(_coroutineCommentData.value.data!!)
                 result.onSuccess {
                     data -> _coroutineCommentDataFromLocal.value = CoroutinesTestState.success(data)
+                    Log.d("CoroutineTestViewModel", "insertCoroutineCommentToLocal - onSuccess")
                 }.onFailure { err ->
                     _coroutineCommentDataFromLocal.value = CoroutinesTestState.error(err.toString())
+                    Log.d("CoroutineTestViewModel", "insertCoroutineCommentToLocal - onFailure")
                 }
             }
         }
     }
 
+    fun deleteAllCoroutineCommentDataFromLocal() {
+        _coroutineTestLocalData.postValue(CoroutinesTestState.loading())
+        viewModelScope.launch {
+            val result = getCoroutineTestUseCase.deleteAllCommentDataFromLocal()
+            result.onSuccess {
+                _coroutineTestLocalData.postValue(CoroutinesTestState.initialize())
+                Log.d("CoroutineTestViewModel", "deleteAllCoroutineCommentDataFromLocal - onSuccess")
 
+            }.onFailure {
+                _coroutineTestLocalData.postValue(CoroutinesTestState.error(it.message.toString()))
+                Log.d("CoroutineTestViewModel", "deleteAllCoroutineCommentDataFromLocal - onFailure")
+
+            }
+        }
+    }
 }

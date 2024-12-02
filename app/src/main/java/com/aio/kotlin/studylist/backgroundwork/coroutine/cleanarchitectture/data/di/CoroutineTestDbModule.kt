@@ -32,8 +32,7 @@ class CoroutineTestDbModule {
             appContext,
             CoroutineTestDatabase::class.java,
             CoroutineTestDatabase.DATABASE_NAME
-        ).fallbackToDestructiveMigration() // 마이그레이션 추가
-            .build()
+        ).build()
     }
 
     @Singleton

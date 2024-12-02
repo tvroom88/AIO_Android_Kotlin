@@ -91,7 +91,12 @@ class CoroutineTestLocalDataSourceImpl @Inject constructor(
             Result.failure(e)
         }
 
-    override suspend fun deleteAllCommentData(): Result<Boolean> {
-        return Result.success(true)
-    }
+    override suspend fun deleteAllCommentData(): Result<Boolean> =
+        try {
+            coroutineCommentDao.deleteAll()
+            Result.success(true)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+
 }

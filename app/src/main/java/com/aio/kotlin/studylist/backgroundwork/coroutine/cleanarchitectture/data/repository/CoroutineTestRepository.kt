@@ -23,6 +23,8 @@ interface CoroutineTestRepository {
 
     suspend fun insertAllCommentToLocal(list: List<CoroutineComment>) : Result<List<CoroutineComment>>
 
+    suspend fun removeAllCommentData(): Result<Boolean>
+    
     // Remote
     suspend fun getAllCoroutineTestResultDataFromRemote(): Result<List<CoroutineTest>>
 

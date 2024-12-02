@@ -87,8 +87,12 @@ class CoroutineTestFragment :
                 coroutineTestViewModel.getAllCommentData()
             }
 
-            btnCoroutineTestInsertDataToLocal.setOnClickListener {
+            btnCoroutineCommentInsertDataToLocal.setOnClickListener {
                 coroutineTestViewModel.insertCoroutineCommentToLocal()
+            }
+
+            btnCoroutineCommentDeleteAllDataFromLocal.setOnClickListener {
+                coroutineTestViewModel.deleteAllCoroutineCommentDataFromLocal()
             }
 
             rvCoroutineTest.run {
@@ -130,7 +134,6 @@ class CoroutineTestFragment :
     }
 
     private fun showLoadedCommentData(data: List<CoroutineComment>?) {
-        Log.d("herehere", "herehere")
         binding?.apply {
             if (data != null) {
                 coroutineCommentAdapter.setItemList(data.toMutableList())
@@ -239,6 +242,7 @@ class CoroutineTestFragment :
 
                                 CoroutineStatus.RELOAD -> {
                                     onOffLoadingImage(false)
+                                    showLoadedCommentData(it.data)
                                 }
                             }
                         }
@@ -263,6 +267,7 @@ class CoroutineTestFragment :
 
                                 CoroutineStatus.RELOAD -> {
                                     onOffLoadingImage(false)
+                                    showLoadedCommentData(it.data)
                                 }
                             }
                         }

@@ -209,7 +209,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_coroutine_test_insert_data_to_Local" />
 
-
         <ProgressBar
             android:id="@+id/pb_coroutine_loading"
             style="?android:attr/progressBarStyle"
