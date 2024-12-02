@@ -5,6 +5,7 @@ import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.backgroundwork.coroutine.CoroutineBuilderFragment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.CoroutineFlowFragment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home.CoroutineTestFragment
+import com.aio.kotlin.studylist.backgroundwork.coroutine.stateflow.CoroutineStateFlowFragment
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.baseclasses.RxJavaBaseClassesFragment
 import com.aio.kotlin.studylist.backgroundwork.rx.basic.RxJavaBasicFragment
@@ -81,7 +82,14 @@ class AsyncExample {
                     3,
                     "https://from-android-to-server.tistory.com/190",
                     "https://from-android-to-server.tistory.com/191"
-                )
+                ),
+                StudyFragmentList(
+                    "Coroutine StateFlow",
+                    CoroutineStateFlowFragment().getFullFragmentName(),
+                    3,
+                    "https://from-android-to-server.tistory.com/192",
+                    "https://from-android-to-server.tistory.com/193"
+                ),
             )
         )
         return asyncCategory
