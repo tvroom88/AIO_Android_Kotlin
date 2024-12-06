@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".studylist.architecturepattern.MvvmSimpleExample">
+    tools:context=".studylist.architecturepattern.mvvm.simple.MvvmSimpleExample">
 
     <Button
         android:id="@+id/btn_mvvmsimple_minus"

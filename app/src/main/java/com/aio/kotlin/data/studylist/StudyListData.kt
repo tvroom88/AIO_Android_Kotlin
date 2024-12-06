@@ -22,6 +22,7 @@ class StudyListData {
 
             addDI(),
             AsyncExample().addAsyncExample(),
+            addAppTest(),
 //            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
 //            addComposeable(),
 
@@ -101,5 +102,20 @@ class StudyListData {
             )
         )
         return jetpackCategory
+    }
+
+    private fun addAppTest(): StudyCategory {
+        val appTest = StudyCategory("Appication Test")
+//        appTest.studyList.addAll(
+//            mutableListOf(
+//                StudyList.StudyFragmentList(
+//                    "Basic Concept of App Test",
+//                    EspressoWoUnitTestFragment().getFullFragmentName(),
+//                    2,
+//                    "https://from-android-to-server.tistory.com/194"
+//                ),
+//            )
+//        )
+        return appTest
     }
 }

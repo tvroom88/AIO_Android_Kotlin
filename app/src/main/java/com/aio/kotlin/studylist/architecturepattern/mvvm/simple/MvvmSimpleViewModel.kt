@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.architecturepattern
+package com.aio.kotlin.studylist.architecturepattern.mvvm.simple
 
 import android.util.Log
 import androidx.lifecycle.LiveData
