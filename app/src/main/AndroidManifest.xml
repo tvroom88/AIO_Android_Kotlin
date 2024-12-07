@@ -11,14 +11,17 @@
         android:name=".AioApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/main_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AIO_Android_Kotlin"
-        android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
+        <activity
+            android:name=".studylist.test.UiTestActivity"
+            android:exported="false" />
         <!-- 앱 시작화면 -->
         <activity
             android:name=".activities.MainActivity"
@@ -33,12 +36,10 @@
             android:name=".activities.AndroidStudyActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" /> <!-- Detail 화면 -->
-
         <activity
             android:name=".activities.DetailActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:exported="false" />
-
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".studylist.jetpack.binding.databinding.DataBindingExampleActivity"
             android:exported="false" />
@@ -47,16 +48,13 @@
             android:exported="false" />
         <activity
             android:name=".studylist.jetpack.compose.layouts.ComposeExample"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".studylist.jetpack.compose.layouts.ComposeALayouts"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".studylist.jetpack.compose.layouts.ComposeBList"
-            android:exported="true"/>
-        <!-- FCM -->
-
+            android:exported="true" /> <!-- FCM -->
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:exported="false">
