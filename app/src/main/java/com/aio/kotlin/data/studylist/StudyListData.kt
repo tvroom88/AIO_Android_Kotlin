@@ -3,6 +3,8 @@ package com.aio.kotlin.data.studylist
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
+import com.aio.kotlin.studylist.architecturepattern.mvc.SimpleMvcPatternFragment
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.MvvmAdvancedExample
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
@@ -22,7 +24,7 @@ class StudyListData {
 
             addDI(),
             AsyncExample().addAsyncExample(),
-            addAppTest(),
+            addArchitecture(),
 //            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
 //            addComposeable(),
 
@@ -104,18 +106,26 @@ class StudyListData {
         return jetpackCategory
     }
 
-    private fun addAppTest(): StudyCategory {
-        val appTest = StudyCategory("Appication Test")
-//        appTest.studyList.addAll(
-//            mutableListOf(
-//                StudyList.StudyFragmentList(
-//                    "Basic Concept of App Test",
-//                    EspressoWoUnitTestFragment().getFullFragmentName(),
-//                    2,
-//                    "https://from-android-to-server.tistory.com/194"
-//                ),
-//            )
-//        )
-        return appTest
+
+    private fun addArchitecture(): StudyCategory {
+        val appArchitectrue = StudyCategory("Android Architecture")
+        appArchitectrue.studyList.addAll(
+            mutableListOf(
+                StudyList.StudyFragmentList(
+                    "Basic Concept of App Test",
+                    SimpleMvcPatternFragment().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/197"
+                ),
+                StudyFragmentList(
+                    "Basic Concept of App Test",
+                    MvvmAdvancedExample().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/197"
+                ),
+            )
+        )
+
+        return appArchitectrue
     }
 }
