@@ -112,13 +112,13 @@ class StudyListData {
         appArchitectrue.studyList.addAll(
             mutableListOf(
                 StudyList.StudyFragmentList(
-                    "Basic Concept of App Test",
+                    "MVC",
                     SimpleMvcPatternFragment().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/197"
                 ),
                 StudyFragmentList(
-                    "Basic Concept of App Test",
+                    "MVVM",
                     MvvmAdvancedExample().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/197"
