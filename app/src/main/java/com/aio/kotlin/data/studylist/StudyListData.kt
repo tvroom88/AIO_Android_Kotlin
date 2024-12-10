@@ -4,6 +4,7 @@ import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.architecturepattern.mvc.SimpleMvcPatternFragment
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.MvvmAdvancedExample
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
@@ -116,8 +117,15 @@ class StudyListData {
                     2,
                     "https://from-android-to-server.tistory.com/197"
                 ),
+                StudyFragmentList(
+                    "Basic Concept of App Test",
+                    MvvmAdvancedExample().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/197"
+                ),
             )
         )
+
         return appArchitectrue
     }
 }
