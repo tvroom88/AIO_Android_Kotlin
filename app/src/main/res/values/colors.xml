@@ -41,4 +41,9 @@
     <color name="pressed">#B3CA6F</color>
     <color name="non_pressed">#4D5052</color>
 
+
+    <!--  app architecture  -->
+    <color name="pokemon_background">#2B292B</color>
+    <color name="white_12">#fafafa</color>
+
 </resources>

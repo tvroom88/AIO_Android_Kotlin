@@ -1,11 +1,8 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.repository
 
-import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.mapper.toDomainModel
-import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.data.mapper.toEntity
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineComment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 interface CoroutineTestRepository {
 

@@ -7,16 +7,35 @@
         <!-- 여기에 변수와 인클루드할 레이아웃 파일을 선언합니다. -->
         <variable
             name="viewModel"
-            type="com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.MvvmAdvancedViewModel" />
+            type="com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.MvvmAdvancedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.AndroidStudyActivity">
+        android:background="@color/pokemon_background"
+        android:clipToPadding="false">
 
-        <TextView
-            android:id="@+id/textView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mvvm_advanced_pokemon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:padding="6dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbVertical="@drawable/pokemon_scrollbar"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:spanCount="2"
+            tools:listitem="@layout/item_pokemon" />
+
+        <ProgressBar
+            android:id="@+id/pb_mvvm_advanced_loading"
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
