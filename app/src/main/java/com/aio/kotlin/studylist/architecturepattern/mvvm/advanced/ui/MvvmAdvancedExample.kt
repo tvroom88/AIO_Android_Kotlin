@@ -1,8 +1,10 @@
 package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -39,7 +41,7 @@ import kotlinx.coroutines.launch
  *  ui :
  *  - Fragment & ViewModel (LiveData & Flow)
  *  - RecyclerView를 이용할 예정
- * 
+ *
  * Data Stream : LiveData, Flow 사용
  */
 @AndroidEntryPoint
@@ -57,18 +59,32 @@ class MvvmAdvancedExample :
         initObserver()
     }
 
-    private fun initView(){
+    private fun initView() {
         binding?.apply {
-            rvMvvmAdvancedPokemon.run {
-                layoutManager = LinearLayoutManager(
+            rvMvvmAdvancedPokemon.let {
+                it.layoutManager = LinearLayoutManager(
                     context,
                     LinearLayoutManager.VERTICAL,
                     false
                 )
-                adapter = pokemonAdapter.apply {
+                it.adapter = pokemonAdapter.apply {
                     setItemList(null) // RecyclerView에 데이터 추가
                 }
-                addItemDecoration(ExampleItemDecoration(30, 60, 60))
+                it.addItemDecoration(ExampleItemDecoration(30, 60, 60))
+
+                /**
+                 *     private val isLoading: () -> Boolean,
+                 *     private val loadMore: (Int) -> Unit,
+                 *     private val onLast: () -> Boolean = { true }
+                 */
+                it.addOnScrollListener(
+                    RecyclerViewPaginator(
+                        it,
+                        { progressBarIsVisible() },
+                        { mvvmAdvancedViewModel.fetchNextPokemonList() },
+                        { false }
+                    )
+                )
             }
         }
     }
@@ -77,29 +93,44 @@ class MvvmAdvancedExample :
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    mvvmAdvancedViewModel.pokemonList.collect{
-                        when(it.status){
-                            PokemonUiStatus.LOADING -> {showProgressBar()}
+                    mvvmAdvancedViewModel.pokemonList.collect {
+                        when (it.status) {
+                            PokemonUiStatus.LOADING -> {
+                                showProgressBar()
+                            }
+
                             PokemonUiStatus.SUCCESS -> {
                                 showLoadedData(it.data)
                                 hideProgressBar()
                             }
+
                             PokemonUiStatus.ERROR -> {}
                             PokemonUiStatus.RELOAD -> {}
                         }
                     }
+                }
+                launch {
+                    mvvmAdvancedViewModel.pokemonFetchingIndex.collect {
+                        Log.d("pagepage", "page : $it")
+                        mvvmAdvancedViewModel.fetchPokemonList()
+                    }
+
                 }
             }
         }
     }
 
 
-    private fun showProgressBar(){
+    private fun showProgressBar() {
         binding?.pbMvvmAdvancedLoading?.visibility = View.VISIBLE
     }
 
-    private fun hideProgressBar(){
+    private fun hideProgressBar() {
         binding?.pbMvvmAdvancedLoading?.visibility = View.INVISIBLE
+    }
+
+    private fun progressBarIsVisible(): Boolean {
+        return binding?.pbMvvmAdvancedLoading?.isVisible ?: false
     }
 
     private fun showLoadedData(data: List<Pokemon>?) {

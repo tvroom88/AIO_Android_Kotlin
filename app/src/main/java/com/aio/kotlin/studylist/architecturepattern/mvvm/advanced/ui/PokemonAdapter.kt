@@ -1,6 +1,7 @@
 package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.ViewGroup
 import com.aio.kotlin.R
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
@@ -17,9 +18,12 @@ class PokemonAdapter :
     override fun getViewHolder(parent: ViewGroup) = StudyListViewHolder(parent)
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItemList(mutableList: MutableList<Pokemon>?) {
-        items = mutableList ?: mutableListOf()
-        notifyDataSetChanged()
+    fun setItemList(newItems: MutableList<Pokemon>?) {
+        if (!newItems.isNullOrEmpty()) {
+            items.addAll(newItems)
+            Log.d("items", "items size after adding: ${items.size}")
+            notifyDataSetChanged() // 모든 데이터 변경 알림
+        }
     }
 
     /**
@@ -33,11 +37,11 @@ class PokemonAdapter :
         @SuppressLint("UseCompatLoadingForDrawables")
         override fun bind(data: Pokemon) {
             binding.pokemon = data // databinding으로 데이터 세팅. xml에서 title 세팅 예정
+            Log.d("items", "data : ${data.name} ")
 
-//            // Glide를 사용해 이미지 로드
-//            Glide.with(binding.root.context)
-//                .load(data.getImageUrl())              // Pokemon의 이미지 URL
-//                .into(binding.ivMvvmAdvancedPokemon)    // ImageView에 로드
+            Glide.with(binding.root.context)
+                .load(data.getImageUrl())              // Pokemon의 이미지 URL
+                .into(binding.ivMvvmAdvancedPokemon)    // ImageView에 로드
         }
 
         override fun recycled() {}

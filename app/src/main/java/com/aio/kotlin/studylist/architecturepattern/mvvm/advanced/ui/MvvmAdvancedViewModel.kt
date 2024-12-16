@@ -1,5 +1,6 @@
 package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
@@ -23,10 +24,10 @@ import javax.inject.Inject
 class MvvmAdvancedViewModel @Inject constructor(
     private val pokemonRepository: PokemonRepository
 ) : ViewModel() {
+
+    // 포켓몬 리스트
     private val _pokemonList: MutableStateFlow<PokemonUiState<List<Pokemon>>> =
         MutableStateFlow(PokemonUiState.initialize())
-//    val pokemonList = _pokemonList.asStateFlow()
-
     val pokemonList: StateFlow<PokemonUiState<List<Pokemon>>> = _pokemonList
         .stateIn(
             scope = viewModelScope,
@@ -34,14 +35,16 @@ class MvvmAdvancedViewModel @Inject constructor(
             PokemonUiState.initialize()
         )
 
-    init {
-        fetchNextPokemonList()
-    }
 
     private val _pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     val pokemonFetchingIndex = _pokemonFetchingIndex
 
-    private fun fetchNextPokemonList() {
+    init {
+        fetchPokemonList()
+    }
+
+    fun fetchPokemonList() {
+        Log.d("pagepage", "fetchPokemonList : ${pokemonFetchingIndex.value}" )
         viewModelScope.launch(Dispatchers.IO) {
             pokemonRepository.fetchPokemonList(pokemonFetchingIndex.value)
                 .onStart {
@@ -55,6 +58,12 @@ class MvvmAdvancedViewModel @Inject constructor(
                         _pokemonList.value = PokemonUiState.error(it.message ?: "on failure error")
                     }
                 }
+        }
+    }
+
+    fun fetchNextPokemonList(){
+        if(_pokemonList.value.status != PokemonUiStatus.LOADING){
+            pokemonFetchingIndex.value++
         }
     }
 }
