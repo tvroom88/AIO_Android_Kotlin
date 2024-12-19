@@ -130,8 +130,14 @@ dependencies {
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' // JSON 데이터 처리를 위한 Gson 컨버터
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'  // RxJava 3 어댑터 추가
+
+    // Gson 대신 사용할 Moshi
+    implementation 'com.squareup.retrofit2:converter-moshi:2.11.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.15.1'
+
+    // Gson (Moshi가 더 빠른 듯)
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' // JSON 데이터 처리를 위한 Gson 컨버터
 
     // Retrofit과 같이 사용하려고 추가한 okhttp3
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
@@ -159,18 +165,10 @@ dependencies {
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.3.0' // uiautomator
     androidTestImplementation 'androidx.test:runner:1.6.2'
 
-
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     kapt 'com.github.bumptech.glide:compiler:4.15.1'
 
-//
-//    // Local Unit Tests
-//    testImplementation 'junit:junit:4.13.2'
-//    androidTestImplementation 'androidx.test:core:1.6.1'// Optional -- Robolectric environment
-//    testImplementation "org.mockito:mockito-core:5.4.0" // Optional -- Mockito framework
-//    testImplementation "org.mockito.kotlin:mockito-kotlin:5.1.0" // Optional -- mockito-kotlin
-//    testImplementation "io.mockk:mockk:1.13.5" // Optional -- Mockk framework
 }
 
 kapt {

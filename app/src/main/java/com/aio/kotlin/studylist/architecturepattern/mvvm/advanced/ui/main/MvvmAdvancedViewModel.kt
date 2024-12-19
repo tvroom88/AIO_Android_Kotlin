@@ -2,7 +2,7 @@ package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model.Pokemon
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.repository.PokemonRepository
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.PokemonUiState
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.PokemonUiStatus
@@ -35,10 +35,6 @@ class MvvmAdvancedViewModel @Inject constructor(
 
     private val _pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     val pokemonFetchingIndex = _pokemonFetchingIndex
-
-//    init {
-//        fetchPokemonList()
-//    }
 
     fun fetchPokemonList() {
         viewModelScope.launch(Dispatchers.IO) {

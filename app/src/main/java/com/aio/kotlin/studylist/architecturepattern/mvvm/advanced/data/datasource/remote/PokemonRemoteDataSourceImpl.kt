@@ -1,6 +1,6 @@
 package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.datasource.remote
 
-import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model.Pokemon
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.network.PokemonListApi
 import javax.inject.Inject
 

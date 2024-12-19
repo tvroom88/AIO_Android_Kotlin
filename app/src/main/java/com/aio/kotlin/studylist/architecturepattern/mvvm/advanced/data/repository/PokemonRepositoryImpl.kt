@@ -5,7 +5,7 @@ import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.datasourc
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.datasource.remote.PokemonRemoteDataSource
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.local.mapper.asDomain
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.local.mapper.asEntity
-import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

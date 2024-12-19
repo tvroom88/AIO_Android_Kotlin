@@ -1,7 +1,7 @@
 package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.local.mapper
 
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.local.PokemonEntity
-import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model.Pokemon
 
 object PokemonEntityMapper : EntityMapper<List<Pokemon>, List<PokemonEntity>> {
     override fun asEntity(domain: List<Pokemon>): List<PokemonEntity> {

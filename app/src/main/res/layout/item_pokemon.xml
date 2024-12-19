@@ -7,7 +7,7 @@
 
         <variable
             name="pokemon"
-            type="com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon" />
+            type="com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model.Pokemon" />
     </data>
 
     <androidx.cardview.widget.CardView

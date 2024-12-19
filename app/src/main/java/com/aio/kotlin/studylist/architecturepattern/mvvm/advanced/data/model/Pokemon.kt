@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote
+package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

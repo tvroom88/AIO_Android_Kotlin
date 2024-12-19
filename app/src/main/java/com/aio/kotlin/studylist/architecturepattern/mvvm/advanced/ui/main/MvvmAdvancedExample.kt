@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentMvvmAdvancedExampleBinding
-import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model.Pokemon
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.PokemonUiStatus
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.RecyclerViewPaginator
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
@@ -44,6 +44,11 @@ import kotlinx.coroutines.launch
  * 참고 :
  * (1) https://velog.io/@jmseb3/Android-Sealed-Class-%EB%A5%BC-Retrofit-%ED%86%B5%EC%8B%A0with-Hilt-flow
  * - ViewModel에서 StateFlow의 HotStream을 어떤 방식으로 사용할지 참고 가능
+ *
+ * 해야할일 :
+ * (1) Gson에서 Moshi로 변경하기
+ * (2) Retrofit 과정 확인하기 - (Okhttp3에서 뭔가 더 추가할 만한게 있는지나 커스터마이징 가능한지 체크하기
+ * (3) Room DB 사용방법
  */
 @AndroidEntryPoint
 class MvvmAdvancedExample :

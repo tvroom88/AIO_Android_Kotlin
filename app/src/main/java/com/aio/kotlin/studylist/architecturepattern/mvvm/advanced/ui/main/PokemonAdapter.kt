@@ -7,7 +7,7 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.base.recyclerview.BaseViewHolder
 import com.aio.kotlin.databinding.ItemPokemonBinding
-import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.model.Pokemon
 import com.bumptech.glide.Glide
 
 class PokemonAdapter :
