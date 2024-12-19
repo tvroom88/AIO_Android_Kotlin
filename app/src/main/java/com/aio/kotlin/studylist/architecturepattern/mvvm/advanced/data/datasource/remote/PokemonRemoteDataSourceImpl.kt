@@ -4,16 +4,19 @@ import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.re
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.network.PokemonListApi
 import javax.inject.Inject
 
+/**
+ *
+ */
 class PokemonRemoteDataSourceImpl @Inject constructor(private val pokemonListApi: PokemonListApi) :
     PokemonRemoteDataSource {
 
     override suspend fun fetchPokemonList(page: Int): Result<List<Pokemon>> = try {
         val response = pokemonListApi.fetchPokemonList(PAGING_SIZE, PAGING_SIZE * page)
-        if(response.isSuccessful){
+        if (response.isSuccessful) {
             response.body()?.let { // 응답이 성공적이면 Response.body()를 Result.Success로 변환하여 반환
                 Result.success(it.results)
             } ?: Result.failure(NullPointerException("Body is null"))
-        }else{ // 응답 코드가 성공이 아니면 Result.Failure로 변환하여 반환
+        } else { // 응답 코드가 성공이 아니면 Result.Failure로 변환하여 반환
             Result.failure(Exception("Error: ${response.code()} - ${response.message()}"))
         }
     } catch (e: Exception) { // 예외가 발생하면 Result.Failure로 처리
@@ -21,6 +24,6 @@ class PokemonRemoteDataSourceImpl @Inject constructor(private val pokemonListApi
     }
 
     companion object {
-        private const val PAGING_SIZE = 20
+        private const val PAGING_SIZE = 10
     }
 }

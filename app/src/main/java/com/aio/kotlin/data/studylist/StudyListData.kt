@@ -4,7 +4,7 @@ import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.architecturepattern.mvc.SimpleMvcPatternFragment
-import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.MvvmAdvancedExample
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.main.MvvmAdvancedExample
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts

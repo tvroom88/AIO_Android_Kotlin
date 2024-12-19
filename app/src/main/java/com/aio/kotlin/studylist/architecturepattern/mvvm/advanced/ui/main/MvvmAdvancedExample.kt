@@ -1,8 +1,6 @@
-package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui
+package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.main
 
-import android.content.Context
 import android.util.Log
-import android.view.ContextThemeWrapper
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -14,11 +12,10 @@ import com.aio.kotlin.R
 import com.aio.kotlin.base.fragment.DataBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentMvvmAdvancedExampleBinding
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
-import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
-import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.adapter.CoroutineTestAdapter
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.PokemonUiStatus
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.RecyclerViewPaginator
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 /**
@@ -43,6 +40,10 @@ import kotlinx.coroutines.launch
  *  - RecyclerView를 이용할 예정
  *
  * Data Stream : LiveData, Flow 사용
+ *
+ * 참고 :
+ * (1) https://velog.io/@jmseb3/Android-Sealed-Class-%EB%A5%BC-Retrofit-%ED%86%B5%EC%8B%A0with-Hilt-flow
+ * - ViewModel에서 StateFlow의 HotStream을 어떤 방식으로 사용할지 참고 가능
  */
 @AndroidEntryPoint
 class MvvmAdvancedExample :
@@ -104,7 +105,9 @@ class MvvmAdvancedExample :
                                 hideProgressBar()
                             }
 
-                            PokemonUiStatus.ERROR -> {}
+                            PokemonUiStatus.ERROR -> {
+                                Log.d("aaaaaa", "error : ${it.message}")
+                            }
                             PokemonUiStatus.RELOAD -> {}
                         }
                     }

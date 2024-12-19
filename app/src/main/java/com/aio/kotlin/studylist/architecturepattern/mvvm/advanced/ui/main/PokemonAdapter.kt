@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui
+package com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.main
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -6,10 +6,8 @@ import android.view.ViewGroup
 import com.aio.kotlin.R
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.base.recyclerview.BaseViewHolder
-import com.aio.kotlin.databinding.ItemCoroutineTestBinding
 import com.aio.kotlin.databinding.ItemPokemonBinding
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.data.entity.remote.Pokemon
-import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.domain.model.CoroutineTest
 import com.bumptech.glide.Glide
 
 class PokemonAdapter :
@@ -19,8 +17,9 @@ class PokemonAdapter :
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItemList(newItems: MutableList<Pokemon>?) {
+
         if (!newItems.isNullOrEmpty()) {
-            items.addAll(newItems)
+            items = newItems
             Log.d("items", "items size after adding: ${items.size}")
             notifyDataSetChanged() // 모든 데이터 변경 알림
         }

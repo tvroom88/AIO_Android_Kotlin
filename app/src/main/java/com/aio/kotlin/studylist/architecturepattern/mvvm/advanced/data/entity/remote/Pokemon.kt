@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Pokemon(
-    var page: Int = 0,
+    var page: Int,
     val name: String,
     val url: String
 ) : Parcelable {

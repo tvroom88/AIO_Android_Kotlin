@@ -6,6 +6,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface PokemonRepository {
 
+    // Local
+    suspend fun insertPokemonListToLocal(pokemonList:List<Pokemon>) : Result<Int>
+    suspend fun fetchPokemonListFromLocal(page: Int): Result<List<Pokemon>>
+    suspend fun fetchAllPokemonListFromLocal(page: Int): Result<List<Pokemon>>
+
+    // Remote
+    suspend fun fetchPokemonListFromRemote(page: Int): Result<List<Pokemon>>
+
+    // Remote & Local
     @WorkerThread
-    fun fetchPokemonList(page: Int): Flow<Result<List<Pokemon>>>
+    suspend fun fetchPokemonList(page: Int): Flow<Result<List<Pokemon>>>
 }
