@@ -15,7 +15,7 @@ class StudyListData {
     // 안드로이드 학습 리스트 데이터
     fun setStudyList(): MutableList<StudyList> {
         return mutableListOf(
-//            addJetPack(),
+            addJetPack(),
 //            StudyFragmentList(
 //                "RecyclerView",
 //                RecyclerViewExampleFragment().getFullFragmentName(),
@@ -40,13 +40,13 @@ class StudyListData {
                     "DataBinding",
                     DataBindingExampleFragment().getFullFragmentName(),
                     2,
-                    getUrl(0),
+                    "https://from-android-to-server.tistory.com/51",
                 ),
                 StudyFragmentList(
                     "ViewBinding",
                     ViewBindingExampleFragment().getFullFragmentName(),
-                    2
-
+                    2,
+                    "https://from-android-to-server.tistory.com/51"
                 )
             )
         )
