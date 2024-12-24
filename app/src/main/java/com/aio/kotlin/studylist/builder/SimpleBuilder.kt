@@ -40,6 +40,7 @@ class SimpleBuilder {
     }
 
     constructor(builder: Builder) {
+        teamName = builder.teamName
         forward = builder.forward
         midfielder = builder.midfielder
         winger = builder.winger
