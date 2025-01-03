@@ -15,7 +15,6 @@ class NetworkUtils {
         val connection = httpUrl.openConnection() as HttpURLConnection
         executor.execute {
             try {
-
                 connection.requestMethod = "GET"  // Set the request method to GET
                 connection.setRequestProperty("Content-Type", "application/json");   // Add any headers you want to send with the request
                 connection.instanceFollowRedirects = false
@@ -40,7 +39,7 @@ class NetworkUtils {
             } catch (e: Exception) {
                 Log.d("makeHttpUrlConnection", "error : ${e.message}")
             } finally {
-                Log.d("makeHttpUrlConnection", "connec")
+                Log.d("makeHttpUrlConnection", "connect")
                 connection.disconnect()
             }
         }

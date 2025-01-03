@@ -21,20 +21,23 @@ class SimpleBuilder {
             this.forward = forward
             return this
         }
+
         fun midfielder(midfielder: String): Builder {
             this.midfielder = midfielder
             return this
         }
+
         fun winger(winger: String): Builder {
             this.winger = winger
             return this
         }
+
         fun defender(defender: String): Builder {
             this.defender = defender
             return this
         }
 
-        fun build() : SimpleBuilder {
+        fun build(): SimpleBuilder {
             return SimpleBuilder(this)
         }
     }
