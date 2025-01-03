@@ -7,68 +7,83 @@
     android:layout_height="match_parent"
     tools:context=".studylist.network.http.httpurlconnection.HttpUrlConnectionFragment">
 
-
-    <LinearLayout
-        android:id="@+id/ll_urlconnection_result_container"
+    <ScrollView
+        android:id="@+id/sv_urlconnection_result_container"
         android:layout_width="0dp"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_urlconnection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_urlconnection_result"
+        <LinearLayout
+            android:id="@+id/ll_urlconnection_result_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:text="결과 : " />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_urlconnection_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="결과 : " />
 
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_urlconnection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 
     <TextView
         android:id="@+id/tv_urlconnection_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="연결할 Url :"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/et_urlconnection_url"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_urlconnection_result_container" />
+        app:layout_constraintTop_toTopOf="@+id/et_urlconnection_url" />
 
     <EditText
         android:id="@+id/et_urlconnection_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_urlconnection_result_container" />
+        app:layout_constraintStart_toEndOf="@+id/tv_urlconnection_url"
+        app:layout_constraintTop_toBottomOf="@+id/sv_urlconnection_result_container" />
 
     <Button
         android:id="@+id/btn_urlconnection_connect_get"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:text="Get Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_urlconnection_url" />
+        app:layout_constraintTop_toBottomOf="@+id/et_urlconnection_url" />
 
     <Button
         android:id="@+id/btn_urlconnection_connect_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Post Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_urlconnection_connect_get" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.aio.kotlin.studylist.network.http.httpurlconnection
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import org.json.JSONObject
 import java.net.HttpURLConnection
@@ -34,9 +36,10 @@ class HttpUrlConnectionBuilder private constructor(
             this.headers[key] = value
         }
 
-        fun addBody(key: String, value: String) {
+        fun addBody(key: String, value: String): Builder {
             map[key] = value
             setBody(map)
+            return this
         }
 
         fun setBody(params: Map<String, String>) = apply {
@@ -113,8 +116,8 @@ class HttpUrlConnectionBuilder private constructor(
                     val response = inputStream.bufferedReader().use { it.readText() }
 
                     when (connection.responseCode) {
-                        HttpURLConnection.HTTP_OK -> { // 정상적으로 연결 되었을 때
-                            futureCallback?.onCompleted(null, response)
+                        in 200..299 -> { // 정상적으로 연결 되었을 때
+                            onComplete(null, response)
                         }
                         // Redirection으로 연결될때
                         HttpURLConnection.HTTP_MOVED_TEMP, HttpURLConnection.HTTP_MOVED_PERM, HttpURLConnection.HTTP_SEE_OTHER -> {
@@ -123,22 +126,24 @@ class HttpUrlConnectionBuilder private constructor(
                         }
 
                         else -> {
-                            Log.d("makeHttpUrlConnection", "connection : ${connection.responseCode}")
-                            futureCallback?.onCompleted(
-                                Exception("ResponseCode : ${connection.responseCode}"),
-                                null
-                            )
+                            val errorMsg = "ResponseCode : ${connection.responseCode}"
+                            onComplete(Exception(errorMsg), null)
                         }
                     }
-                }catch (e:Exception){
-                    futureCallback?.onCompleted(e, null)
+                } catch (e: Exception) {
+                    onComplete(e, null)
                 }
             }.start()
         } catch (e: Exception) {
-            futureCallback?.onCompleted(e, null)
+            onComplete(e, null)
         }
     }
 
+    private fun onComplete(e: Exception?, result: String?) {
+        Handler(Looper.getMainLooper()).post {
+            futureCallback?.onCompleted(e, result)
+        }
+    }
 
     interface FutureCallback<T> {
         fun onCompleted(e: Exception?, result: T?)
