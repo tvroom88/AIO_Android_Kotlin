@@ -5,6 +5,10 @@ import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentCoroutineBuilderBinding
 import com.aio.kotlin.databinding.FragmentCoroutineScopeBinding
 
+/**
+ * (1) MainThread 사용후 Worker THread
+ * (2) WorkerThead 사용후 MainThread
+ */
 class CoroutineScopeFragment : ViewBindingBaseFragment<FragmentCoroutineScopeBinding>() {
 
     private lateinit var resultTextView: TextView

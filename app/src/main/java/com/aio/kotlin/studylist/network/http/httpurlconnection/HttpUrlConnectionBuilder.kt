@@ -97,13 +97,14 @@ class HttpUrlConnectionBuilder private constructor(
                         setRequestProperty(key, value)
                     }
 
-                    // 바디 작성
+                    // POST로 통신할 경우 보낼내용을 body에 넣어서 보냄
                     if (body != null && (method == "POST" || method == "PUT")) {
                         setRequestProperty(
                             "Content-Type",
                             "application/x-www-form-urlencoded; charset=UTF-8"
                         )
                         doOutput = true
+                        setChunkedStreamingMode(0)
                         outputStream.use { os ->
                             os.write(body.toByteArray(StandardCharsets.UTF_8)) // 인코딩된 바디를 바이트 배열로 전송
                         }
@@ -131,7 +132,11 @@ class HttpUrlConnectionBuilder private constructor(
                         }
                     }
                 } catch (e: Exception) {
+                    val errorStream = connection.errorStream
+                    Log.d("errorStream", "errorStream : $errorStream")
                     onComplete(e, null)
+                } finally {
+                    connection.disconnect()
                 }
             }.start()
         } catch (e: Exception) {

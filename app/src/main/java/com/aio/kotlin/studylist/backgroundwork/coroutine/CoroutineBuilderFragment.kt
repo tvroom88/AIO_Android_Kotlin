@@ -86,8 +86,8 @@ class CoroutineBuilderFragment : ViewBindingBaseFragment<FragmentCoroutineBuilde
                 myCharacter.weapon = "sword"
                 setStringWithStringBuilder(sb, "2. myCharacter : $myCharacter", resultTextView)
                 Log.d("coroutineAsync", "2. $myCharacter")
-
             }
+
             myCharacter.age = 11
             setStringWithStringBuilder(sb, "3. myCharacter : $myCharacter", resultTextView)
             Log.d("coroutineAsync", "3. $myCharacter")

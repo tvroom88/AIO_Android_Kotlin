@@ -10,6 +10,7 @@ import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFr
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
 import com.aio.kotlin.studylist.network.http.httpurlconnection.HttpUrlConnectionFragment
+import com.aio.kotlin.studylist.network.http.okhttp3.Okhttp3TestFragment
 
 class StudyListData {
 
@@ -22,7 +23,7 @@ class StudyListData {
             addArchitecture(),
             addNetworkConnect(),
 
-        //            StudyFragmentList(
+            //            StudyFragmentList(
 //                "RecyclerView",
 //                RecyclerViewExampleFragment().getFullFragmentName(),
 //                2
@@ -132,8 +133,8 @@ class StudyListData {
     }
 
     private fun addNetworkConnect(): StudyCategory {
-        val appArchitectrue = StudyCategory("Network Connection")
-        appArchitectrue.studyList.addAll(
+        val networkConnection = StudyCategory("Network Connection")
+        networkConnection.studyList.addAll(
             mutableListOf(
                 StudyFragmentList(
                     "HttpURLConnection",
@@ -141,10 +142,16 @@ class StudyListData {
                     2,
                     "https://from-android-to-server.tistory.com/197"
                 ),
+                StudyFragmentList(
+                    "Okhttp3",
+                    Okhttp3TestFragment().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/197"
+                ),
             )
         )
 
-        return appArchitectrue
+        return networkConnection
     }
 
 }
