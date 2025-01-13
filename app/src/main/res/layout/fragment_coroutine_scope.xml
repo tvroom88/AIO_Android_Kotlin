@@ -11,19 +11,40 @@
         android:id="@+id/tv_coroutine_scope_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Result"
+        android:layout_marginTop="60dp"
+        android:text="withcontext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_coroutine_scope"
+        android:id="@+id/btn_coroutine_scope_withcontext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="50dp"
-        android:text="Test"
+        android:text="launch"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_coroutine_scope_launch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="50dp"
+        android:text="async"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_coroutine_scope_withcontext" />
+
+    <Button
+        android:id="@+id/btn_coroutine_scope_async"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="50dp"
+        android:text="Test3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_coroutine_scope_launch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

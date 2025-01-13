@@ -4,6 +4,7 @@ import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.backgroundwork.coroutine.CoroutineBuilderFragment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.CoroutineFlowFragment
+import com.aio.kotlin.studylist.backgroundwork.coroutine.CoroutineScopeFragment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.cleanarchitectture.ui.home.CoroutineTestFragment
 import com.aio.kotlin.studylist.backgroundwork.coroutine.stateflow.CoroutineStateFlowFragment
 import com.aio.kotlin.studylist.backgroundwork.multithread.MultiThreadFragment
@@ -66,8 +67,8 @@ class AsyncExample {
                 ),
                 StudyFragmentList(
                     "Coroutine Scope",
-                    CoroutineBuilderFragment().getFullFragmentName(),
-                    1,
+                    CoroutineScopeFragment().getFullFragmentName(),
+                    2,
                     "https://from-android-to-server.tistory.com/143",
                 ),
                 StudyFragmentList(

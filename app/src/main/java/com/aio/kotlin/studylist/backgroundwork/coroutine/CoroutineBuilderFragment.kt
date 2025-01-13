@@ -49,6 +49,11 @@ class CoroutineBuilderFragment : ViewBindingBaseFragment<FragmentCoroutineBuilde
      *   launch는 코루틴 블록을 만드는 코루틴 빌더중 하나입니다.
      *   launch는 현재 스레드를 차단하지 않고 새로운 코루틴을 생성할 수 있습니다.
      *   특정 결과값을 반환하지 않고 Job객체를 반환합니다.
+     *
+     *   Job으로는 코루틴을 취소하거나 작업이 끝날때까지 대기 시키는 등의 역할을 수행할 수 있다.
+     *   - result.join() : 대기
+     *   - result.cancel() : 코루틴 취소
+     *
      */
     private fun coroutineLaunch() {
         val sb = StringBuilder()
