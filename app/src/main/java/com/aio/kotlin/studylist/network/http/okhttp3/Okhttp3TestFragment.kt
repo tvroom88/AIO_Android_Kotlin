@@ -9,8 +9,8 @@ import com.aio.kotlin.utils.ResponseCallBack
 import okhttp3.Response
 
 class Okhttp3TestFragment : ViewBindingBaseFragment<FragmentOkhttp3TestBinding>() {
-    private val networkUtils by lazy { NetworkUtils() }
-    private val connectUrl = "https://jsonplaceholder.typicode.com/posts/1"
+    private val networkUtils by lazy { NetworkUtils(activityContext) }
+    private var connectUrl = "https://jsonplaceholder.typicode.com/posts/1"
     private val jsonConverterUtils by lazy { JsonConverterUtils() }
 
     override fun getViewBinding(): FragmentOkhttp3TestBinding {
@@ -20,6 +20,9 @@ class Okhttp3TestFragment : ViewBindingBaseFragment<FragmentOkhttp3TestBinding>(
     override fun initContentInOnViewCreated() {
 
         binding.btnOkhttp3TestWithSync.setOnClickListener {
+            if(binding.etOkhttp3TestUrl.text.toString() != ""){
+                connectUrl = binding.etOkhttp3TestUrl.text.toString()
+            }
             networkUtils.okhttp3ConnectSync(
                 url = connectUrl,
                 success = { response -> binding.tvOkhttp3TestResult.text = response.toString()},

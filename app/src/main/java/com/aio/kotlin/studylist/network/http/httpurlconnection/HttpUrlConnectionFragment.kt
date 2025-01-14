@@ -8,7 +8,7 @@ import com.aio.kotlin.utils.dialog.DialogUtils
 
 class HttpUrlConnectionFragment : ViewBindingBaseFragment<FragmentHttpUrlConnectionBinding>() {
 
-    private val networkUtil: NetworkUtils by lazy { NetworkUtils() }
+    private val networkUtil: NetworkUtils by lazy { NetworkUtils(activityContext) }
     override fun getViewBinding(): FragmentHttpUrlConnectionBinding {
         return FragmentHttpUrlConnectionBinding.inflate(layoutInflater)
     }
