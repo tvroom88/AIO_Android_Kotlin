@@ -9,6 +9,7 @@ import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFr
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
+import com.aio.kotlin.studylist.jetpack.roomdb.view.RoomDbFragment
 import com.aio.kotlin.studylist.network.http.httpurlconnection.HttpUrlConnectionFragment
 import com.aio.kotlin.studylist.network.http.okhttp3.Okhttp3TestFragment
 
@@ -50,7 +51,15 @@ class StudyListData {
                     ViewBindingExampleFragment().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/51"
+                ),
+                StudyFragmentList(
+                    "DataBinding",
+                    RoomDbFragment().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/51"
                 )
+
+
             )
         )
         return jetpackCategory
