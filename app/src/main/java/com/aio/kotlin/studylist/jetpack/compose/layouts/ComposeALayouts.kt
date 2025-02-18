@@ -1,25 +1,58 @@
 package com.aio.kotlin.studylist.jetpack.compose.layouts
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
+import com.aio.kotlin.R
 import com.aio.kotlin.studylist.jetpack.compose.theme.DiverseComposeLayoutsTheme
 
 /**
@@ -32,136 +65,188 @@ class ComposeALayouts : ComponentActivity() {
             DiverseComposeLayoutsTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     Column {
-                        AddColumn()
-                        AddRow()
-                        AddBox()
-                        AddConstraintLayout()
+                        Row()
+                        Column()
+                        CustomBox()
                     }
                 }
-
             }
         }
     }
 
-    @Preview(showBackground = true)
+
+    // TextView
     @Composable
-    fun AddColumn() {
-        Column(
+    fun customText() {
+        Text(
+            text = stringResource(R.string.first_text), // Text 글자
             modifier = Modifier
-                .background(Color.Green)
-        ) {
-            Text(text = "1-1. Column ")
-            Text(text = "1-2. Check where second text is with Column.")
-        }
+                .size(width = 80.dp, height = 100.dp) // text 영역 사이즈 설정
+                .padding(start = 10.dp, bottom = 15.dp) // padding 설정
+                .clickable(onClick = { Log.d("TestActivity", "click") }),
+            color = Color.Green, // 색상 설정
+            fontWeight = FontWeight.Bold, // font 굵기
+            fontStyle = FontStyle.Italic, // font 스타일
+            fontSize = 12.sp, // 글자 크기
+            textAlign = TextAlign.Center, // Text 위치
+            letterSpacing = 2.sp, // 글자 간격
+            lineHeight = 28.sp, // 줄 간격
+            textDecoration = TextDecoration.Underline, // 밑줄 효과
+            overflow = TextOverflow.Ellipsis, // 길면 ... 표시
+            softWrap = true // 자동 줄바꿈 여부
+        )
     }
 
-    @Preview(showBackground = true)
+    // EditText
     @Composable
-    fun AddRow() {
+    fun customTextField(modifier: Modifier = Modifier) {
+        var textField by rememberSaveable { mutableStateOf("") }
+        TextField(
+            value = textField, // 현재 입력된 값
+            onValueChange = { textField = it }, // 값이 변경될 때 호출되는 콜백
+            leadingIcon = {  // 입력창 왼쪽에 나오는 아이콘
+                Icon(
+                    imageVector = Icons.Default.Search, // 기본 검색 아이콘 사용
+                    contentDescription = null // 접근성 설명 (null로 두면 스크린 리더에서 무시)
+                )
+            },
+            colors = TextFieldDefaults.colors( // TextField의 색상 지정
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface, // 포커스되지 않았을 때 배경색
+                focusedContainerColor = MaterialTheme.colorScheme.surface // 포커스되었을 때 배경색
+            ),
+            placeholder = { // 힌트 텍스트 (아무것도 입력되지 않았을 때 표시)
+                Text("Search")
+            },
+            modifier = modifier
+                .fillMaxWidth() // 너비를 부모 크기에 맞게 설정
+                .heightIn(min = 56.dp), // 최소 높이 설정
+            visualTransformation = PasswordVisualTransformation(), // 입력된 값을 비밀번호 형태(●●●)로 변환
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password), // 키보드 타입을 비밀번호 입력용으로 설정
+        )
+    }
+
+    // ImageView
+    @Composable
+    fun customImage() {
+        val borderWidth = 4.dp
         Row(
             modifier = Modifier
-                .background(Color.Blue)
+                .padding(
+                    top = 10.dp,
+                    bottom = 10.dp
+                )
         ) {
-            Text(text = "2-1. Row ")
-            Text(text = "2-2. Check where second text is with Row.")
+            Image(
+                painter = painterResource(id = R.drawable.aio_android),
+                contentDescription = stringResource(id = R.string.first_text),
+                modifier = Modifier
+                    .size(150.dp)
+            )
+
+            AsyncImage(
+                model = "https://cdn.news.hidoc.co.kr/image/logo/favicon.ico",
+                contentDescription = "Translated description of what the image contains",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(150.dp)
+                    .clip(RoundedCornerShape(16.dp))
+            )
         }
     }
 
-    @Preview(showBackground = true)
     @Composable
-    fun AddBox() {
-        Box(
+    fun Row() {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .fillMaxWidth() // 너비(width) 꽉 채우기
-                .height(100.dp)
-                .background(Color.Cyan)
-        ) // 높이(height) 100dp 로 설정
-        {
-            Text(
-                text = "3-1. Box",
-                modifier = Modifier.align(Alignment.TopStart) // 상단 왼쪽 정렬
-            )
-            Text(
-                text = "3-2. Check where second text is with Box.",
-                modifier = Modifier.align(Alignment.BottomStart) // 하단 왼쪽 정렬
-            )
+                .padding(10.dp)
+                .horizontalScroll(rememberScrollState())
+        ) {
+            customText()
+            customTextField(Modifier.padding(horizontal = 16.dp))
+            customImage()
+        }
+    }
+
+    @Composable
+    fun Column() {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(10.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            customText()
+            customTextField(Modifier.padding(horizontal = 16.dp))
+            customImage()
+        }
+    }
+
+    @Composable
+    fun CustomBox() {
+        Box(
+            contentAlignment = Alignment.BottomEnd,
+            modifier = Modifier
+                .background(color = Color.Cyan)
+                .size(400.dp, 300.dp)
+        ) {
+            Text(modifier = Modifier.align(Alignment.TopStart), text = "First")
+            Text(modifier = Modifier.align(Alignment.Center), text = "Second")
+            Text(text = "Third")
         }
     }
 
     /**
-     * Constraint Layout :
-     * 위젯을 다른 위젯의 위치에 대해 상대적으로 배치시키는 레이아웃이다. 기존 xml에서 많이 활용되던 레이아웃인데 xml에서는
-     * 성능상의 이점이 많았지만, Compose에서는 성능상의 이점은 없다. 따라서 Android 공식 사이트에서는 뷰가 복잡하거나 가독성이
-     * 떨어질 때만 ConstraintLayout을 이용하는 것을 권장하고 있다.
+     * LazyColumn, LazyRow, LazyGrid
      */
-
-    @Preview(showBackground = true)
     @Composable
-    fun AddConstraintLayout() {
-        ConstraintLayout(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(100.dp)
-        ) {// 레이아웃의 크기 조정) {
-            val (button, text) = createRefs()
-            Button(
-                onClick = { },
-                modifier = Modifier.constrainAs(button) {
-                    // DO SOMETHING
-                    top.linkTo(parent.top, margin = 16.dp) // 부모의 top에 16dp 마진을 준다
-                    start.linkTo(parent.start) // 부모의 start에 맞춘다 (왼쪽 정렬)
-                }
-            ) {
-                Text("Button")
+    fun recyclerView() {
+        val data = arrayOf("1", "2", "3", "4", "5")
+//    LazyRow(
+//        horizontalArrangement = Arrangement.spacedBy(8.dp),
+//        contentPadding = PaddingValues(horizontal = 16.dp),
+//        modifier = modifier
+//    ) {
+//        items(alignYourBodyData) { item ->
+//            AlignYourBodyElement(item.drawable, item.text)
+//        }
+//    }
+    }
+
+    @Composable
+    fun Grid() {
+
+    }
+
+    @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, widthDp = 100, heightDp = 200)
+    @Composable
+    fun PreviewRowColumn() {
+        DiverseComposeLayoutsTheme {
+            Column {
+                Row()
+                Column()
+                CustomBox()
             }
-            Text(
-                "Text",
-                modifier = Modifier.constrainAs(text) {
-                    // DO SOMETHING
-                    top.linkTo(button.bottom, margin = 16.dp) // 버튼의 bottom에 16dp 마진을 준다
-                    start.linkTo(parent.start) // 부모의 start에 맞춘다 (왼쪽 정렬)
-                    end.linkTo(parent.end)
-                }
-            )
         }
     }
 
+
+    @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+    @Composable
+    fun PreviewText() {
+        DiverseComposeLayoutsTheme { customText() }
+    }
+
+    @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+    @Composable
+    fun PreviewTextField() {
+        DiverseComposeLayoutsTheme { customTextField() }
+    }
+
+    @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+    @Composable
+    fun PreviewImage() {
+        DiverseComposeLayoutsTheme { customImage() }
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -23,6 +23,8 @@ class StudyListData {
             AsyncExample().addAsyncExample(),
             addArchitecture(),
             addNetworkConnect(),
+            addComposeable(),
+
 
             //            StudyFragmentList(
 //                "RecyclerView",
@@ -30,7 +32,6 @@ class StudyListData {
 //                2
 //            ),
 //            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
-//            addComposeable(),
 
         )
     }
