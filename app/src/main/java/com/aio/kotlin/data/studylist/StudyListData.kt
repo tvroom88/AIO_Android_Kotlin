@@ -9,6 +9,7 @@ import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFr
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
+import com.aio.kotlin.studylist.jetpack.compose.webview.ComposeWebView
 import com.aio.kotlin.studylist.jetpack.roomdb.view.RoomDbFragment
 import com.aio.kotlin.studylist.network.http.httpurlconnection.HttpUrlConnectionFragment
 import com.aio.kotlin.studylist.network.http.okhttp3.Okhttp3TestFragment
@@ -86,6 +87,10 @@ class StudyListData {
                 StudyList.StudyActivityList(
                     "List",
                     ComposeBList::class
+                ),
+                StudyList.StudyActivityList(
+                    "WebView",
+                    ComposeWebView::class
                 )
             )
         )

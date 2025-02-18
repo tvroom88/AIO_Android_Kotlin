@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.jetpack.compose.layouts
+package com.aio.kotlin.studylist.jetpack.compose.webview
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,14 +14,10 @@ class ComposeWebView : ComponentActivity() {
         setContent {
             DiverseComposeLayoutsTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-
+                    MainScreen()
                 }
             }
         }
     }
 }
 
-@Composable
-fun CustomWebView() {
-
-}
