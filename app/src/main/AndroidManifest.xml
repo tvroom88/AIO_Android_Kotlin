@@ -60,7 +60,9 @@
         <activity
             android:name=".studylist.jetpack.compose.webview.ComposeWebView"
             android:exported="true" />
-
+        <activity
+            android:name=".studylist.jetpack.compose.state.ComposeStateExample"
+            android:exported="true" />
         <!-- FCM -->
         <service
             android:name=".fcm.MyFirebaseMessagingService"

@@ -1,5 +1,6 @@
 package com.aio.kotlin.data.studylist
 
+
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
@@ -9,6 +10,7 @@ import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFr
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
+import com.aio.kotlin.studylist.jetpack.compose.state.ComposeStateExample
 import com.aio.kotlin.studylist.jetpack.compose.webview.ComposeWebView
 import com.aio.kotlin.studylist.jetpack.roomdb.view.RoomDbFragment
 import com.aio.kotlin.studylist.network.http.httpurlconnection.HttpUrlConnectionFragment
@@ -25,15 +27,13 @@ class StudyListData {
             addArchitecture(),
             addNetworkConnect(),
             addComposeable(),
-
-
-            //            StudyFragmentList(
+            
+            // StudyFragmentList(
 //                "RecyclerView",
 //                RecyclerViewExampleFragment().getFullFragmentName(),
 //                2
 //            ),
 //            StudyFragmentList("Mvvm Simple Example", MvvmSimpleExample().getFullFragmentName(), 2),
-
         )
     }
 
@@ -87,6 +87,10 @@ class StudyListData {
                 StudyList.StudyActivityList(
                     "List",
                     ComposeBList::class
+                ),
+                StudyList.StudyActivityList(
+                    "State",
+                    ComposeStateExample::class
                 ),
                 StudyList.StudyActivityList(
                     "WebView",
