@@ -56,7 +56,13 @@
             android:exported="true" />
         <activity
             android:name=".studylist.jetpack.compose.layouts.ComposeBList"
-            android:exported="true" /> <!-- FCM -->
+            android:exported="true" />
+        <activity
+            android:name=".studylist.jetpack.compose.state.ComposeStateExample"
+            android:exported="true" />
+
+
+        <!-- FCM -->
         <service
             android:name=".fcm.MyFirebaseMessagingService"
             android:exported="false">
