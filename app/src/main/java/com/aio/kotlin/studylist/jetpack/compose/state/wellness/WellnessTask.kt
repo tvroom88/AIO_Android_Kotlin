@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.jetpack.compose.state
+package com.aio.kotlin.studylist.jetpack.compose.state.wellness
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

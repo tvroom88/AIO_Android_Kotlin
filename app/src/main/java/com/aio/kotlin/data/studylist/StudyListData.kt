@@ -27,7 +27,7 @@ class StudyListData {
             addArchitecture(),
             addNetworkConnect(),
             addComposeable(),
-            
+
             // StudyFragmentList(
 //                "RecyclerView",
 //                RecyclerViewExampleFragment().getFullFragmentName(),
