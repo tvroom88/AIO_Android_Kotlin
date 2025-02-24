@@ -12,6 +12,7 @@ import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
 import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
 import com.aio.kotlin.studylist.jetpack.compose.state.ComposeStateExample
 import com.aio.kotlin.studylist.jetpack.compose.webview.ComposeWebView
+import com.aio.kotlin.studylist.jetpack.datastore.DataStoreFragment
 import com.aio.kotlin.studylist.jetpack.roomdb.view.RoomDbFragment
 import com.aio.kotlin.studylist.network.http.httpurlconnection.HttpUrlConnectionFragment
 import com.aio.kotlin.studylist.network.http.okhttp3.Okhttp3TestFragment
@@ -55,13 +56,11 @@ class StudyListData {
                     "https://from-android-to-server.tistory.com/51"
                 ),
                 StudyFragmentList(
-                    "DataBinding",
-                    RoomDbFragment().getFullFragmentName(),
+                    "DataStore",
+                    DataStoreFragment().getFullFragmentName(),
                     2,
-                    "https://from-android-to-server.tistory.com/51"
+                    "https://from-android-to-server.tistory.com/222"
                 )
-
-
             )
         )
         return jetpackCategory
