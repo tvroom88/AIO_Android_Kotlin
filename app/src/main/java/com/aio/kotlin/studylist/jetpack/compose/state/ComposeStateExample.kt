@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.aio.kotlin.studylist.jetpack.compose.state.wellness.WellnessScreen
+import com.aio.kotlin.studylist.jetpack.compose.state.samguozhi.SamguozhiScreen
 import com.aio.kotlin.studylist.jetpack.compose.theme.DiverseComposeLayoutsTheme
 
 class ComposeStateExample : ComponentActivity() {
@@ -20,7 +20,8 @@ class ComposeStateExample : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    WellnessScreen()
+//                    WellnessScreen()
+                    SamguozhiScreen()
                 }
             }
         }

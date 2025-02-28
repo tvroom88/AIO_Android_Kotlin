@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
-fun MainScreen() {
+fun MainWebScreen() {
     val url = "https://www.naver.com"
     CustomWebView(url)
 }

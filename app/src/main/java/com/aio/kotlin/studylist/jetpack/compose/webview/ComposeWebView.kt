@@ -14,7 +14,7 @@ class ComposeWebView : ComponentActivity() {
         setContent {
             DiverseComposeLayoutsTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    MainScreen()
+                    MainWebScreen()
                 }
             }
         }
