@@ -1,6 +1,5 @@
 package com.aio.kotlin.studylist.jetpack.datastore
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aio.kotlin.AioApplication
@@ -34,8 +33,6 @@ class DataStoreViewModel : ViewModel() {
         )
 
     fun saveProtoDataStore(data: String) {
-        Log.d("HereHere", "2. saveProtoDataStore - data : $data")
-
         viewModelScope.launch {
             dataStoreUtil.updateShowCompleted(true, data)
         }

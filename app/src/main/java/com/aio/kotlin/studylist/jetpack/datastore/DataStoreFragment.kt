@@ -35,7 +35,6 @@ class DataStoreFragment : ViewBindingBaseFragment<FragmentDataStoreBinding>() {
         }
 
         binding.btnDatastoreProto.setOnClickListener {
-            Log.d("HereHere", "1. btnDatastorePreference : ${binding.etDatastoreShowText.text}")
             viewModel.saveProtoDataStore(binding.etDatastoreShowText.text.toString())
         }
     }

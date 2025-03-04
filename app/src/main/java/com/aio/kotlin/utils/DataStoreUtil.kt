@@ -29,13 +29,9 @@ import kotlinx.coroutines.flow.map
 // Preferences DataStore
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-private const val USER_PREFERENCES_NAME = "user_preferences"
-private const val DATA_STORE_FILE_NAME = "user_prefs.pb"
-private const val SORT_ORDER_KEY = "sort_order"
-
 // Proto DataStore
 private val Context.userPreferencesStore: DataStore<UserPreferences> by dataStore(
-    fileName = DATA_STORE_FILE_NAME,
+    fileName = "user_prefs.pb",
     serializer = UserPreferencesSerializer
 )
 
@@ -55,7 +51,6 @@ class DataStoreUtil(private val context: Context) {
             preferences[stringKey] ?: ""
         }
 
-
     // Preference에 Setting 하는 방법
     suspend fun setText(text: String) {
         context.dataStore.edit { preferences ->
@@ -63,12 +58,9 @@ class DataStoreUtil(private val context: Context) {
         }
     }
 
-    val show_complete = booleanPreferencesKey("show_completed")
 
     val userPreferencesFlow: Flow<ProtoDataStore> = context.userPreferencesStore.data
-        .catch { exception ->
-            // dataStore.data throws an IOException when an error is encountered when reading data
-            Log.d("HereHere", "Excpetion : $exception")
+        .catch { exception -> // dataStore.data throws an IOException when an error is encountered when reading data
             if (exception is IOException) {
                 emit(UserPreferences.getDefaultInstance())
             } else {
@@ -83,9 +75,7 @@ class DataStoreUtil(private val context: Context) {
         }
 
     suspend fun updateShowCompleted(completed: Boolean, data: String) {
-        Log.d("HereHere", "3. saveProtoDataStore data : $data")
         context.userPreferencesStore.updateData { preferences ->
-            Log.d("HereHere", "3-1. saveProtoDataStore data : $data")
             preferences
                 .toBuilder()
                 .setShowCompleted(completed)
@@ -93,29 +83,4 @@ class DataStoreUtil(private val context: Context) {
                 .build()
         }
     }
-
-
-    private object PreferencesKeys {
-        val NAME = stringPreferencesKey("name")
-        val AGE = stringPreferencesKey("age")
-        val SALARY = stringPreferencesKey("salary")
-        val SHOW_COMPLETED = booleanPreferencesKey("show_completed")
-    }
-
-
-//    val sampleData: Flow<SampleData> = context.dataStore.data.map { preferences ->
-//        SampleData(
-//            name = preferences[PreferencesKeys.NAME]?: "",
-//            age = preferences[PreferencesKeys.AGE]?: "",
-//            salary = preferences[PreferencesKeys.SALARY]?: ""
-//        )
-//    }
-//
-//    suspend fun setEmployee(sampleData: SampleData) {
-//        context.dataStore.edit { settings ->
-//            settings[PreferencesKeys.NAME] = sampleData.name
-//            settings[PreferencesKeys.AGE] = sampleData.age
-//            settings[PreferencesKeys.SALARY] = sampleData.salary
-//        }
-//    }
 }
