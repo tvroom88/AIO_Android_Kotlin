@@ -1,6 +1,5 @@
 package com.aio.kotlin.data.studylist
 
-
 import com.aio.kotlin.models.StudyList
 import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
@@ -8,12 +7,8 @@ import com.aio.kotlin.studylist.architecturepattern.mvc.SimpleMvcPatternFragment
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.main.MvvmAdvancedExample
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
-import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeALayouts
-import com.aio.kotlin.studylist.jetpack.compose.layouts.ComposeBList
-import com.aio.kotlin.studylist.jetpack.compose.state.ComposeStateExample
-import com.aio.kotlin.studylist.jetpack.compose.webview.ComposeWebView
+import com.aio.kotlin.studylist.jetpack.compose.ComposeFragment
 import com.aio.kotlin.studylist.jetpack.datastore.DataStoreFragment
-import com.aio.kotlin.studylist.jetpack.roomdb.view.RoomDbFragment
 import com.aio.kotlin.studylist.network.http.httpurlconnection.HttpUrlConnectionFragment
 import com.aio.kotlin.studylist.network.http.okhttp3.Okhttp3TestFragment
 
@@ -27,7 +22,7 @@ class StudyListData {
             AsyncExample().addAsyncExample(),
             addArchitecture(),
             addNetworkConnect(),
-            addComposeable(),
+            addComposable(),
 
             // StudyFragmentList(
 //                "RecyclerView",
@@ -66,35 +61,35 @@ class StudyListData {
         return jetpackCategory
     }
 
-
-    // WebView url list
-    private fun getUrl(idx: Int): String {
-        val urlList = arrayListOf(
-            "https://from-android-to-server.tistory.com/51"
-        )
-        return urlList[idx]
-    }
-
-    private fun addComposeable(): StudyCategory {
-        val jetpackCategory = StudyCategory("Jetpack Example")
+    private fun addComposable(): StudyCategory {
+//        SamguozhiScreen()
+        val jetpackCategory = StudyCategory("Composable Example")
         jetpackCategory.studyList.addAll(
             mutableListOf(
-                StudyList.StudyActivityList(
+                StudyFragmentList(
                     "DiverseLayouts",
-                    ComposeALayouts::class
+                    ComposeFragment.newInstance(0).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/51"
                 ),
-                StudyList.StudyActivityList(
-                    "List",
-                    ComposeBList::class
-                ),
-                StudyList.StudyActivityList(
+                StudyFragmentList(
                     "State",
-                    ComposeStateExample::class
+                    ComposeFragment.newInstance(1).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/51"
                 ),
-                StudyList.StudyActivityList(
+                StudyFragmentList(
+                    "Modifier",
+                    ComposeFragment.newInstance(2).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/51"
+                ),
+                StudyFragmentList(
                     "WebView",
-                    ComposeWebView::class
-                )
+                    ComposeFragment.newInstance(3).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/51"
+                ),
             )
         )
         return jetpackCategory

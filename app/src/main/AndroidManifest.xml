@@ -55,6 +55,9 @@
             android:name=".studylist.jetpack.compose.layouts.ComposeALayouts"
             android:exported="true" />
         <activity
+            android:name=".studylist.jetpack.compose.modifier.ComposeModifier"
+            android:exported="true" />
+        <activity
             android:name=".studylist.jetpack.compose.layouts.ComposeBList"
             android:exported="true" />
         <activity
