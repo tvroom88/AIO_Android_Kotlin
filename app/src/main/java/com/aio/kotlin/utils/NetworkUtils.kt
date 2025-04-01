@@ -28,6 +28,7 @@ class NetworkUtils(val mContext: Context) {
     val executor = Executors.newSingleThreadExecutor()
     val cookie = ""
 
+    // HttpUrlConnection
     fun connectWithHttpURLConnection(url: String) {
         val httpUrl = URL(url)
         val connection = httpUrl.openConnection() as HttpURLConnection

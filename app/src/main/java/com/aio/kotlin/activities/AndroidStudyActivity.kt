@@ -16,6 +16,7 @@ import com.aio.kotlin.data.studylist.StudyListData
 import com.aio.kotlin.databinding.ActivityAndroidStudyBinding
 import com.aio.kotlin.databinding.ItemStudyListBinding
 import com.aio.kotlin.models.StudyList
+import com.aio.kotlin.studylist.jetpack.compose.ComposeFragment
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
 import com.aio.kotlin.utils.PermissionUtils
 
@@ -62,6 +63,8 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
                             // 클린 이벤트에 필요한 내용
                             when (data) {
                                 is StudyList.StudyFragmentList -> {
+                                    ComposeFragment.CUR_NUM = itemPosition
+
                                     val intent =
                                         Intent(applicationContext, DetailActivity::class.java)
                                     intent.putExtra("data", data)

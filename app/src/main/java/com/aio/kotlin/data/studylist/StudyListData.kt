@@ -90,6 +90,18 @@ class StudyListData {
                     2,
                     "https://from-android-to-server.tistory.com/51"
                 ),
+                StudyFragmentList(
+                    "State",
+                    ComposeFragment.newInstance(4).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/227"
+                ),
+                StudyFragmentList(
+                    "SideEffect",
+                    ComposeFragment.newInstance(5).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/228"
+                ),
             )
         )
         return jetpackCategory
