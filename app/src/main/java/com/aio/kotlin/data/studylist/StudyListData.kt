@@ -87,8 +87,7 @@ class StudyListData {
                 StudyFragmentList(
                     "WebView",
                     ComposeFragment.newInstance(3).getFullFragmentName(),
-                    2,
-                    "https://from-android-to-server.tistory.com/51"
+                    1
                 ),
                 StudyFragmentList(
                     "State",
@@ -102,6 +101,12 @@ class StudyListData {
                     2,
                     "https://from-android-to-server.tistory.com/228"
                 ),
+                StudyFragmentList(
+                    "Mvvm예제",
+                    ComposeFragment.newInstance(6).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/228"
+                )
             )
         )
         return jetpackCategory

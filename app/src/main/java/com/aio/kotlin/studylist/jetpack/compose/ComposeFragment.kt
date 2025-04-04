@@ -2,10 +2,14 @@ package com.aio.kotlin.studylist.jetpack.compose
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.viewModels
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentComposeBinding
 import com.aio.kotlin.studylist.jetpack.compose.layouts.LayoutScreen
 import com.aio.kotlin.studylist.jetpack.compose.modifier.ModifierScreen
+import com.aio.kotlin.studylist.jetpack.compose.mvvm.basic.BasicMvvmScreen
+import com.aio.kotlin.studylist.jetpack.compose.mvvm.basic.composeBasicUser.ComposeBasicUserViewModel
+import com.aio.kotlin.studylist.jetpack.compose.mvvm.basic.stopwatch.StopWatchViewModel
 import com.aio.kotlin.studylist.jetpack.compose.sideeffect.SideEffectScreen
 import com.aio.kotlin.studylist.jetpack.compose.state.basic.BasicStateScreen
 import com.aio.kotlin.studylist.jetpack.compose.state.samguozhi.SamguozhiScreen
@@ -14,6 +18,10 @@ import com.aio.kotlin.studylist.jetpack.compose.webview.MainWebScreen
 class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
 
     private var num: Int = 0
+
+    private val stopWatchViewModel: StopWatchViewModel by viewModels()
+    private val composeBasicUserViewModel: ComposeBasicUserViewModel by viewModels()
+
 
     override fun getViewBinding(): FragmentComposeBinding =
         FragmentComposeBinding.inflate(layoutInflater)
@@ -33,6 +41,7 @@ class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
                     3 -> MainWebScreen()
                     4 -> BasicStateScreen()
                     5 -> SideEffectScreen(activityContext)
+                    6 -> BasicMvvmScreen(stopWatchViewModel, composeBasicUserViewModel)
                 }
             }
         }
