@@ -1,5 +1,6 @@
 package com.aio.kotlin.studylist.backgroundwork.coroutine.stateflow
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -20,8 +21,30 @@ class CoroutineStateFlowFragment : ViewBindingBaseFragment<FragmentCoroutineStat
 
     override fun initContentInOnViewCreated() {
 
-        binding.btnCoroutineStateFlowStart.setOnClickListener {
-            getDataFromServer()
+        // 1. StateFlow + value
+        binding.btnCoroutineStateFlowWValue.setOnClickListener {
+            coroutineStateFlowViewModel.loadDataWithValue()
+        }
+
+        // 2. StateFlow + emit()
+        binding.btnCoroutineStateFlowStartWEmit.setOnClickListener {
+            coroutineStateFlowViewModel.loadDataWithEmit()
+        }
+
+        // 3. SharedFlow
+        binding.btnCoroutineSharedFlow.setOnClickListener {
+            coroutineStateFlowViewModel.loadSharedFlow()
+        }
+
+        // 4. StateFlow + StateIn
+        binding.btnCoroutineStateFlowWStatein.setOnClickListener {
+            coroutineStateFlowViewModel.changeStateFlow("statein")
+        }
+
+        // 5. SharedFlow + ShareIn
+        binding.btnCoroutineSharedFlowWSharein.setOnClickListener {
+            coroutineStateFlowViewModel.makeStateFlowData("sharedin")
+
         }
 
         // StateFlow 구독
@@ -29,6 +52,7 @@ class CoroutineStateFlowFragment : ViewBindingBaseFragment<FragmentCoroutineStat
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     coroutineStateFlowViewModel.coroutineData.collect { result ->
+                        Log.d("CoroutineStateFlowViewModel", "result : $result")
                         when (result.status) {
                             CoroutineStatus.LOADING -> showLoadingBar()
                             CoroutineStatus.SUCCESS -> setTextView(result.data)
@@ -39,16 +63,22 @@ class CoroutineStateFlowFragment : ViewBindingBaseFragment<FragmentCoroutineStat
 
                 launch {
                     coroutineStateFlowViewModel.sharedFlow.collect { result ->
+                        Log.d("CoroutineStateFlowViewModel", "result $result")
                         setTextView2(result)
                     }
                 }
 
                 launch {
-                    coroutineStateFlowViewModel.stateInFlow.collect { result ->
+                    coroutineStateFlowViewModel.stateFlowWithStateIn.collect { result ->
                         setTextView3(result)
                     }
                 }
 
+                launch {
+                    coroutineStateFlowViewModel.sharedFlowWithSharedIn.collect { result ->
+                        setTextView3(result)
+                    }
+                }
             }
         }
     }
@@ -63,20 +93,15 @@ class CoroutineStateFlowFragment : ViewBindingBaseFragment<FragmentCoroutineStat
 
     private fun setTextView(str: String?) {
         hideLoadingBar()
-        binding.tvCoroutineStateFlowContent1.text = str
+        binding.tvCoroutineStateFlowContent.text = str
     }
 
     private fun setTextView2(str: String?) {
-        binding.tvCoroutineStateFlowContent2.text = str
+        binding.tvCoroutineSharedFlowContent.text = str
     }
 
     private fun setTextView3(str: String?) {
-        binding.tvCoroutineStateFlowContent3.text = str
-    }
-
-    private fun getDataFromServer() {
-        coroutineStateFlowViewModel.loadData()
-        coroutineStateFlowViewModel.emitSharedFlowData()
+        binding.tvCoroutineStateSharedIn.text = str
     }
 
     private fun showErrorMsg(msg: String?) {

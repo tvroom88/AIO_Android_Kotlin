@@ -7,8 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".studylist.backgroundwork.coroutine.CoroutineFlowFragment">
 
+    <!--  StateFlow  -->
     <TextView
-        android:id="@+id/tv_coroutine_state_flow_content1"
+        android:id="@+id/tv_coroutine_state_flow_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -18,8 +19,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btn_coroutine_state_flow_w_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="stateFlow + value"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_state_flow_content" />
+
+    <Button
+        android:id="@+id/btn_coroutine_state_flow_start_w_emit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="stateFlow + emit"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/btn_coroutine_state_flow_w_value" />
+
+
+    <!-- SharedFlow -->
     <TextView
-        android:id="@+id/tv_coroutine_state_flow_content2"
+        android:id="@+id/tv_coroutine_shared_flow_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -27,28 +55,59 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_state_flow_content1" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_coroutine_state_flow_w_value" />
 
+    <Button
+        android:id="@+id/btn_coroutine_shared_flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="sharedflow + value"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_shared_flow_content" />
+
+
+    <!-- StateIn and SharedIn  -->
     <TextView
-        android:id="@+id/tv_coroutine_state_flow_content3"
+        android:id="@+id/tv_coroutine_state_shared_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="data 3"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_state_flow_content2"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_coroutine_shared_flow" />
 
     <Button
-        android:id="@+id/btn_coroutine_state_flow_start"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_coroutine_state_flow_w_statein"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="stateFlow + statein"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_state_flow_content3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_coroutine_state_shared_in" />
+
+    <Button
+        android:id="@+id/btn_coroutine_shared_flow_w_sharein"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="sharedFlow + sharedin"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/btn_coroutine_state_flow_w_statein" />
 
     <ProgressBar
         android:id="@+id/pb_coroutine_state_flow_loading"
@@ -60,5 +119,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
