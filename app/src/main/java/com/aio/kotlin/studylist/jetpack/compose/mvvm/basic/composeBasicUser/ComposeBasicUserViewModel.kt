@@ -2,10 +2,12 @@ package com.aio.kotlin.studylist.jetpack.compose.mvvm.basic.composeBasicUser
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ComposeBasicUserViewModel : ViewModel() {
     private var composeBasicUserRepository: ComposeBasicUserRepository =
@@ -21,6 +23,7 @@ class ComposeBasicUserViewModel : ViewModel() {
 
     init {
         addAllUser(getTestData())
+        fetchUsers()
     }
 
     // Fetch users from the repository
@@ -28,7 +31,10 @@ class ComposeBasicUserViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading  // Set loading state
             try {
-                val users = composeBasicUserRepository.getUsers()  // Fetch users
+                var users: List<ComposeBasicUser>
+                withContext(Dispatchers.IO) {
+                    users = composeBasicUserRepository.getUsers()  // Fetch users
+                }
                 _uiState.value = UiState.Success(
                     users,
                     users.isEmpty() // true - empty, false - not empty
@@ -40,54 +46,57 @@ class ComposeBasicUserViewModel : ViewModel() {
         }
     }
 
-    private fun addUser(user:ComposeBasicUser){
-        viewModelScope.launch {
+    private fun addUser(user: ComposeBasicUser) {
+        viewModelScope.launch(Dispatchers.Main) {
             _uiState.value = UiState.Loading  // Set loading state
             try {
-                val users = composeBasicUserRepository.addUser(user)  // Fetch users
+                var users: List<ComposeBasicUser>
+                withContext(Dispatchers.IO) {
+                    users = composeBasicUserRepository.addUser(user)  // Fetch users
+                }
                 _uiState.value = UiState.Success(
                     users,
                     users.isEmpty() // true - empty, false - not empty
                 )
                 _filteredUsers.value = users  // Emit the fetched users
-
-                fetchUsers()
             } catch (e: Exception) {
                 _uiState.value = UiState.Error(e.message ?: "Unknown error")  // Handle error
             }
         }
-
     }
 
-    private fun addAllUser(userList:List<ComposeBasicUser>){
-        for(user in userList){
+    private fun addAllUser(userList: List<ComposeBasicUser>) {
+        for (user in userList) {
             addUser(user)
         }
     }
 
     fun deleteUser(user: ComposeBasicUser) {
-        viewModelScope.launch {
-            _uiState.value = UiState.Loading  // Set loading state
+        viewModelScope.launch(Dispatchers.Main) {
+            _filteredUsers.value = emptyList()
             try {
-                val users = composeBasicUserRepository.deleteUser(user)  // Fetch users
+                var users: List<ComposeBasicUser>
+                withContext(Dispatchers.IO) {
+                    users = composeBasicUserRepository.deleteUser(user)  // Fetch users
+                }
+                _filteredUsers.value = users // Emit the fetched users
                 _uiState.value = UiState.Success(
                     users,
                     users.isEmpty() // true - empty, false - not empty
                 )
-                _filteredUsers.value = users  // Emit the fetched users
             } catch (e: Exception) {
                 _uiState.value = UiState.Error(e.message ?: "Unknown error")  // Handle error
             }
         }
     }
 
-    fun getTestData(): List<ComposeBasicUser> {
+    private fun getTestData(): List<ComposeBasicUser> {
         return listOf(
-            ComposeBasicUser("A", 22),
-            ComposeBasicUser("B", 22),
-            ComposeBasicUser("C", 22),
-            ComposeBasicUser("D", 22),
-            ComposeBasicUser("E", 22),
+            ComposeBasicUser("A", 19),
+            ComposeBasicUser("B", 33),
+            ComposeBasicUser("C", 26),
+            ComposeBasicUser("D", 27),
+            ComposeBasicUser("E", 38),
         )
     }
 }

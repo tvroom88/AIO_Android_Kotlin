@@ -1,5 +1,6 @@
 package com.aio.kotlin.studylist.jetpack.compose.mvvm.basic.composeBasicUser
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +31,8 @@ fun ComposeBasicUserScreen(viewModel: ComposeBasicUserViewModel) {
 
     val uiState by viewModel.uiState.collectAsState()  // Collect the UI state
     val filteredUsers by viewModel.filteredUsers.collectAsState()  // Collect filtered users
+//    val users = (uiState as? UiState.Success)?.users ?: emptyList()
+    Log.d("ComposeBasicUserScreen", "filteredUsers : $uiState")
 
     when (val state = uiState) {
         is UiState.Loading -> {
@@ -38,6 +40,8 @@ fun ComposeBasicUserScreen(viewModel: ComposeBasicUserViewModel) {
         }
 
         is UiState.Success -> {
+            Log.d("ComposeBasicUserScreen", "in Success")
+
             if (state.isEmpty) {
                 Text(text = "User list is Empty")
             } else {
@@ -51,6 +55,7 @@ fun ComposeBasicUserScreen(viewModel: ComposeBasicUserViewModel) {
                             user,
                             onDeleteUser = {
                                 viewModel.deleteUser(user)
+                                Log.d("ComposeBasicUserScreen", "onDeleteButtonClicked")
                             }
                         )  // Display user items
                     }
