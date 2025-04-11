@@ -55,6 +55,12 @@ class StudyListData {
                     DataStoreFragment().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/222"
+                ),
+                StudyFragmentList(
+                    "Paging",
+                    ComposeFragment.newInstance(8).getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/222"
                 )
             )
         )
@@ -62,7 +68,6 @@ class StudyListData {
     }
 
     private fun addComposable(): StudyCategory {
-//        SamguozhiScreen()
         val jetpackCategory = StudyCategory("Composable Example")
         jetpackCategory.studyList.addAll(
             mutableListOf(

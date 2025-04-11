@@ -40,6 +40,4 @@ class StopWatchViewModel : ViewModel() {
         _isRunning.value = false
         _timeInMillis.value = 0L
     }
-
-
 }

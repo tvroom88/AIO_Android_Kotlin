@@ -1,5 +1,6 @@
 package com.aio.kotlin.studylist.jetpack.compose.mvvm.basic.stopwatch
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -47,6 +48,8 @@ fun StopWatchScreen(
 
         val stopWatchFunction = if (isRunning) onPause else onStart
         val stopWatchText = if (isRunning) "Pause" else "Start"
+
+        Log.d("StopWatchScreen", "--- Start ---")
 
         Text(
             text = "Stopwatch",

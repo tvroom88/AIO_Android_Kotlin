@@ -34,6 +34,5 @@ fun BasicMvvmScreen(
         Spacer(modifier = Modifier.height(16.dp))
         ComposeBasicUserScreen(composeBasicUserViewModel)
     }
-
 }
 

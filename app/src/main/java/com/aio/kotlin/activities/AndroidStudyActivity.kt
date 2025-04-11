@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,7 +64,7 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
                             // 클린 이벤트에 필요한 내용
                             when (data) {
                                 is StudyList.StudyFragmentList -> {
-                                    ComposeFragment.CUR_NUM = itemPosition
+                                    setComposeNumber(data.title, itemPosition)
 
                                     val intent =
                                         Intent(applicationContext, DetailActivity::class.java)
@@ -103,5 +104,13 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
         )
         animator.duration = 300 // 애니메이션 지속 시간 (밀리초)
         animator.start()
+    }
+
+    fun setComposeNumber(title:String, position:Int){
+        if(title == "Paging"){
+            ComposeFragment.CUR_NUM = 101
+        } else {
+            ComposeFragment.CUR_NUM = position
+        }
     }
 }

@@ -38,12 +38,12 @@ class CoroutineStateFlowFragment : ViewBindingBaseFragment<FragmentCoroutineStat
 
         // 4. StateFlow + StateIn
         binding.btnCoroutineStateFlowWStatein.setOnClickListener {
-            coroutineStateFlowViewModel.changeStateFlow("statein")
+            coroutineStateFlowViewModel.makeStateFlowData()
         }
 
         // 5. SharedFlow + ShareIn
         binding.btnCoroutineSharedFlowWSharein.setOnClickListener {
-            coroutineStateFlowViewModel.makeStateFlowData("sharedin")
+            coroutineStateFlowViewModel.makeStateFlowData()
 
         }
 
