@@ -6,14 +6,18 @@ import androidx.paging.PagingData
 import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.DelayedPagingSource
 import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingItemDao
 import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingItemEntity
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.AlbumPagingSource
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.PagingAlbumItem
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.PagingRetrofitInstance
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class PagingRepository(
     private val pagingItemDao: PagingItemDao,
-) {
 
-    // ---------- Local ----------
+    ) {
+
+    // ------------------------- Local -------------------------
     fun getItemPager(): Flow<PagingData<PagingItemEntity>> {
         return Pager(
             config = PagingConfig(
@@ -38,5 +42,18 @@ class PagingRepository(
 
     suspend fun deleteAll() {
         pagingItemDao.deleteAll()
+    }
+
+    // ------------------------- Remote -------------------------
+    fun getRemotePagingFlow(): Flow<PagingData<PagingAlbumItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                initialLoadSize = 10
+            ),
+            pagingSourceFactory = {
+                AlbumPagingSource(PagingRetrofitInstance.api)
+            }
+        ).flow
     }
 }

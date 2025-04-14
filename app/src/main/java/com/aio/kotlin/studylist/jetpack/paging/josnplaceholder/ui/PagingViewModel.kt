@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.PagingRepository
 import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingItemEntity
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.PagingAlbumItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -49,8 +50,13 @@ class PagingViewModel(
                 }
         }
     }
-}
 
+    // --- Remote ---
+    // Retrofit 기반 Remote Paging Flow
+    val remotePagingFlow: Flow<PagingData<PagingAlbumItem>> =
+        repository.getRemotePagingFlow()
+            .cachedIn(viewModelScope)
+}
 
 class PagingViewModelFactory(
     private val repository: PagingRepository

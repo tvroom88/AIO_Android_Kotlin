@@ -26,21 +26,22 @@ import kotlinx.coroutines.launch
 @Composable
 fun PagingComposeScreen(pagingViewModel: PagingViewModel) {
 
-    val lazyPagingItems = pagingViewModel.items.collectAsLazyPagingItems()
+    val localItem = pagingViewModel.items.collectAsLazyPagingItems()
+    val remoteItem = pagingViewModel.remotePagingFlow.collectAsLazyPagingItems()
 
     // item이 LazyColum 에 들어왔을 때 아이템이 있는 곳까지 scroll을 내려주는 역할
     val lazyListState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
-    LaunchedEffect(lazyPagingItems) {
+    LaunchedEffect(localItem) {
         coroutineScope.launch {
-            val lastIndex = lazyPagingItems.itemCount - 1
+            val lastIndex = localItem.itemCount - 1
             if (lastIndex >= 0) {
-                lazyListState.scrollToItem(index = lazyPagingItems.itemCount - 1)
+                lazyListState.scrollToItem(index = localItem.itemCount - 1)
             }
         }
     }
 
-    lazyPagingItems.apply {
+    localItem.apply {
         when {
             loadState.refresh is LoadState.Loading -> {
                 progressIndicator()
@@ -83,8 +84,8 @@ fun PagingComposeScreen(pagingViewModel: PagingViewModel) {
 
 
         LazyColumn(state = lazyListState) {
-            items(lazyPagingItems.itemCount) { idx ->
-                val item = lazyPagingItems[idx]
+            items(localItem.itemCount) { idx ->
+                val item = localItem[idx]
                 if (item != null) {
                     ItemView(item)
                 } else {
