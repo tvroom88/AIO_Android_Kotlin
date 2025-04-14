@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data
+package com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote
 
 import com.aio.kotlin.studylist.jetpack.paging.github.data.GitHubApi
 import com.aio.kotlin.studylist.jetpack.paging.github.data.GitHubRepository

@@ -3,6 +3,7 @@ package com.aio.kotlin.studylist.jetpack.compose
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.databinding.FragmentComposeBinding
 import com.aio.kotlin.studylist.jetpack.compose.layouts.LayoutScreen
@@ -17,6 +18,11 @@ import com.aio.kotlin.studylist.jetpack.compose.webview.MainWebScreen
 import com.aio.kotlin.studylist.jetpack.paging.github.data.GitHubRetrofitInstance
 import com.aio.kotlin.studylist.jetpack.paging.github.ui.GitHubUserList
 import com.aio.kotlin.studylist.jetpack.paging.github.ui.GitHubViewModel
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.PagingRepository
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingRoomDatabase
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.ui.PagingComposeScreen
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.ui.PagingViewModel
+import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.ui.PagingViewModelFactory
 
 class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
 
@@ -25,11 +31,13 @@ class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
     private val stopWatchViewModel: StopWatchViewModel by viewModels()
     private val composeBasicUserViewModel: ComposeBasicUserViewModel by viewModels()
 
-
     // Paging에서 사용한 ViewModel
     private val githubViewModel: GitHubViewModel by viewModels {
         GitHubRetrofitInstance.provideViewModelFactory()
     }
+
+    private lateinit var pagingViewModel: PagingViewModel
+
 
     override fun getViewBinding(): FragmentComposeBinding =
         FragmentComposeBinding.inflate(layoutInflater)
@@ -39,6 +47,18 @@ class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
         num = CUR_NUM
 
         Log.d("ComposeFragment", "initContentInOnViewCreated - num : $num")
+
+        // DB와 Repository 초기화
+        val db = PagingRoomDatabase.getInstance(requireContext())!!
+        val pagingItemDao = db.pagingItemDao()
+        val repository = PagingRepository(pagingItemDao)
+
+        // ViewModel 초기화
+        pagingViewModel = ViewModelProvider(
+            this,
+            PagingViewModelFactory(repository)
+        )[PagingViewModel::class.java]
+
 
         binding.composeView.apply {
             setContent {
@@ -53,8 +73,8 @@ class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
                     6 -> BasicMvvmScreen(stopWatchViewModel, composeBasicUserViewModel)
 
                     // Compose 제외한 부분들
-                    // 1. Paging
-                    101 -> GitHubUserList(githubViewModel)
+                    101 -> GitHubUserList(githubViewModel) // 1. Paging with github list
+                    102 -> PagingComposeScreen(pagingViewModel)
 
                 }
             }
@@ -76,16 +96,3 @@ class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
         }
     }
 }
-
-
-//class ComposeFragment(private val content:  @Composable () -> Unit) : ViewBindingBaseFragment<FragmentComposeBinding>() {
-//    override fun getViewBinding(): FragmentComposeBinding =
-//        FragmentComposeBinding.inflate(layoutInflater)
-//
-//    override fun initContentInOnViewCreated() {
-//        Log.d("HiHiHi", "HiHiHi")
-//        binding.composeView.setContent {
-//            content() // 전달받은 Composable을 사용
-//        }
-//    }
-//}

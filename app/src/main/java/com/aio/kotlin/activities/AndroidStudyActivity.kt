@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,7 +39,7 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
             binding.layout.tooblarTitle,
             "안드로이드 학습 리스트"
         );
-        
+
         permissionUtils.askNotificationPermission(this, this) // 권한 요청
 
         binding.rvMain.run {
@@ -106,11 +105,13 @@ class AndroidStudyActivity : ViewBindingBaseActivity<ActivityAndroidStudyBinding
         animator.start()
     }
 
-    fun setComposeNumber(title:String, position:Int){
-        if(title == "Paging"){
-            ComposeFragment.CUR_NUM = 101
-        } else {
-            ComposeFragment.CUR_NUM = position
+    fun setComposeNumber(title: String, position: Int) {
+
+        when (title) {
+            "Paging - 1" -> ComposeFragment.CUR_NUM = 101
+            "Paging - 2" -> ComposeFragment.CUR_NUM = 102
+            else -> ComposeFragment.CUR_NUM = position
         }
+
     }
 }
