@@ -1,13 +1,13 @@
-package com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.ui
+package com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.PagingRepository
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingItemEntity
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.PagingAlbumItem
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.PagingRepository
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.local.PagingItemEntity
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.remote.PagingAlbumItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

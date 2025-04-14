@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote
+package com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

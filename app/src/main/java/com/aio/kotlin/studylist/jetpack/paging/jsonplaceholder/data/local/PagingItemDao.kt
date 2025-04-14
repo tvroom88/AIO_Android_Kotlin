@@ -1,4 +1,4 @@
-package com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local
+package com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

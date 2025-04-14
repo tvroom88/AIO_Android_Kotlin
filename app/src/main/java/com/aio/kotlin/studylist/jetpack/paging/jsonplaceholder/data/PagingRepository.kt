@@ -1,14 +1,14 @@
-package com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data
+package com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.DelayedPagingSource
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingItemDao
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingItemEntity
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.AlbumPagingSource
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.PagingAlbumItem
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.remote.PagingRetrofitInstance
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.local.DelayedPagingSource
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.local.PagingItemDao
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.local.PagingItemEntity
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.remote.AlbumPagingSource
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.remote.PagingAlbumItem
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.remote.PagingRetrofitInstance
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -35,7 +35,6 @@ class PagingRepository(
             }
     }
 
-
     suspend fun insertUser(user: PagingItemEntity) {
         pagingItemDao.insert(user)
     }
@@ -48,8 +47,10 @@ class PagingRepository(
     fun getRemotePagingFlow(): Flow<PagingData<PagingAlbumItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 10,
-                initialLoadSize = 10
+                pageSize = 3,
+                initialLoadSize = 3,
+                prefetchDistance = 1, // ← 중요!
+                enablePlaceholders = false
             ),
             pagingSourceFactory = {
                 AlbumPagingSource(PagingRetrofitInstance.api)

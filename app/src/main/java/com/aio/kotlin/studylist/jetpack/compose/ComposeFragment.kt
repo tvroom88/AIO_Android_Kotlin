@@ -18,11 +18,11 @@ import com.aio.kotlin.studylist.jetpack.compose.webview.MainWebScreen
 import com.aio.kotlin.studylist.jetpack.paging.github.data.GitHubRetrofitInstance
 import com.aio.kotlin.studylist.jetpack.paging.github.ui.GitHubUserList
 import com.aio.kotlin.studylist.jetpack.paging.github.ui.GitHubViewModel
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.PagingRepository
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.data.local.PagingRoomDatabase
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.ui.PagingComposeScreen
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.ui.PagingViewModel
-import com.aio.kotlin.studylist.jetpack.paging.josnplaceholder.ui.PagingViewModelFactory
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.PagingRepository
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.data.local.PagingRoomDatabase
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.ui.PagingComposeScreen
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.ui.PagingViewModel
+import com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.ui.PagingViewModelFactory
 
 class ComposeFragment : ViewBindingBaseFragment<FragmentComposeBinding>() {
 
