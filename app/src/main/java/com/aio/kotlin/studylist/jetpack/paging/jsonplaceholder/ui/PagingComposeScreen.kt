@@ -1,5 +1,7 @@
 package com.aio.kotlin.studylist.jetpack.paging.jsonplaceholder.ui
 
+import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +17,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,10 +39,19 @@ fun PagingComposeScreen(pagingViewModel: PagingViewModel) {
                 localItem.loadState.append.endOfPaginationReached
     }
 
-    // 원격 데이터 - 로컬 데이터 호출 완료시 원격 데이터를 가져온다.
-    val remoteItem = if (isLocalLoadComplete) {
-        pagingViewModel.remotePagingFlow.collectAsLazyPagingItems()
-    } else null
+    LaunchedEffect(isLocalLoadComplete) {
+        Log.d("TestTest", "isLocalLoadComplete : $isLocalLoadComplete")
+        if (isLocalLoadComplete) {
+            pagingViewModel.getRemotePagingFlow()
+        }
+    }
+
+    // Remote Flow는 로컬 로딩이 끝났을 때만 collect
+    val remoteFlow = remember(isLocalLoadComplete) {
+        if (isLocalLoadComplete) pagingViewModel.remotePagingFlow else null
+    }
+    val remoteItem = remoteFlow?.collectAsState()?.value?.collectAsLazyPagingItems()
+
 
     val lazyListState = rememberLazyListState()
 
@@ -140,7 +153,8 @@ fun ItemView(item: PagingItemEntity) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(80.dp)
+            .background(Color.LightGray.copy(alpha = 0.3f)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -153,7 +167,8 @@ fun RemoteItemView(item: PagingAlbumItem) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(80.dp)
+            .background(Color.Blue.copy(alpha = 0.3f)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

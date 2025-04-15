@@ -32,4 +32,8 @@ interface PagingItemDao {
 
     @Query("DELETE FROM paging")
     suspend fun deleteAll()
+
+    // 마지막 ID 가져오는 부분
+    @Query("SELECT MAX(id) FROM paging")
+    suspend fun getLastId(): Int?
 }

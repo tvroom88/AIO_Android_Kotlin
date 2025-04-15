@@ -5,9 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "paging")
 data class PagingItemEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val albumId: Int? = null,
-    val title: String? = null,
-    val url: String? = null,
-    val thumbnailUrl: String? = null,
+    @PrimaryKey val id: Int = 0,
+    val userId: Int? = null,
+    val title: String? = null
 )

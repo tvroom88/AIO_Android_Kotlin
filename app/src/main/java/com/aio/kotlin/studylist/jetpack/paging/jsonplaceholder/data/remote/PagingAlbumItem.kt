@@ -6,7 +6,7 @@ data class PagingAlbumItem(
     @SerializedName("id")
     val id: Int = 0,
     @SerializedName("userId")
-    val albumId: Int? = null,
+    val userId: Int? = null,
     @SerializedName("title")
     val title: String? = null
 )

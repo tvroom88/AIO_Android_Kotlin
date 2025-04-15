@@ -18,11 +18,12 @@ class PagingRepository(
     ) {
 
     // ------------------------- Local -------------------------
+    // --- get ---
     fun getItemPager(): Flow<PagingData<PagingItemEntity>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 3, // 한 번에 읽을 데이터 수
-                initialLoadSize = 3,
+                pageSize = 10, // 한 번에 읽을 데이터 수
+                initialLoadSize = 10,
                 prefetchDistance = 1, // ← 중요!
                 enablePlaceholders = false
             ),
@@ -43,17 +44,23 @@ class PagingRepository(
         pagingItemDao.deleteAll()
     }
 
+
+    suspend fun getLastLocalId(): Int {
+        return pagingItemDao.getLastId() ?: 0
+    }
+
     // ------------------------- Remote -------------------------
-    fun getRemotePagingFlow(): Flow<PagingData<PagingAlbumItem>> {
+    // --- get ---
+    fun getRemotePagingFlow(lastId: Int): Flow<PagingData<PagingAlbumItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 3,
-                initialLoadSize = 3,
+                pageSize = 10,
+                initialLoadSize = 10,
                 prefetchDistance = 1, // ← 중요!
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                AlbumPagingSource(PagingRetrofitInstance.api)
+                AlbumPagingSource(PagingRetrofitInstance.api, lastId)
             }
         ).flow
     }
