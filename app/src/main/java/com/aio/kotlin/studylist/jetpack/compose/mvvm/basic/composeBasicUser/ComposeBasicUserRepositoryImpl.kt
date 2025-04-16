@@ -26,6 +26,4 @@ class ComposeBasicUserRepositoryImpl : ComposeBasicUserRepository {
         users.clear()
         return users
     }
-
-
 }

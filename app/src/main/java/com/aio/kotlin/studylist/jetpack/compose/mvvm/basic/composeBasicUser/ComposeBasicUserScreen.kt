@@ -31,8 +31,6 @@ fun ComposeBasicUserScreen(viewModel: ComposeBasicUserViewModel) {
 
     val uiState by viewModel.uiState.collectAsState()  // Collect the UI state
     val filteredUsers by viewModel.filteredUsers.collectAsState()  // Collect filtered users
-//    val users = (uiState as? UiState.Success)?.users ?: emptyList()
-    Log.d("ComposeBasicUserScreen", "filteredUsers : $uiState")
 
     when (val state = uiState) {
         is UiState.Loading -> {
