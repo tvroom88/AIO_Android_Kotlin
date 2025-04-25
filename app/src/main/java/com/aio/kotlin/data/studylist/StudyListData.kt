@@ -5,6 +5,7 @@ import com.aio.kotlin.models.StudyList.StudyCategory
 import com.aio.kotlin.models.StudyList.StudyFragmentList
 import com.aio.kotlin.studylist.architecturepattern.mvc.SimpleMvcPatternFragment
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.main.MvvmAdvancedExample
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.ui.fragment.MvvmAdvancedMoreExample
 import com.aio.kotlin.studylist.jetpack.binding.databinding.DataBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.binding.viewbinding.ViewBindingExampleFragment
 import com.aio.kotlin.studylist.jetpack.compose.ComposeFragment
@@ -118,7 +119,7 @@ class StudyListData {
                     ComposeFragment.newInstance(6).getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/228"
-                )
+                ),
             )
         )
         return jetpackCategory
@@ -167,6 +168,12 @@ class StudyListData {
                     MvvmAdvancedExample().getFullFragmentName(),
                     2,
                     "https://from-android-to-server.tistory.com/197"
+                ),
+                StudyFragmentList(
+                    "MVVM2",
+                    MvvmAdvancedMoreExample().getFullFragmentName(),
+                    2,
+                    "https://from-android-to-server.tistory.com/232"
                 ),
             )
         )
