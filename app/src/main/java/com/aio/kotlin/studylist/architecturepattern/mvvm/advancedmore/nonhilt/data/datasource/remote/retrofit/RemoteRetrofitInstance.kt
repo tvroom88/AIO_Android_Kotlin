@@ -1,6 +1,7 @@
-package com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.remote
+package com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.datasource.remote.retrofit
 
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.Constants
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.datasource.remote.GithubServiceApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,6 +11,7 @@ object RemoteRetrofitInstance {
     private val okHttpClient: OkHttpClient by lazy {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
+
         OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .build()
@@ -27,7 +29,7 @@ object RemoteRetrofitInstance {
             .build()
     }
 
-    val retrofitService: GithubService by lazy {
-        retrofit.create(GithubService::class.java)
+    val retrofitService: GithubServiceApi by lazy {
+        retrofit.create(GithubServiceApi::class.java)
     }
 }

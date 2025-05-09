@@ -1,8 +1,8 @@
-package com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.remote
+package com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.entity.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class RemoteGithubResponse(
+data class RemoteGithubModel(
     @SerializedName("login") val login: String,
     @SerializedName("id") val id: Int,
     @SerializedName("node_id") val nodeId: String,
