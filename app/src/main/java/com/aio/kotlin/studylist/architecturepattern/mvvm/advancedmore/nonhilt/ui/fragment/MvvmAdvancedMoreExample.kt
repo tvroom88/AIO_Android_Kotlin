@@ -2,18 +2,25 @@ package com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.u
 
 import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aio.kotlin.base.fragment.ViewBindingBaseFragment
 import com.aio.kotlin.base.recyclerview.BaseRecyclerViewAdapter
 import com.aio.kotlin.databinding.FragmentMvvmAdvancedMoreExampleBinding
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.PokemonUiStatus
+import com.aio.kotlin.studylist.architecturepattern.mvvm.advanced.ui.RecyclerViewPaginator
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.GithubRepository
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.datasource.remote.RemoteDataSource
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.datasource.remote.retrofit.RemoteRetrofitInstance
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.data.entity.remote.RemoteGithubModel
 import com.aio.kotlin.studylist.architecturepattern.mvvm.advancedmore.nonhilt.ui.UiState
 import com.aio.kotlin.studylist.recyclerview.ExampleItemDecoration
+import kotlinx.coroutines.launch
 
 /**
  * 전반적인 구조 재정리 :
@@ -46,13 +53,13 @@ class MvvmAdvancedMoreExample : ViewBindingBaseFragment<FragmentMvvmAdvancedMore
         val factory = MvvmAdvancedMoreExampleViewModelFactory(githubRepository)
         viewModel = ViewModelProvider(this, factory)[MvvmAdvancedMoreExampleViewModel::class.java]
 
-        binding.rvExample.run {
-            layoutManager = LinearLayoutManager(
+        binding.rvExample.let {
+            it.layoutManager = LinearLayoutManager(
                 requireContext(),
                 LinearLayoutManager.VERTICAL,
                 false
             )
-            adapter = githubAdapter.apply {
+            it.adapter = githubAdapter.apply {
                 onItemClickListener =
                     object : BaseRecyclerViewAdapter.OnItemClickListener<RemoteGithubModel> {
                         override fun onItemClick(
@@ -65,7 +72,15 @@ class MvvmAdvancedMoreExample : ViewBindingBaseFragment<FragmentMvvmAdvancedMore
                         }
                     }
             }
-            addItemDecoration(ExampleItemDecoration(30, 60, 60))
+            it.addItemDecoration(ExampleItemDecoration(30, 60, 60))
+//            it.addOnScrollListener(
+//                RecyclerViewPaginator(
+//                    it,
+//                    { binding.pbMvvmAdvancedMoreLoading.isVisible },
+//                    { viewModel.fetchNextPokemonList() },
+//                    { false }
+//                )
+//            )
         }
 
         binding.btnLoadRemote.setOnClickListener {
@@ -78,31 +93,65 @@ class MvvmAdvancedMoreExample : ViewBindingBaseFragment<FragmentMvvmAdvancedMore
         val tempSince = 0
         val tempPerPage = 10
         viewModel.fetchGithubData(tempSince, tempPerPage)
-        viewModel.response.observe(this) { response ->
-            when (response) {
-                is UiState.INIT -> {} // 첫 시작
 
-                is UiState.Loading -> {
-                    showOrHideLoadingBar(true) // show a progress bar
-                }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.githubResponse.collect {
+                        when (it) {
+                            UiState.Loading -> {
+                                showOrHideLoadingBar(true)
+                            }
 
-                is UiState.Success -> {
-                    // bind data to the view
-                    showOrHideLoadingBar(false)
-                    Log.d("TestTestTest", "response : ${response.data[0].url}")
-                    response.data.let {
-                        githubAdapter.setItemList(it.toMutableList())
+                            is UiState.Success -> {
+//                                showLoadedData(it.data)
+                                showOrHideLoadingBar(false)
+                            }
+
+                            is UiState.Error -> {
+                                Log.d("aaaaaa", "error : ${it.message}")
+                            }
+                            UiState.INIT -> {}
+
+                        }
                     }
                 }
-
-                is UiState.Error -> {
-                    // show error message
-                    showOrHideLoadingBar(false)
-                    Log.d("TestTestTest", "error : ${response.message}")
+                launch {
+                    viewModel.githubFetchingIndex.collect {
+                        Log.d("githubgithub", "page : $it")
+                        viewModel.fetchGithubData(0, 10)
+                    }
 
                 }
             }
         }
+
+
+//        viewModel.response.observe(this) { response ->
+//            when (response) {
+//                is UiState.INIT -> {} // 첫 시작
+//
+//                is UiState.Loading -> {
+//                    showOrHideLoadingBar(true) // show a progress bar
+//                }
+//
+//                is UiState.Success -> {
+//                    // bind data to the view
+//                    Log.d("TestTestTest", "response : ${response.data[0].url}")
+//                    showOrHideLoadingBar(false)
+//                    response.data.let {
+//                        githubAdapter.setItemList(it.toMutableList())
+//                    }
+//                }
+//
+//                is UiState.Error -> {
+//                    // show error message
+//                    showOrHideLoadingBar(false)
+//                    Log.d("TestTestTest", "error : ${response.message}")
+//
+//                }
+//            }
+//        }
     }
 
     private fun showOrHideLoadingBar(isLoadingBarVisible: Boolean) {

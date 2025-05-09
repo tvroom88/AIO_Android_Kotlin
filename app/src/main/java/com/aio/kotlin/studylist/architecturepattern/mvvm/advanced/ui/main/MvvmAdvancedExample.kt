@@ -119,7 +119,7 @@ class MvvmAdvancedExample :
                 }
                 launch {
                     mvvmAdvancedViewModel.pokemonFetchingIndex.collect {
-                        Log.d("pagepage", "page : $it")
+                        Log.d("pokemonpokemon", "page : $it")
                         mvvmAdvancedViewModel.fetchPokemonList()
                     }
 

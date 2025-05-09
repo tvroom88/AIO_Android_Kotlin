@@ -11,6 +11,17 @@ import com.bumptech.glide.Glide
 
 class GitHubAdapter : BaseRecyclerViewAdapter<GitHubAdapter.GithubViewHolder, RemoteGithubModel>() {
 
+    fun addItem(item: RemoteGithubModel) {
+        items.add(item) // 데이터에 추가
+        notifyItemInserted(items.size - 1) // 새 항목을 삽입
+    }
+
+    fun addItems(newItems: List<RemoteGithubModel>) {
+        val startPosition = items.size
+        items.addAll(newItems) // 데이터에 여러 항목 추가
+        notifyItemRangeInserted(startPosition, newItems.size) // 추가된 항목을 알림
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun setItemList(mutableList: MutableList<RemoteGithubModel>) {
         items = mutableList

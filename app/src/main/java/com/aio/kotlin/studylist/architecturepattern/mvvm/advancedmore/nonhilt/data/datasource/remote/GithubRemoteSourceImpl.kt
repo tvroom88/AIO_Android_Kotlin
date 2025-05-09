@@ -16,6 +16,7 @@ class RemoteDataSource(private val githubServiceApi: GithubServiceApi) : GithubR
         perPage: Int
     ): List<RemoteGithubModel> = githubServiceApi.getGithubData(since, perPage)
 
+    // 2) Hilt 미사용 + Response 사용 + Result 미사용 + Flow & SharedFlow
     override suspend fun getGithubDataWithResponse(
         since: Int,
         perPage: Int
@@ -31,14 +32,19 @@ class RemoteDataSource(private val githubServiceApi: GithubServiceApi) : GithubR
         }
     }
 
+    // 3) Hilt 미사용 + Response 미사용 + Result 사용 + Flow & SharedFlow
     override suspend fun getGithubDataResult(
         since: Int,
         perPage: Int
     ): Result<List<RemoteGithubModel>> {
-        // Todo : 추가하기 
-        return Result.success(arrayListOf())
+        val response =
+            githubServiceApi.getGithubDataWithResponse(since, perPage)
+        return response.body()?.let { // 성공
+            Result.success(it)
+        } ?: Result.failure(NullPointerException("Body is null")) // 실패 1 : 응답의 body가 비어있을 경우
     }
 
+    // 4) Hilt 미사용 + Response 사용 + Result 사용 + Flow & SharedFlow
     override suspend fun getGithubDataResultResponse(
         since: Int,
         perPage: Int
